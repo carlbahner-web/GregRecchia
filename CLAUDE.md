@@ -15,8 +15,7 @@ relative so the same page works there; its form only says it is a preview.
   testimonials, contact. His five steps came off: "Yeah take em out" (Carl, 10 Nov 2026), as they repeated his intro
   (vocals, transitions, ear candy) before the songs; kept in `archive/five-steps.html` to put back.
 - His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood-tile.webp`),
-  butter-cream type, tinted panels in butter frames, and his three
-  fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
+  butter-cream type (still the hero's), and his three fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
   GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
   sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
@@ -35,9 +34,18 @@ relative so the same page works there; its form only says it is a preview.
   logo?" (Carl, 10 Nov 2026). Traced into `img/mark.svg` and painted as a mask like the wordmark: white in the hero,
   cream in the footer, butter as the tab icon (`img/favicon.svg`). The old headphone-and-waveform logo is gone from
   the site. `img/share.jpg`, the picture a shared link shows, is the hero's mark and name over the console clip.
-- One wood surface from the video to the footer, the player and the form on it as dark panels in the cards' butter
-  frame: "It feels so jarring from one to the next" (Carl, 10 Nov 2026, of black and wood bands taking turns), picked
-  over an all-dark page on mockups ("Middle column"). The wood is tiled as itself and its mirror, so it has no seam.
+- The body below the hero, redesigned: "can you re think the design of the main body entirely? Leave the hero section
+  unchanged for the moment but show off your modern web dev chops" (Carl, 10 Nov 2026). Colours from a picture he sent
+  ("What about these colors? Ignore the copy and font"): off-white page, charcoal, slate, dusty blue, ochre, all named
+  at the top of THE BODY in the styles; ochre is never for words on the off-white (too light). It replaced one wood
+  surface with framed panels (the wood photo and his old site's tints), which he'd come to dislike ("I don't like the
+  whole page scheme"). In it: a bar that drops in at the top once the video is gone, with a scroll progress line; Greg
+  standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; things rising into
+  place as you scroll (CSS scroll-driven, no script, none for less motion); the player as a charcoal deck with each
+  song's own waveform as the scrubber (`peaks` in `TRACKS`, from `tools/peaks.py`; tap, drag or arrow keys), a setlist
+  with lengths, covers and titles cross-fading on a change (view transitions), a small player at the foot of the screen
+  while a song plays and the deck is out of sight, and the phone's lock-screen controls (Media Session); the quote as a
+  snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
   `--text-*` at the top of the styles, white only over the video, cream for everything else read, nothing faded.
   `python3 tools/check_consistency.py` lists anything outside them; run it before every change. The rest of the

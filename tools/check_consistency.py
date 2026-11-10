@@ -1,5 +1,6 @@
 """Lists any text size, text colour, faded text, corner, line thickness or letter spacing in site/index.html outside the set Carl picked on the
-consistency quiz (10 Nov 2026; the rules are in .officers/consistency-rules.md). Run before every change:
+consistency quiz (10 Nov 2026; the rules are in .officers/consistency-rules.md). Text colours: the hero's
+(white, butter) and the body's, from the picture Carl sent (paper, charcoal, slate, dusty blue, ochre, ink-soft). Run before every change:
 
     python3 tools/check_consistency.py
 
@@ -19,9 +20,9 @@ for line_no, line in enumerate(rest.splitlines(), 1):
         if sizes: problems.append(f"text size {', '.join(sizes)} outside the set: {line.strip()[:110]}")
     for m in re.finditer(r"(?<![-\w])color\s*:\s*([^;}]+)", line):
         v = m.group(1).strip()
-        if not re.fullmatch(r"var\(--(cream|butter|steel|black|white)\)|inherit|currentColor", v):
+        if not re.fullmatch(r"var\(--(cream|butter|steel|black|white|paper|char|slate|dusty|ochre|ink-soft)\)|inherit|currentColor", v):
             problems.append(f"text colour {v} outside the set: {line.strip()[:110]}")
-    if re.search(r"(?<![-\w])opacity\s*:\s*(?!1\b)", line) and not line.strip().startswith(("footer .mark", ".down")):
+    if re.search(r"(?<![-\w])opacity\s*:\s*(?!1\b)", line) and not line.strip().startswith("@keyframes"):
         problems.append(f"faded: {line.strip()[:110]}")
     for m in re.finditer(r"border-radius\s*:\s*([^;}]+)", line):
         if m.group(1).strip() != "50%": problems.append(f"a round corner (only the play button is round): {line.strip()[:110]}")
