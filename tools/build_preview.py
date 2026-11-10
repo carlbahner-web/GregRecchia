@@ -23,10 +23,14 @@ for n, clip in enumerate(clips):
     s = s.replace(f'src="{clip}" ', f'data-clip="{n}" ', 1)
     s += f'<script type="text/plain" id="clip-{n}">{base64.b64encode((root / clip).read_bytes()).decode()}</script>\n'
 s += """<script>
-document.querySelectorAll("video[data-clip]").forEach((v) => {
+// Turned into a playable file without stopping the page: decoding 2 MB letter by letter froze everything (both videos
+// and the record player) for a moment as the preview opened ("I see the glitch right on load", Carl, 10 Nov 2026).
+// The poster (its first frame) shows until the file is ready, so the swap doesn't show.
+document.querySelectorAll("video[data-clip]").forEach(async (v) => {
   const b64 = document.getElementById("clip-" + v.dataset.clip).textContent;
+  const blob = await (await fetch("data:video/mp4;base64," + b64)).blob();
   v.muted = true;
-  v.src = URL.createObjectURL(new Blob([Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))], { type: "video/mp4" }));
+  v.src = URL.createObjectURL(blob);
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().catch(() => {});
 });
 </script>
