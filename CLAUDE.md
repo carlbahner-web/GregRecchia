@@ -14,8 +14,7 @@ relative so the same page works there; its form only says it is a preview.
 - `site/index.html`: the whole page, styles and script inline. Sections in his Squarespace order: hero, intro, the player,
   testimonials, contact. His five steps came off: "Yeah take em out" (Carl, 10 Nov 2026), as they repeated his intro
   (vocals, transitions, ear candy) before the songs; kept in `archive/five-steps.html` to put back.
-- His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood-tile.webp`),
-  butter-cream type (still the hero's), and his three fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
+- His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black and butter-cream type (still the hero's), and his three fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
   GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
   sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
@@ -47,7 +46,7 @@ relative so the same page works there; its form only says it is a preview.
   while a song plays and the deck is out of sight, and the phone's lock-screen controls (Media Session); the quote as a
   snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
-  `--text-*` at the top of the styles, white only over the video, cream for everything else read, nothing faded.
+  `--text-*` at the top of the styles, nothing faded. Colours: the hero's white and butter, the body's own set (above).
   `python3 tools/check_consistency.py` lists anything outside them; run it before every change. The rest of the
   quiz (https://claude.ai/artifact/AM6gVs8Rb5PWBfe1Q6VbEG) saves its answers in its own database: read them with
   ArtifactData `list`, collection `answers`. The officer's notes are in `.officers/` (not in git).
