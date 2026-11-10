@@ -260,12 +260,14 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 /* Things rise into place as they come into view, where the browser can tie it to scrolling (no script). */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
-    .unveil { animation: unveil linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
   }
 }
-@keyframes rise { from { opacity: 0; transform: translateY(36px); } }
-@keyframes unveil { from { clip-path: inset(14% 14% 14% 14%); } }
+/* "something weird happens when scrolling" (Carl, 10 Nov 2026): the portrait and the quote's photo were cut in from
+   every edge and opened as they scrolled in, which read as a zoom gone wrong, and the words beside them faded in so late
+   the photo stood alone. The photos now just sit there; the words are fully in by the time they're 60% on screen, and
+   rise less. */
+@keyframes rise { from { opacity: 0; transform: translateY(20px); } }
 
 /* ---------- Hear for yourself: the record player from his MGMT page, in his colours ---------- */
 .listen { padding-block: 0 clamp(72px, 12vw, 130px); }
@@ -387,7 +389,7 @@ footer a { color: var(--paper); }
 <main>
   <section class="intro" id="hi">
     <div class="wrap split">
-      <figure class="portrait unveil">
+      <figure class="portrait">
         <video src="video/greg.mp4" poster="video/greg.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
       </figure>
       <div>
@@ -418,7 +420,7 @@ footer a { color: var(--paper); }
       <h2 id="quotes-h" class="rise">What the artists are saying</h2>
       <div class="q-track">
         <figure class="q split">
-          <img class="unveil" src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy">
+          <img src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy">
           <blockquote class="rise">
             <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
             <cite>Mishaal Tamer</cite>

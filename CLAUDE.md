@@ -50,8 +50,9 @@ relative so the same page works there; its form only says it is a preview.
   (the turntable just under the bar where the whole player won't fit, a phone) and puts the first record on; after that
   it plays and pauses what's on the deck; the song's cover or title glides down without playing. It replaced a small
   player at the foot of the screen; Greg
-  standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; things rising into
-  place as you scroll (CSS scroll-driven, no script, none for less motion); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quote as a
+  standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; words rising into
+  place as you scroll (CSS scroll-driven, no script, none for less motion; the photos no longer open in from cut edges:
+  "something weird happens when scrolling", Carl, 10 Nov 2026, so they hold still and the words are in by 60% on screen); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quote as a
   snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
   `--text-*` at the top of the styles, nothing faded. Colours: the hero's white and butter, the body's own set (above).
