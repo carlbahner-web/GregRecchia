@@ -248,7 +248,12 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 .intro { padding-block: clamp(72px, 12vw, 130px); }
 .split { display: grid; grid-template-columns: var(--cols); gap: var(--gap-cols); align-items: center; }
 .portrait { margin: 0 22px 22px 0; position: relative; isolation: isolate; }  /* the margin is the offset frame's room, inside the column */
-.portrait video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--paper-deep); }
+.portrait video, .portrait > img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: var(--at, 50% 50%); background: var(--paper-deep); }
+/* HIS PHOTO BY "HI, I'M GREG", HIS VIDEO BY THE FORM: "Could it be used in the hi in Greg section and then move that video
+   down to the contact section?" (Carl, 10 Nov 2026, of a new photo of Greg against a white brick wall). Under the
+   contact's words, in the same offset frame, here in dusty blue on the charcoal. */
+.contact-video { margin-top: var(--gap-panel); max-width: 340px; }
+.contact-video video { background: var(--char); }
 .portrait::after { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
 .intro h2 { margin-bottom: var(--gap-words); }  /* a heading with words under it (the officers' round, 10 Nov 2026) */
 .intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin: 0 0 var(--gap-words); color: var(--char); }
@@ -412,9 +417,7 @@ footer a { color: var(--paper); }
 <main>
   <section class="intro" id="hi">
     <div class="wrap split">
-      <figure class="portrait">
-        <video src="video/greg.mp4" poster="video/greg.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
-      </figure>
+      <figure class="portrait"><img src="img/greg-portrait.webp" style="--at: 54% 30%" width="1400" height="933" alt="Greg Recchia"></figure>
       <div>
         <h2 class="rise">Hi, I’m Greg</h2>
         <p class="rise">I’m a mixer &amp; co-producer who helps dedicated indie artists capture the raw, the catchy, and the quirky.</p>
@@ -479,6 +482,9 @@ footer a { color: var(--paper); }
       <div class="rise">
         <h2 id="contact-h">Let’s make it happen</h2>
         <p class="lede">I’m approachable, easy to work and communicate with. Fill out some brief info and I’ll be in touch with you shortly. Looking forward to hearing from you!</p>
+        <figure class="portrait contact-video">
+        <video src="video/greg.mp4" poster="video/greg.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+      </figure>
       </div>
       <form name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="company" id="form" class="rise">
         <input type="hidden" name="form-name" value="contact">
