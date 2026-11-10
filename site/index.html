@@ -269,7 +269,6 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 
 /* ---------- Hear for yourself: the record player from his MGMT page, in his colours ---------- */
 .listen { padding-block: 0 clamp(72px, 12vw, 130px); }
-.listen-head { margin-bottom: var(--gap-panel); }
 /* NEVER .rise ON THE PLAYER, nor on anything round it: a transform on an ancestor, even one an animation is running,
    becomes where the player's flight layer (position: fixed) is measured from, and every record in the air was drawn
    180px right and 188px low of its path (found 10 Nov 2026, looking at the fade from carlbahner). */
@@ -400,11 +399,12 @@ footer a { color: var(--paper); }
     </div>
   </section>
 
-  <section class="listen" id="listen" aria-labelledby="listen-h">
+  <section class="listen" id="listen" aria-label="Hear for yourself">
     <div class="wrap">
-      <div class="listen-head rise"><h2 id="listen-h">Hear for yourself</h2></div>
       <!-- The songs, in his Squarespace player's order. To add one: its MP3 in audio/, its cover in img/, and a row here. -->
-      <vinyl-player id="deck" max="4" data-art="plinth record tonearm" noframe autoadvance><script type="application/json">[
+      <!-- HEAR FOR YOURSELF on the deck until a record is picked, in place of the heading over it: "instead of "CHOOSE A RECORD"
+           can we put "HEAR FOR YOURSELF" there so we don't need that unnecessary header?" (Carl, 10 Nov 2026) -->
+      <vinyl-player id="deck" idle="Hear for yourself" max="4" data-art="plinth record tonearm" noframe autoadvance><script type="application/json">[
   {"title": "i won’t see you anymore", "artist": "Rol3ert", "role": "Mixed", "style": "dark catchy alt pop", "sleeve": "img/i-won-t-see-you-anymore.webp", "src": "audio/I-Won-t-See-You-Anymore.mp3"},
   {"title": "Painful Paradise", "artist": "Mishaal Tamer", "role": "Mixed", "style": "deep emotional pop", "sleeve": "img/painful-paradise.webp", "src": "audio/Painful-Paradise.mp3"},
   {"title": "Forgive Them", "artist": "Essence Natay & Vic Lucas", "role": "Mixed", "style": "soulfully uplifting pop", "sleeve": "img/forgive-them.webp", "src": "audio/Forgive-Them.mp3"},

@@ -102,8 +102,7 @@ relative so the same page works there; its form only says it is a preview.
   the thank-you takes the form's place ("Thanks, <first name>!" and his "I'll be in touch with you shortly."); the
   page's name "Greg Recchia // Mixer & Co-Producer" with his intro sentence for search results and "© Greg Recchia";
   his Instagram (@greg_recchia_productions, from his MGMT page) in the footer; the quote's photo 150 wide on a phone; the
-  intro's heading 22 above its words. Kept: the song in the bar while the player is on screen, CHOOSE A RECORD, Listen,
-  Hear for yourself, no prices. One test send once it's on Netlify.
+  intro's heading 22 above its words. Kept: the song in the bar while the player is on screen, Listen, no prices. One test send once it's on Netlify.
 - The deck is drawn in code, not a picture: "can we replace the deck with something procedural?", then, shown three,
   "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board, charcoal edge, an off-white line
   inset round it and a screw in each corner (THE DECK DRAWN IN CODE, end of the player's styles); the record, arm, keys
@@ -121,6 +120,9 @@ relative so the same page works there; its form only says it is a preview.
   2026). His portrait video plays forward then backward and round again, made into the file itself (forward, then the
   same frames reversed less the two at the turns, so nothing stutters): "the hi i'm greg video seem a bit glitchy, can
   we try making it loop/boomerang?" (Carl, 10 Nov 2026). The forward-only cut is the first half of `video/greg.mp4`.
+- No heading over the record player: its deck says HEAR FOR YOURSELF until a record is picked, where it said CHOOSE A
+  RECORD (the player's `idle` attribute): "instead of "CHOOSE A RECORD" can we put "HEAR FOR YOURSELF" there so we don't
+  need that unnecessary header?" (Carl, 10 Nov 2026).
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg

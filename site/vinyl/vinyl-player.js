@@ -1938,8 +1938,9 @@ class VinylPlayer extends HTMLElement {
                 <button id="stopBtn" title="Stop" aria-label="Stop" disabled>${ICONS.stop}</button>
               </div>
               <div class="np">
-                <p class="np-title" id="npTitle">Choose a record</p>
-                <!-- Empty at rest on purpose. "Pick a sleeve to drop the needle"
+                <p class="np-title" id="npTitle">${escapeHTML(this.getAttribute('idle') || 'Choose a record')}</p>
+                <!-- The idle attribute sets these words (Greg's page: "Hear for yourself", Carl, 10 Nov 2026).
+                     Empty at rest on purpose. "Pick a sleeve to drop the needle"
                      under a title already reading "Choose a record" said the same
                      thing twice, and at phone width the second copy did not even
                      fit — it truncated to "PICK A SLEEVE TO D...". -->
