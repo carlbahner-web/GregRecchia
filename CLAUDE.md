@@ -40,10 +40,9 @@ relative so the same page works there; its form only says it is a preview.
   surface with framed panels (the wood photo and his old site's tints), which he'd come to dislike ("I don't like the
   whole page scheme"). In it: a bar that drops in at the top once the video is gone, with a scroll progress line; Greg
   standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; things rising into
-  place as you scroll (CSS scroll-driven, no script, none for less motion); the player as a charcoal deck with each
-  song's own waveform as the scrubber (`peaks` in `TRACKS`, from `tools/peaks.py`; tap, drag or arrow keys), a setlist
-  with lengths, covers and titles cross-fading on a change (view transitions), a small player at the foot of the screen
-  while a song plays and the deck is out of sight, and the phone's lock-screen controls (Media Session); the quote as a
+  place as you scroll (CSS scroll-driven, no script, none for less motion); the record player from his MGMT page (below), with a
+  small player at the foot of the screen while a song plays and the record player is out of sight, and the phone's
+  lock-screen controls (Media Session); the quote as a
   snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
   `--text-*` at the top of the styles, nothing faded. Colours: the hero's white and butter, the body's own set (above).
@@ -51,9 +50,15 @@ relative so the same page works there; its form only says it is a preview.
   quiz (https://claude.ai/artifact/AM6gVs8Rb5PWBfe1Q6VbEG) saves its answers in its own database: read them with
   ArtifactData `list`, collection `answers`. The officer's notes are in `.officers/` (not in git).
 - Every word is his, from the Squarespace page. Nothing on the page is written for him.
-- The player: four songs whose masters and art came from his StudioLand MGMT page (studiolandmgmt-site,
-  `deploy-mgmt/greg-recchia/`). Each song's "vibe" is his own line from the Squarespace player. A song is one row in
-  `TRACKS` plus its MP3 in `site/audio/` (keep each under ~40 MB) and art in `site/img/`.
+- The player is the record player from his StudioLand MGMT profile page, `<vinyl-player>`: "I want to take the
+  portfolio player from his profile page and migrate it to his website but with different images instead of my Slmgmt
+  branded art" (Carl, 10 Nov 2026). Copied from studiolandmgmt-site `portfolio-player-kit/src/vinyl-player.js` into
+  `site/vinyl/vinyl-player.js` (change it there first, then copy). Its four drawings are Greg's versions of Carl's,
+  `site/vinyl/art/`, made by `tools/vinyl_art.py`: the plinth slate, the platter a deep slate disc with Greg's mark
+  where the STUDIOLAND MGMT watermark was, the label squares and tonearm ochre. Its colours and fonts (his, not
+  StudioLand's licensed ones) are set on `vinyl-player` in the styles. It replaced a waveform deck built the same day.
+  Four songs whose masters and art came from that MGMT page; a song is one row in the JSON inside `<vinyl-player>`
+  plus its MP3 in `site/audio/` (keep each under ~40 MB) and cover in `site/img/`.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg

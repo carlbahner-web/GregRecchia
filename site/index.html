@@ -133,7 +133,7 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
   --paper-deep: #e8e2d6;   /* a row under the mouse, the portrait before it loads */
   --char: #2c3739;         /* words on the page; the player and the contact section */
   --slate: #4a6777;        /* buttons, links, the line that sums things up */
-  --dusty: #92a6b1;        /* quiet words on charcoal, the waveform still to play */
+  --dusty: #92a6b1;        /* quiet words on charcoal */
   --ochre: #af945f;        /* accents you don't read */
   --ink-soft: #4d636e;     /* quiet words on the page */
   --hair: rgba(44, 55, 57, .14);        /* the hairline between song rows */
@@ -200,53 +200,24 @@ main :focus-visible, .topbar :focus-visible, .mini :focus-visible { outline-colo
 @keyframes rise { from { opacity: 0; transform: translateY(36px); } }
 @keyframes unveil { from { clip-path: inset(14% 14% 14% 14%); } }
 
-/* ---------- Hear for yourself: the deck, the song's own waveform, the setlist ---------- */
+/* ---------- Hear for yourself: the record player from his MGMT page, in his colours ---------- */
 .listen { padding-block: 0 clamp(72px, 12vw, 130px); scroll-margin-top: 60px; }
 .listen-head { margin-bottom: var(--gap-panel); }
-.deck { background: var(--char); color: var(--paper); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  container-type: inline-size; }
-.deck-art { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--char); }
-.deck-art img { width: 100%; height: 100%; object-fit: cover; view-transition-name: cover; }
-.deck-body { padding: var(--inside); display: grid; grid-template-rows: auto 1fr auto; gap: var(--gap-words); min-width: 0; }
-.deck-vibe { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-small); text-transform: uppercase; color: var(--dusty); }
-.deck-title { font: 800 var(--text-heading)/var(--lines-title) var(--head); margin: 10px 0 8px; text-wrap: balance; view-transition-name: title; }
-.deck-artist { font-size: var(--text-read); color: var(--dusty); }
-.wave { display: block; width: 100%; height: 88px; cursor: pointer; touch-action: none; }
-.wave:focus-visible { outline: var(--line) solid var(--ochre); outline-offset: 6px; }
-.transport { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--gap); align-items: center; }
-.d-play { width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--ochre); color: var(--char);
-  display: grid; place-items: center; cursor: pointer; transition: transform .2s var(--ease), background .2s; }
-.d-play:hover { transform: scale(1.06); background: var(--paper); }
-.d-play svg, .m-play svg { width: 24px; height: 24px; }
-.is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
-.times { display: flex; justify-content: space-between; font-size: var(--text-tiny); color: var(--dusty); font-variant-numeric: tabular-nums; margin-top: 8px; }
-@container (max-width: 520px) { .deck-title { font-size: var(--text-now); } .wave { height: 64px; } }
-@media (max-width: 760px) { .deck { grid-template-columns: 1fr; } .deck-art { aspect-ratio: 16 / 10; } }
-
-.setlist { list-style: none; margin: var(--gap-words) 0 0; padding: 0; }
-.setlist button { width: 100%; display: grid; grid-template-columns: 34px 52px minmax(0, 1fr) auto auto; gap: var(--gap); align-items: center;
-  padding: 14px 10px; border: 0; background: none; color: var(--char); font: inherit; text-align: left; cursor: pointer;
-  box-shadow: inset 0 -1px 0 var(--hair); transition: background .2s; }
-.setlist button:hover { background: var(--paper-deep); }
-.setlist img { width: 52px; height: 52px; object-fit: cover; }
-.s-n { font: 600 var(--text-small)/1 var(--head); color: var(--ink-soft); font-variant-numeric: tabular-nums; display: grid; place-items: center; height: 18px; }
-.s-title { display: block; font: 600 var(--text-name)/var(--lines-title) var(--head); }
-.s-meta { display: block; font-size: var(--text-small); color: var(--ink-soft); margin-top: 4px; }
-.s-vibe { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-small); text-transform: uppercase; color: var(--ink-soft); }
-.s-dur { font-size: var(--text-small); color: var(--ink-soft); font-variant-numeric: tabular-nums; min-width: 3ch; text-align: right; }
-.setlist button[aria-current="true"] .s-title { color: var(--slate); }
-.eq { display: none; gap: 2px; align-items: end; height: 16px; }
-.eq i { width: 3px; background: var(--ochre); height: 100%; transform-origin: bottom; }
-.is-playing .setlist button[aria-current="true"] .eq { display: inline-flex; }
-.is-playing .setlist button[aria-current="true"] .s-num { display: none; }
-@media (prefers-reduced-motion: no-preference) {
-  .eq i { animation: eq .9s ease-in-out infinite alternate; }
-  .eq i:nth-child(2) { animation-duration: .7s; animation-delay: -.3s; }
-  .eq i:nth-child(3) { animation-duration: 1.1s; animation-delay: -.6s; }
+/* "I want to take the portfolio player from his profile page and migrate it to his website but with different images
+   instead of my Slmgmt branded art" (Carl, 10 Nov 2026). The component is vinyl/vinyl-player.js; its four drawings are
+   Greg's versions of Carl's (vinyl/art/, made by tools/vinyl_art.py): the plinth in slate, the platter a deep slate disc
+   with Greg's mark where the STUDIOLAND MGMT watermark was, the record's label squares and the tonearm in ochre. Its
+   colours and fonts are set here; StudioLand's own fonts are not used. */
+vinyl-player {
+  --art-plinth: url("vinyl/art/plinth.webp"); --art-platter: url("vinyl/art/platter.webp");
+  --art-record: url("vinyl/art/record.webp"); --art-tonearm: url("vinyl/art/tonearm.webp");
+  --pp-font: "Encode Sans Condensed", "Arial Narrow", sans-serif; --pp-font-body: "Krub", system-ui, sans-serif;
+  --pp-bg: var(--paper); --pp-panel: var(--paper-deep); --pp-board: var(--paper); --pp-cream: var(--paper);
+  --pp-line: var(--char); --pp-text: var(--char); --pp-ink: var(--char); --pp-muted: var(--ink-soft);
+  --pp-accent: var(--slate); --pp-teal: var(--slate); --pp-plinth-1: var(--slate); --pp-plinth-2: var(--slate);
+  --pp-mustard: var(--ochre); --pp-mint: var(--dusty); --pp-vinyl-1: var(--char); --pp-vinyl-2: var(--char);
+  --pp-radius: 0px;
 }
-@keyframes eq { from { transform: scaleY(.25); } }
-@media (max-width: 640px) { .setlist button { grid-template-columns: 26px 48px minmax(0, 1fr) auto; } .s-vibe { display: none; } .setlist img { width: 48px; height: 48px; } }
-
 /* The song keeps you company: a small player at the foot of the screen once the big one is out of sight. */
 .mini { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 30;
   width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 12px; align-items: center;
@@ -306,9 +277,6 @@ footer strong { color: var(--paper); font-weight: 600; }
 footer a { color: var(--paper); }
 .is-playing footer { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); } /* room for the small player */
 
-/* View transitions: changing songs cross-fades the cover and the title instead of snapping. */
-::view-transition-old(cover), ::view-transition-new(cover), ::view-transition-old(title), ::view-transition-new(title) { animation-duration: .35s; }
-@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 </style>
 </head>
 <body>
@@ -353,30 +321,14 @@ footer a { color: var(--paper); }
   <section class="listen" id="listen" aria-labelledby="listen-h">
     <div class="wrap">
       <div class="listen-head rise"><p class="kicker">Selected work</p><h2 id="listen-h">Hear for yourself</h2></div>
-      <div class="deck rise" id="deck">
-        <div class="deck-art"><img id="d-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="600" height="600"></div>
-        <div class="deck-body">
-          <div>
-            <div class="deck-vibe" id="d-vibe">Dark catchy alt pop</div>
-            <div class="deck-title" id="d-title">i won’t see you anymore</div>
-            <div class="deck-artist" id="d-artist">Rol3ert · Mixed</div>
-          </div>
-          <div aria-hidden="true"></div>
-          <div class="transport">
-            <button class="d-play" id="d-play" type="button" aria-label="Play">
-              <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
-              <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
-            </button>
-            <div>
-              <canvas class="wave" id="wave" tabindex="0" role="slider" aria-label="Position in song" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></canvas>
-              <div class="times"><span id="cur">0:00</span><span id="dur">4:02</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ol class="setlist" id="setlist"></ol>
+      <!-- The songs, in his Squarespace player's order. To add one: its MP3 in audio/, its cover in img/, and a row here. -->
+      <vinyl-player class="rise" id="deck" max="4" data-art="plinth record tonearm" noframe><script type="application/json">[
+  {"title": "i won’t see you anymore", "artist": "Rol3ert", "role": "Mixed", "sleeve": "img/i-won-t-see-you-anymore.webp", "src": "audio/I-Won-t-See-You-Anymore.mp3"},
+  {"title": "Painful Paradise", "artist": "Mishaal Tamer", "role": "Mixed", "sleeve": "img/painful-paradise.webp", "src": "audio/Painful-Paradise.mp3"},
+  {"title": "Forgive Them", "artist": "Essence Natay & Vic Lucas", "role": "Mixed", "sleeve": "img/forgive-them.webp", "src": "audio/Forgive-Them.mp3"},
+  {"title": "Won’t Let You Down", "artist": "MONZ", "role": "Mixed", "sleeve": "img/wont-let-you-down.webp", "src": "audio/Wont-Let-You-Down.mp3"}
+]</script></vinyl-player>
     </div>
-    <audio id="audio" preload="none"></audio>
   </section>
 
   <section class="quotes" aria-labelledby="quotes-h">
@@ -435,136 +387,47 @@ footer a { color: var(--paper); }
   <span class="m-bar" aria-hidden="true"></span>
 </div>
 
+<script src="vinyl/vinyl-player.js"></script>
 <script>
-// The songs, in his Squarespace player's order. "vibe" is his own line for each one there; "peaks" is the song's own
-// loudness in 160 slices (one character each, read from the MP3 by tools/peaks.py), drawn as its waveform; "dur" its
-// length in seconds. To add a song: its MP3 in audio/, its art in img/, and a row here from tools/peaks.py.
-const TRACKS = [
-  { vibe: "Dark catchy alt pop",     title: "i won’t see you anymore", artist: "Rol3ert",                  role: "Mixed", art: "i-won-t-see-you-anymore.webp", src: "I-Won-t-See-You-Anymore.mp3", dur: 242.4, peaks: "hgjijikhjloknkojmmojkonmnroqqsloiqrpppnplpyxxutvvwxvzuvuysxtvsuuyrstvuvtwvumhkhmkljmmomomrsszwwwuwwvxwztwtxswsvrtuysssvtutuvsi]XV^SbQ\\posopsnuwuxpql_YRHB<743333" },
-  { vibe: "Deep emotional pop",      title: "Painful Paradise",         artist: "Mishaal Tamer",            role: "Mixed", art: "painful-paradise.webp",        src: "Painful-Paradise.mp3",        dur: 176.1, peaks: "U^^UV^WSY\\VX^a_bfcadhbgfddaiedijfaijgkknhigedkgdjglmemgoiqqkynzltsmskeecjghbehhfffecgdfdfddifhcegfgkkfdgkfjllhlheglg`lhliinimlxjknmoiwlorp_SQV\\YVZJOXVZL?4333333" },
-  { vibe: "Soulfully uplifting pop", title: "Forgive Them",             artist: "Essence Natay & Vic Lucas", role: "Mixed", art: "forgive-them.webp",            src: "Forgive-Them.mp3",            dur: 146.3, peaks: "IYVSVPXVSTOZWTYSZVXcflkgjnikijnioohqoothnnjmklrnqnqvzprvtyrurmutuwrzufmjhknmngikgkljqgqmikpmnnmsjrojojkmmqplpniogopnj[lvvwsmyxrvtnsstxpwzh[]PRZY[PUPVXQVUXZSSB33" },
-  { vibe: "Smooth emotional pop",    title: "Won’t Let You Down",       artist: "MONZ",                     role: "Mixed", art: "wont-let-you-down.webp",       src: "Wont-Let-You-Down.mp3",       dur: 149.0, peaks: "VXVXRPMVOZ]gqsvuturtumommuqtyoryokwigmgo_\\enfpmkxprwonwprsn\\\\c_[[S^\\\\b\\zqpzqmxrml`dsqvuuuqqvlmsprustsqupmukfien^_djikpjqvovrlwoqtqtvsowhqutryuuqnvspvsmxll;33333" },
-];
-
 const $ = id => document.getElementById(id);
-const root = document.documentElement, audio = $("audio"), wave = $("wave"), mini = $("mini");
+const root = document.documentElement, vp = $("deck"), mini = $("mini");
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
-const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "–:––";
-let current = 0, loaded = -1;
 document.querySelector(".hero").id = "top";
 
-// ---- The setlist
-TRACKS.forEach((t, i) => {
-  const li = document.createElement("li");
-  li.innerHTML = `<button type="button"><span class="s-n"><span class="s-num"></span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
-    <img src="img/${t.art}" alt="" width="52" height="52" loading="lazy">
-    <span><span class="s-title"></span><span class="s-meta"></span></span><span class="s-vibe"></span><span class="s-dur"></span></button>`;
-  li.querySelector(".s-num").textContent = String(i + 1).padStart(2, "0");
-  li.querySelector(".s-title").textContent = t.title;
-  li.querySelector(".s-meta").textContent = `${t.artist} · ${t.role}`;
-  li.querySelector(".s-vibe").textContent = t.vibe;
-  li.querySelector(".s-dur").textContent = fmt(t.dur);
-  li.querySelector("button").addEventListener("click", () => i === loaded ? toggle() : load(i, true));
-  $("setlist").append(li);
-});
-const rows = [...$("setlist").querySelectorAll("button")];
-
-// ---- Showing a song (its cover and title cross-fade, where the browser can)
-function paint(i) {
-  const t = TRACKS[i];
-  $("d-art").src = $("m-art").src = "img/" + t.art;
-  $("d-title").textContent = $("m-title").textContent = t.title;
-  $("d-artist").textContent = `${t.artist} · ${t.role}`; $("m-artist").textContent = t.artist;
-  $("d-vibe").textContent = t.vibe; $("dur").textContent = fmt(t.dur); $("cur").textContent = "0:00";
-  rows.forEach((b, j) => b.setAttribute("aria-current", j === i));
-  drawWave();
-}
-function show(i) {
-  current = i;
-  if (document.startViewTransition && !calm.matches) document.startViewTransition(() => paint(i)); else paint(i);
-}
-function load(i, play) {
-  if (i !== loaded) { audio.src = "audio/" + TRACKS[i].src; loaded = i; show(i); setSession(i); }
-  if (play) audio.play().catch(() => {});
-}
-function toggle() { if (loaded < 0) return load(current, true); audio.paused ? audio.play().catch(() => {}) : audio.pause(); }
-$("d-play").addEventListener("click", toggle);
-$("m-play").addEventListener("click", toggle);
-$("m-open").addEventListener("click", () => $("deck").scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: "center" }));
-function state() {
-  const on = !audio.paused; root.classList.toggle("is-playing", on);
-  for (const b of [$("d-play"), $("m-play")]) b.setAttribute("aria-label", on ? "Pause" : "Play");
-  placeMini();
-}
-audio.addEventListener("play", state); audio.addEventListener("pause", state);
-audio.addEventListener("ended", () => current + 1 < TRACKS.length ? load(current + 1, true) : state());
-audio.addEventListener("timeupdate", () => {
-  const d = audio.duration || TRACKS[current].dur, p = audio.currentTime / d;
-  $("cur").textContent = fmt(audio.currentTime); mini.style.setProperty("--p", p);
-  wave.setAttribute("aria-valuenow", Math.round(p * 100)); wave.setAttribute("aria-valuetext", `${fmt(audio.currentTime)} of ${fmt(d)}`);
-  drawWave();
-});
-
-// ---- The waveform: the song's own shape, the played part in ochre. Tap, drag or use the arrow keys to move through it.
-const ctx = wave.getContext("2d");
-function drawWave(hover) {
-  const r = wave.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
-  if (!r.width) return;
-  if (wave.width !== Math.round(r.width * dpr)) { wave.width = Math.round(r.width * dpr); wave.height = Math.round(r.height * dpr); }
-  const W = wave.width, H = wave.height, peaks = TRACKS[current].peaks, n = peaks.length;
-  const d = (loaded === current && audio.duration) || TRACKS[current].dur;
-  const played = loaded === current ? audio.currentTime / d : 0;
-  const step = W / n, bw = Math.max(1, step * .58);
-  ctx.clearRect(0, 0, W, H);
-  for (let k = 0; k < n; k++) {
-    const v = (peaks.charCodeAt(k) - 48) / 74, h = Math.max(2 * dpr, v * H * .92), at = (k + .5) / n;
-    const done = at <= played, ahead = hover != null && at <= hover;
-    ctx.fillStyle = done ? "#af945f" : "#92a6b1";
-    ctx.globalAlpha = done ? 1 : ahead ? .85 : .5;
-    ctx.fillRect(k * step, (H - h) / 2, bw, h);
+// ---- The record player keeps you company: the small player at the foot of the screen, the phone's lock screen.
+// The player is its own element (vinyl/vinyl-player.js); this only listens to it and presses its buttons.
+let deckSeen = true, playing = -1;
+const placeMini = () => mini.classList.toggle("on", root.classList.contains("is-playing") && !deckSeen);
+function hookUp() {
+  const audio = vp.audio;
+  if (!audio) return requestAnimationFrame(hookUp);
+  const state = () => {
+    const on = !audio.paused; root.classList.toggle("is-playing", on);
+    $("m-play").setAttribute("aria-label", on ? "Pause" : "Play"); placeMini();
+  };
+  audio.addEventListener("play", state); audio.addEventListener("pause", state); audio.addEventListener("ended", state);
+  audio.addEventListener("timeupdate", () => mini.style.setProperty("--p", audio.duration ? audio.currentTime / audio.duration : 0));
+  vp.addEventListener("trackchange", ({ detail: { index, track } }) => {
+    playing = index;
+    $("m-art").src = track.sleeve; $("m-title").textContent = track.title; $("m-artist").textContent = track.artist;
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: track.title, artist: track.artist,
+        artwork: [{ src: new URL(track.sleeve, location.href).href, sizes: "600x600", type: "image/webp" }] });
+    }
+  });
+  if ("mediaSession" in navigator) {
+    const h = { play: () => vp.play(), pause: () => vp.pause(),
+      previoustrack: () => playing > 0 && vp.play(playing - 1),
+      nexttrack: () => playing + 1 < vp.tracks.length && vp.play(playing + 1),
+      seekto: d => { audio.currentTime = d.seekTime; } };
+    for (const [k, f] of Object.entries(h)) { try { navigator.mediaSession.setActionHandler(k, f); } catch {} }
   }
-  ctx.globalAlpha = 1;
+  $("m-play").addEventListener("click", () => audio.paused ? vp.play() : vp.pause());
 }
-function seekTo(frac) {
-  frac = Math.min(1, Math.max(0, frac));
-  if (loaded !== current) load(current, false);
-  const go = () => { audio.currentTime = frac * (audio.duration || TRACKS[current].dur); drawWave(); };
-  audio.readyState >= 1 ? go() : audio.addEventListener("loadedmetadata", go, { once: true });
-  if (audio.paused) audio.play().catch(() => {});
-}
-const fracAt = e => { const r = wave.getBoundingClientRect(); return (e.clientX - r.left) / r.width; };
-let dragging = false;
-wave.addEventListener("pointerdown", e => { dragging = true; wave.setPointerCapture(e.pointerId); seekTo(fracAt(e)); });
-wave.addEventListener("pointermove", e => { if (dragging) seekTo(fracAt(e)); else drawWave(fracAt(e)); });
-wave.addEventListener("pointerup", () => { dragging = false; });
-wave.addEventListener("pointerleave", () => { if (!dragging) drawWave(); });
-wave.addEventListener("keydown", e => {
-  const d = audio.duration || TRACKS[current].dur, now = loaded === current ? audio.currentTime : 0;
-  const by = { ArrowRight: 5, ArrowUp: 5, ArrowLeft: -5, ArrowDown: -5 }[e.key];
-  if (by) { e.preventDefault(); seekTo((now + by) / d); }
-  else if (e.key === "Home") { e.preventDefault(); seekTo(0); }
-  else if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(); }
-});
-new ResizeObserver(() => drawWave()).observe(wave);
-
-// ---- The phone's lock screen and the keyboard's media keys
-function setSession(i) {
-  if (!("mediaSession" in navigator)) return;
-  const t = TRACKS[i], art = new URL("img/" + t.art, location.href).href;
-  navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: t.artist, artwork: [{ src: art, sizes: "600x600", type: "image/webp" }] });
-  const h = { play: () => audio.play(), pause: () => audio.pause(),
-    previoustrack: () => load(Math.max(0, current - 1), true), nexttrack: () => load(Math.min(TRACKS.length - 1, current + 1), true),
-    seekto: d => { audio.currentTime = d.seekTime; } };
-  for (const [k, f] of Object.entries(h)) { try { navigator.mediaSession.setActionHandler(k, f); } catch {} }
-}
-
-// ---- The bar at the top once the video is gone; the small player once the big one is out of sight
-let deckSeen = true;
+hookUp();
+$("m-open").addEventListener("click", () => vp.scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: "center" }));
 new IntersectionObserver(([e]) => $("topbar").classList.toggle("on", !e.isIntersecting), { threshold: 0.05 }).observe(document.querySelector(".hero"));
-new IntersectionObserver(([e]) => { deckSeen = e.isIntersecting; placeMini(); }, { threshold: 0.2 }).observe($("deck"));
-function placeMini() { mini.classList.toggle("on", root.classList.contains("is-playing") && !deckSeen); }
-
-paint(0);
+new IntersectionObserver(([e]) => { deckSeen = e.isIntersecting; placeMini(); }, { threshold: 0.2 }).observe(vp);
 
 // ---- Contact: sent to Netlify Forms without leaving the page
 $("form").addEventListener("submit", async e => {

@@ -33,6 +33,6 @@ document.querySelectorAll("video[data-clip]").forEach((v) => {
 """
 s = s.replace("</body>", "").replace("</html>", "")
 (out / "index.html").write_text(s)
-for d in ("img", "audio", "video"):
+for d in ("img", "audio", "video", "vinyl"):
     shutil.copytree(root / d, out / d, dirs_exist_ok=True)
 print(out / "index.html")
