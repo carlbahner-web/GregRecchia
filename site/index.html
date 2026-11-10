@@ -315,11 +315,13 @@ vinyl-player {
 .q-dots { display: flex; gap: 10px; }
 .q-dots button { width: 12px; height: 12px; border-radius: 50%; border: var(--line) solid var(--slate); background: none; padding: 0; cursor: pointer; }
 .q-dots button[aria-current="true"] { background: var(--slate); }
-.q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+/* LANDSCAPE, ALL OF THEM: "I'm thinking we could maybe crop the images to all be a bit landscape? The three testimonials
+   I mean" (Carl, 10 Nov 2026). 3 to 2; each photo says where its subject is with --at (Mishaal's head near the top). */
+.q img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: var(--at, 50% 50%); }
 .q blockquote { margin: 0; }
 /* The quote's photo fills the left column like Greg's portrait, and on a phone is 150 wide above the quote so the
    quote shows (the officers' round, 10 Nov 2026). */
-@media (max-width: 760px) { .q .portrait { width: 150px; } }
+
 /* THE SAME OFFSET FRAME BEHIND IT AS BEHIND GREG'S PORTRAIT: "can we put the little box layer thing behind the quote photos
    too?" (Carl, 10 Nov 2026). The photo sits in a .portrait like his video. */
 .q .portrait img { display: block; }
@@ -439,7 +441,7 @@ footer a { color: var(--paper); }
            artist's name, the quote word for word, the name in <cite>); the arrows and dots appear once there are two. -->
       <div class="q-track" id="q-track" tabindex="0" aria-label="Quotes">
         <figure class="q split">
-          <div class="portrait"><img src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy"></div>
+          <div class="portrait"><img style="--at: 50% 5%" src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy"></div>
           <blockquote>
             <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
             <cite>Mishaal Tamer</cite>

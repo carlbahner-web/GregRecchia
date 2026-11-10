@@ -101,7 +101,7 @@ relative so the same page works there; its form only says it is a preview.
   up with the page; the drawings in the page's exact charcoal, ochre and off-white (`tools/vinyl_art.py`); one Name box;
   the thank-you takes the form's place ("Thanks, <first name>!" and his "I'll be in touch with you shortly."); the
   page's name "Greg Recchia // Mixer & Co-Producer" with his intro sentence for search results and "© Greg Recchia";
-  his Instagram (@greg_recchia_productions, from his MGMT page) in the footer; the quote's photo 150 wide on a phone; the
+  his Instagram (@greg_recchia_productions, from his MGMT page) in the footer; the quote's photo 150 wide on a phone (until the photos went landscape); the
   intro's heading 22 above its words. Kept: the song in the bar while the player is on screen, Listen, no prices. One test send once it's on Netlify.
 - The deck is drawn in code, not a picture: "can we replace the deck with something procedural?", then, shown three,
   "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board, charcoal edge, an off-white line
@@ -133,6 +133,10 @@ relative so the same page works there; its form only says it is a preview.
   ends on its bottom edge, the rows spread to its height and the covers shrinking when the deck gets short (`--shelf-rows`,
   INK TO INK WITH THE DECK in the player): "can we make the ink-to-ink of the left column match the ink-to-ink of the
   deck, even during resizing?" (Carl, 10 Nov 2026). Measured within 1px from 1440 to 770 wide.
+- The quotes' photos are landscape, 3 to 2, each placed on its subject with `--at` (Mishaal's head near the top): "I'm
+  thinking we could maybe crop the images to all be a bit landscape? The three testimonials I mean" (Carl, 10 Nov 2026).
+  So a phone no longer needs a smaller photo. Waiting in `img/`: `matt.webp` and `essence.webp` (her "In The Light" cover,
+  "a better one for Essence Natay") for their quotes, and `greg-portrait.webp`, a new photo of Greg, place not chosen.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
