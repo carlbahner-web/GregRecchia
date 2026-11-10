@@ -235,6 +235,9 @@ vinyl-player {
 .mini img { width: 48px; height: 48px; object-fit: cover; }
 .m-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .m-artist { font-size: var(--text-tiny); color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* one icon at a time: play while it's paused, pause while it plays */
+.m-play svg { width: 24px; height: 24px; }
+.is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
 .m-play { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ochre); color: var(--char); display: grid; place-items: center; cursor: pointer; }
 .m-bar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
 .m-open { padding: 0; border: 0; background: none; cursor: pointer; display: block; }
