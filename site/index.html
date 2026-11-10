@@ -238,6 +238,10 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 .intro p.goal { color: var(--slate); margin: 0; }
 .intro em { font: 400 1em/1 var(--slab); color: var(--slate); white-space: nowrap; }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .portrait { max-width: 380px; margin-inline: 0 22px; } }
+/* GREG'S PORTRAIT DOESN'T JUMP EITHER: beside his words down to a phone, growing and shrinking with the window (it went
+   from 260 to 380 the moment the window narrowed past 860); stacked only on a phone. */
+.intro .split { grid-template-columns: clamp(150px, 30vw, 460px) minmax(0, 1fr); }
+@media (max-width: 560px) { .intro .split { grid-template-columns: 1fr; } }
 
 /* Things rise into place as they come into view, where the browser can tie it to scrolling (no script). */
 @media (prefers-reduced-motion: no-preference) {
@@ -284,7 +288,13 @@ vinyl-player {
 .q { scroll-snap-align: start; margin: 0; }
 .q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; max-width: 460px; }
 .q blockquote { margin: 0; }
-@media (max-width: 860px) { .q img { width: 150px; } }  /* on a phone the photo had filled the screen before the quote (the officers' round) */
+/* THE PHOTO GROWS AND SHRINKS WITH THE WINDOW, NEVER JUMPS ("things like the testimonial images ... get real weird as
+   things get resized", Carl, 10 Nov 2026): it was as wide as its column, 416 at a laptop and 328 just before the layout
+   stacked, then 150 at once. Now one size rule all the way, 150 on a phone to 340 on a laptop, beside the quote until
+   a phone, above it there (150, so the quote shows: the officers' round). */
+.q.split { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
+.q img { width: clamp(150px, 26vw, 340px); max-width: none; }
+@media (max-width: 560px) { .q.split { grid-template-columns: 1fr; } }
 .q blockquote::before { content: "\201C"; display: block; font: 400 var(--text-mark)/.7 var(--slab); color: var(--ochre); height: 56px; }
 .q blockquote p { font: 600 var(--text-big)/var(--lines-read) var(--head); color: var(--char); margin: 0 0 var(--gap-panel); max-width: 30ch; }
 .q cite { font: 400 var(--text-read)/1 var(--slab); font-style: normal; letter-spacing: var(--caps-slab); color: var(--slate); }
@@ -323,6 +333,10 @@ footer .sig { display: flex; align-items: center; gap: 12px; }
 footer .mark { width: 30px; margin: 0; background: var(--paper); }
 footer .wordmark { width: 170px; margin: 0; background: var(--paper); }
 footer p { margin: 0; }
+/* ONE ROW OR ONE COLUMN, NEVER HALF-WRAPPED: where his name, Instagram, management and the year don't all fit on one
+   line they stack down the left, rather than wrapping into a ragged second row ("the footer text gets real weird as
+   things get resized", Carl, 10 Nov 2026). */
+@media (max-width: 1100px) { footer .inner { flex-direction: column; align-items: flex-start; gap: 12px; } }
 footer strong { color: var(--paper); font-weight: 600; }
 footer a { color: var(--paper); }
 
