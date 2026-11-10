@@ -38,11 +38,15 @@ relative so the same page works there; its form only says it is a preview.
   ("What about these colors? Ignore the copy and font"): off-white page, charcoal, slate, dusty blue, ochre, all named
   at the top of THE BODY in the styles; ochre is never for words on the off-white (too light). It replaced one wood
   surface with framed panels (the wood photo and his old site's tints), which he'd come to dislike ("I don't like the
-  whole page scheme"). In it: a bar that drops in at the top once the video is gone, with a scroll progress line; Greg
+  whole page scheme"). In it: a bar at the top carrying the song: "Can the audio player stay at the top in the header? And maybe even have
+  the play button visible on page load and if someone clicks it, it scrolls to the player section, then pulls the vinyl
+  etc" (Carl, 10 Nov 2026). From the start, over the video, its play button, the song's cover, title and artist; past the
+  video it fills in with his name, the links and a scroll progress line. Its first play glides down to the record player
+  (the turntable just under the bar where the whole player won't fit, a phone) and puts the first record on; after that
+  it plays and pauses what's on the deck; the song's cover or title glides down without playing. It replaced a small
+  player at the foot of the screen; Greg
   standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; things rising into
-  place as you scroll (CSS scroll-driven, no script, none for less motion); the record player from his MGMT page (below), with a
-  small player at the foot of the screen while a song plays and the record player is out of sight, and the phone's
-  lock-screen controls (Media Session); the quote as a
+  place as you scroll (CSS scroll-driven, no script, none for less motion); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quote as a
   snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
   `--text-*` at the top of the styles, nothing faded. Colours: the hero's white and butter, the body's own set (above).

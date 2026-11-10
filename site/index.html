@@ -142,7 +142,7 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
 }
 main { background: var(--paper); color: var(--char); }
 main h2 { color: var(--char); text-align: left; }
-main :focus-visible, .topbar :focus-visible, .mini :focus-visible { outline-color: var(--slate); }
+main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .contact :focus-visible, footer :focus-visible { outline-color: var(--ochre); }
 .kicker { color: var(--ink-soft); text-align: left; margin: 0 0 12px; }
 
@@ -155,18 +155,25 @@ main :focus-visible, .topbar :focus-visible, .mini :focus-visible { outline-colo
 .b-btn .arrow { transition: transform .25s var(--ease); }
 .b-btn:hover .arrow { transform: translateX(4px); }
 
-/* ---------- The bar that follows you down the page, once the video is gone ---------- */
-.topbar { position: fixed; inset: 0 0 auto; z-index: 30; display: flex; align-items: center; justify-content: space-between;
-  gap: var(--gap); padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, 4vw) 10px;
-  background: rgba(242, 238, 229, .86); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  box-shadow: 0 1px 0 var(--hair); transform: translateY(-110%); transition: transform .45s var(--ease); }
-.topbar.on { transform: none; }
-.tb-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+/* ---------- THE BAR AT THE TOP, WITH THE SONG IN IT ---------- */
+/* "Can the audio player stay at the top in the header? And maybe even have the play button visible on page load and if
+   someone clicks it, it scrolls to the player section, then pulls the vinyl etc" (Carl, 10 Nov 2026). It replaced a
+   small player at the foot of the screen. Over the video only the song shows, his name being big there already; past
+   it, the bar fills in behind it with his name and the links. Its first play glides down to the record player and puts
+   the first record on; after that it plays and pauses whatever is on the deck. */
+.topbar { position: fixed; inset: 0 0 auto; z-index: 30; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  gap: var(--gap); padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, 4vw) 10px; color: var(--white);
+  transition: background-color .35s, box-shadow .35s, color .35s; }
+.topbar.on { background: rgba(242, 238, 229, .86); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 1px 0 var(--hair); color: var(--char); }
+.tb-brand, .tb-links, .progress { visibility: hidden; }
+.topbar.on .tb-brand, .topbar.on .tb-links, .topbar.on .progress { visibility: visible; }
+.tb-brand { justify-self: start; display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .tb-mark { width: 28px; aspect-ratio: 1625 / 1517; background: var(--char);
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
 .tb-name { width: clamp(120px, 14vw, 160px); aspect-ratio: 5832 / 631; background: var(--char);
   -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
-.tb-links { display: flex; gap: 6px; }
+.tb-links { justify-self: end; display: flex; gap: 6px; }
 .tb-links a { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-big); text-transform: uppercase;
   color: var(--char); text-decoration: none; padding: 12px 14px; }
 .tb-links a:hover { color: var(--slate); }
@@ -176,7 +183,29 @@ main :focus-visible, .topbar :focus-visible, .mini :focus-visible { outline-colo
   transform-origin: 0 50%; transform: scaleX(0); }
 @supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
 @keyframes grow { to { transform: scaleX(1); } }
-@media (max-width: 520px) { .tb-name { display: none; } .tb-links a:not(.go) { display: none; } }
+
+/* the song: its play button, its cover, its title over its artist, and how far through it is */
+.tb-player { justify-self: center; position: relative; display: flex; align-items: center; gap: 12px; min-width: 0;
+  max-width: min(420px, 56vw); }
+.tb-play { flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--ochre); color: var(--char);
+  display: grid; place-items: center; cursor: pointer; transition: transform .2s var(--ease); }
+.tb-play:hover { transform: scale(1.06); }
+.tb-play svg { width: 20px; height: 20px; }
+.is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
+.tb-song { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 0; border: 0; background: none;
+  color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.tb-song img { flex: none; width: 36px; height: 36px; object-fit: cover; }
+.tb-song span { display: block; min-width: 0; }
+.tb-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb-artist { font-size: var(--text-tiny); color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topbar.on .tb-artist { color: var(--ink-soft); }
+.tb-bar { position: absolute; left: 54px; right: 0; bottom: -6px; height: var(--line); background: var(--ochre);
+  transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+@media (max-width: 640px) {
+  .topbar { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .tb-name, .tb-links a:not(.go), .tb-artist { display: none; }
+  .tb-player { max-width: none; justify-self: stretch; }
+}
 
 /* ---------- Hi, I'm Greg Recchia: Greg in the live room beside his words ---------- */
 .intro { padding-block: clamp(72px, 12vw, 130px); }
@@ -226,21 +255,6 @@ vinyl-player {
   /* the keys' and the knob's sides, a darker off-white; a key under the mouse, a lighter one (GREG'S DECK) */
   --pp-key-side: #cfc6b4; --pp-key-hover: #fbf9f4;
 }
-/* The song keeps you company: a small player at the foot of the screen once the big one is out of sight. */
-.mini { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 30;
-  width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 12px; align-items: center;
-  padding: 10px 10px 13px; background: var(--char); color: var(--paper); box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
-  transform: translate(-50%, calc(100% + 60px)); transition: transform .45s var(--ease); }
-.mini.on { transform: translate(-50%, 0); }
-.mini img { width: 48px; height: 48px; object-fit: cover; }
-.m-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.m-artist { font-size: var(--text-tiny); color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* one icon at a time: play while it's paused, pause while it plays */
-.m-play svg { width: 24px; height: 24px; }
-.is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
-.m-play { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ochre); color: var(--char); display: grid; place-items: center; cursor: pointer; }
-.m-bar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
-.m-open { padding: 0; border: 0; background: none; cursor: pointer; display: block; }
 
 /* ---------- What the artists are saying ---------- */
 .quotes { padding-block: 0 clamp(72px, 12vw, 130px); } /* the songs' own space sits above it */
@@ -286,7 +300,6 @@ footer .wordmark { width: 170px; margin: 0; background: var(--paper); }
 footer p { margin: 0; }
 footer strong { color: var(--paper); font-weight: 600; }
 footer a { color: var(--paper); }
-.is-playing footer { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); } /* room for the small player */
 
 </style>
 </head>
@@ -310,6 +323,17 @@ footer a { color: var(--paper); }
 
 <nav class="topbar" id="topbar" aria-label="Greg Recchia">
   <a class="tb-brand" href="#top" aria-label="Back to the top"><span class="tb-mark"></span><span class="tb-name"></span></a>
+  <div class="tb-player" id="tb-player">
+    <button class="tb-play" id="tb-play" type="button" aria-label="Play">
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
+    </button>
+    <button class="tb-song" id="tb-song" type="button" aria-label="Go to the record player">
+      <img id="tb-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="36" height="36">
+      <span><span class="tb-title" id="tb-title">i won’t see you anymore</span><span class="tb-artist" id="tb-artist">Rol3ert</span></span>
+    </button>
+    <span class="tb-bar" aria-hidden="true"></span>
+  </div>
   <div class="tb-links"><a href="#listen">Listen</a><a class="go" href="#contact">Contact</a></div>
   <span class="progress" aria-hidden="true"></span>
 </nav>
@@ -388,39 +412,28 @@ footer a { color: var(--paper); }
   </div>
 </footer>
 
-<div class="mini" id="mini" role="region" aria-label="Now playing">
-  <button class="m-open" id="m-open" type="button" aria-label="Go to the player"><img id="m-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="48" height="48"></button>
-  <div style="min-width:0"><div class="m-title" id="m-title">i won’t see you anymore</div><div class="m-artist" id="m-artist">Rol3ert</div></div>
-  <button class="m-play" id="m-play" type="button" aria-label="Play">
-    <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
-    <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
-  </button>
-  <span class="m-bar" aria-hidden="true"></span>
-</div>
-
 <script src="vinyl/vinyl-player.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const root = document.documentElement, vp = $("deck"), mini = $("mini");
+const root = document.documentElement, vp = $("deck"), bar = $("topbar");
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
 document.querySelector(".hero").id = "top";
 
-// ---- The record player keeps you company: the small player at the foot of the screen, the phone's lock screen.
-// The player is its own element (vinyl/vinyl-player.js); this only listens to it and presses its buttons.
-let deckSeen = true, playing = -1;
-const placeMini = () => mini.classList.toggle("on", root.classList.contains("is-playing") && !deckSeen);
+// ---- The song in the bar at the top, and the phone's lock screen. The record player is its own element
+// (vinyl/vinyl-player.js); this only listens to it and presses its buttons.
+let playing = -1;
 function hookUp() {
   const audio = vp.audio;
   if (!audio) return requestAnimationFrame(hookUp);
   const state = () => {
     const on = !audio.paused; root.classList.toggle("is-playing", on);
-    $("m-play").setAttribute("aria-label", on ? "Pause" : "Play"); placeMini();
+    $("tb-play").setAttribute("aria-label", on ? "Pause" : "Play");
   };
   audio.addEventListener("play", state); audio.addEventListener("pause", state); audio.addEventListener("ended", state);
-  audio.addEventListener("timeupdate", () => mini.style.setProperty("--p", audio.duration ? audio.currentTime / audio.duration : 0));
+  audio.addEventListener("timeupdate", () => bar.style.setProperty("--p", audio.duration ? audio.currentTime / audio.duration : 0));
   vp.addEventListener("trackchange", ({ detail: { index, track } }) => {
-    playing = index;
-    $("m-art").src = track.sleeve; $("m-title").textContent = track.title; $("m-artist").textContent = track.artist;
+    playing = index; bar.style.setProperty("--p", 0);
+    $("tb-art").src = track.sleeve; $("tb-title").textContent = track.title; $("tb-artist").textContent = track.artist;
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({ title: track.title, artist: track.artist,
         artwork: [{ src: new URL(track.sleeve, location.href).href, sizes: "600x600", type: "image/webp" }] });
@@ -433,12 +446,44 @@ function hookUp() {
       seekto: d => { audio.currentTime = d.seekTime; } };
     for (const [k, f] of Object.entries(h)) { try { navigator.mediaSession.setActionHandler(k, f); } catch {} }
   }
-  $("m-play").addEventListener("click", () => audio.paused ? vp.play() : vp.pause());
 }
 hookUp();
-$("m-open").addEventListener("click", () => vp.scrollIntoView({ behavior: calm.matches ? "auto" : "smooth", block: "center" }));
-new IntersectionObserver(([e]) => $("topbar").classList.toggle("on", !e.isIntersecting), { threshold: 0.05 }).observe(document.querySelector(".hero"));
-new IntersectionObserver(([e]) => { deckSeen = e.isIntersecting; placeMini(); }, { threshold: 0.2 }).observe(vp);
+
+// Down to the record player, resolving once it is there (or straight away, for anyone who asks for less motion). Where
+// the whole player fits under the bar it is centred; where it doesn't (a phone, the turntable over the sleeves), the
+// turntable stops just under the bar, so the record's trip up from its sleeve is all in view.
+function glideToDeck() {
+  const head = bar.getBoundingClientRect().height, room = innerHeight - head;
+  const whole = vp.getBoundingClientRect(), deck = vp.shadowRoot?.querySelector(".deck")?.getBoundingClientRect() || whole;
+  const target = whole.height <= room - 24
+    ? scrollY + whole.top - head - (room - whole.height) / 2
+    : scrollY + deck.top - head - 12;
+  const to = Math.max(0, Math.round(target));
+  if (Math.abs(to - scrollY) < 8) return Promise.resolve();
+  return new Promise(done => {
+    const finish = () => { clearTimeout(late); removeEventListener("scrollend", finish); done(); };
+    const late = setTimeout(finish, 1500);   // a browser with no scrollend, or a glide cut short
+    addEventListener("scrollend", finish);
+    scrollTo({ top: to, behavior: calm.matches ? "auto" : "smooth" });
+    if (calm.matches) finish();
+  });
+}
+/* THE FIRST PLAY FROM THE TOP: down to the record player, then the first record out of its sleeve and onto the deck, as a
+   tap on its sleeve would. The song's file starts loading inside the click itself, so a phone that only lets sound
+   start from a tap still counts this as one. After that the button plays and pauses what is on the deck. */
+let starting = false;
+$("tb-play").addEventListener("click", async () => {
+  if (vp.current !== -1) return vp.audio.paused ? vp.play() : vp.pause();
+  if (starting) return;
+  starting = true;
+  const first = vp.tracks[0];
+  if (first && vp.audio) { vp.audio.src = first.src; vp.audio.load(); }
+  await glideToDeck();
+  starting = false;
+  vp.play(0);
+});
+$("tb-song").addEventListener("click", () => glideToDeck());
+new IntersectionObserver(([e]) => bar.classList.toggle("on", !e.isIntersecting), { threshold: 0.05 }).observe(document.querySelector(".hero"));
 
 // ---- Contact: sent to Netlify Forms without leaving the page
 $("form").addEventListener("submit", async e => {
