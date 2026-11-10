@@ -1,0 +1,36 @@
+<!-- His five steps, taken off the page: "Yeah take em out" (Carl, 10 Nov 2026). They repeated his intro.
+     The section and its styles as they were, to put back between the intro and the player. -->
+<style>
+/* ---------- How he works ---------- */
+.process { padding: 0 0 clamp(72px, 12vw, 130px); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; grid-template-columns: repeat(6, 1fr); counter-reset: step; }
+.step { grid-column: span 2; padding: 34px 28px 30px; border: 6px solid var(--butter); text-align: center; counter-increment: step;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35); backdrop-filter: blur(2px); }
+.step:nth-child(4) { grid-column: 2 / span 2; }
+.step:nth-child(1) { background: var(--tint-1); } .step:nth-child(2) { background: var(--tint-2); }
+.step:nth-child(3) { background: var(--tint-3); } .step:nth-child(4) { background: var(--tint-4); }
+.step:nth-child(5) { background: var(--tint-5); }
+.step::before { content: counter(step, decimal-leading-zero); display: block; font: 400 22px/1 var(--slab); color: var(--butter); opacity: .65; margin-bottom: 14px; }
+.step h3 { font-size: 30px; color: var(--butter); margin-bottom: 14px; font-weight: 600; }
+.step p { margin: 0; font-style: italic; font-size: 17px; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step, .step:nth-child(4) { grid-column: auto; }
+  .step:nth-child(5) { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+
+</style>
+
+  <section class="process" aria-labelledby="how">
+    <div class="wrap">
+      <h2 id="how" class="sr">How I work</h2>
+      <ol class="steps">
+        <li class="step"><h3>It Starts With the Feeling</h3><p>First, we tune into what the song actually feels like: the vibe, the tension, the pulse. That sets the direction for everything that follows.</p></li>
+        <li class="step"><h3>Lift What’s Already There</h3><p>From there, I zero in on the parts that make your track <strong>you</strong>. The grit, the warmth, and the attitude in the lyrics. Your intention leads; the production follows.</p></li>
+        <li class="step"><h3>Let the Vocal Lead</h3><p>Your vocal carries the story. I shape it so the emotion hits clear, intentional, and impossible to miss.</p></li>
+        <li class="step"><h3>Dial In the Final 3%</h3><p>The small things matter: transitions, ear candy, shifts in momentum. Those subtle details that make the listener wanna hit repeat.</p></li>
+        <li class="step"><h3>Build It Together</h3><p>This is a collaborative process: making decisions that feel natural, purposeful, and true to your sound.</p></li>
+      </ol>
+    </div>
+  </section>

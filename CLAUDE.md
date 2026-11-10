@@ -11,10 +11,11 @@ Until it is on Netlify, Carl sees it at https://claude.ai/artifact/XA2wrXqQrUkxm
 relative so the same page works there; its form only says it is a preview.
 
 ## What's in it
-- `site/index.html`: the whole page, styles and script inline. Sections in his Squarespace order: hero, intro, his five
-  steps, the player, testimonials, contact.
+- `site/index.html`: the whole page, styles and script inline. Sections in his Squarespace order: hero, intro, the player,
+  testimonials, contact. His five steps came off: "Yeah take em out" (Carl, 10 Nov 2026), as they repeated his intro
+  (vocals, transitions, ear candy) before the songs; kept in `archive/five-steps.html` to put back.
 - His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood-tile.webp`),
-  butter-cream type, the five tinted cards with butter frames, and his three
+  butter-cream type, tinted panels in butter frames, and his three
   fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
   GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
