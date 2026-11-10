@@ -22,6 +22,10 @@ relative so the same page works there; its form only says it is a preview.
   sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
   it replaces the logo's small navy name, under his mark, with
   MIXER & CO-PRODUCER spaced under it, in white: "Instead of productions, can it say MIXER & CO-PRODUCER" (Carl, 10 Nov 2026). It is a commercial font: Greg needs a licence for it as a logo if he keeps it.
+- The headline, EARWORM ARCHITECT FOR / HOOK-OBSESSED INDIE ARTISTS, in the MIXER & CO-PRODUCER line's type
+  (Encode Sans Condensed 600, spaced capitals), bigger: "can you use that for the architect lines? Maybe a bigger size
+  though?" (Carl, 10 Nov 2026). Two lines, broken after FOR. Where the headline and buttons finally go is his to pick
+  (A in the wood, B a strip along the video's foot, C the buttons top right; B recommended).
 - The hero's background is Greg at the console, looping silently behind the type: "Can we use one of these for the
   top of the page? Like a background video?" (Carl, 10 Nov 2026, with three clips). Of the three it is
   `Contact_Vid.mov`; in the other two he stands facing the camera in the middle of the frame, where the headline sits.

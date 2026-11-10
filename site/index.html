@@ -80,8 +80,13 @@ h2 { font-size: clamp(36px, 6vw, 60px); color: var(--butter); text-align: center
 .wordmark { width: 100%; aspect-ratio: 5832 / 631; background: #fff;
   -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
 .productions { font: 600 clamp(13px, 1.7vw, 19px)/1 var(--head); letter-spacing: .42em; margin-right: -.42em; color: #fff; text-transform: uppercase; }
-.hero h1 { font-size: clamp(38px, 6.6vw, 84px); font-style: italic; color: #fff; max-width: 12ch; line-height: .98; }
-.hero h1 em { font-style: italic; color: var(--butter); }
+/* The headline in the MIXER & CO-PRODUCER line's type, bigger: "can you use that for the architect lines? Maybe a
+   bigger size though?" (Carl, 10 Nov 2026). It was big italic Encode Sans Condensed. */
+.hero h1 { font: 600 clamp(14px, 2.6vw, 34px)/1.4 var(--head); letter-spacing: .24em; margin-right: -.24em;
+  text-transform: uppercase; color: #fff; }
+.hero h1 .l2 { display: block; white-space: nowrap; }
+@media (max-width: 560px) { .hero-ctas .btn { font-size: 16px; padding: 13px 22px; } }
+.hero h1 em { font-style: normal; color: var(--butter); white-space: nowrap; }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
 /* ---------- Wood sections ---------- */
@@ -177,7 +182,7 @@ footer strong { color: var(--cream); font-weight: 600; }
       <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
       <div class="productions">Mixer &amp; Co-Producer</div>
     </div>
-    <h1>Earworm Architect for <em>Hook-Obsessed</em> Indie Artists</h1>
+    <h1>Earworm Architect for <span class="l2"><em>Hook-Obsessed</em> Indie Artists</span></h1>
     <div class="hero-ctas">
       <a class="btn solid" href="#listen">Listen</a>
       <a class="btn" href="#contact">Contact</a>
