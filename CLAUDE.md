@@ -24,6 +24,9 @@ relative so the same page works there; its form only says it is a preview.
   (Encode Sans Condensed 600, spaced capitals), bigger: "can you use that for the architect lines? Maybe a bigger size
   though?" (Carl, 10 Nov 2026). Two lines, broken after FOR. Where the headline and buttons finally go is his to pick
   (A in the wood, B a strip along the video's foot, C the buttons top right; B recommended).
+- The hero is two thirds of the screen tall, its video cropped from the bottom at the size it always had and the name and
+  headline higher with it: "can we move the hero image up higher on the page? and then make the video not as tall? but
+  cropping the bottom 1/3rd or so(?) not just scaling the whole thing down" (Carl, 10 Nov 2026).
 - The hero's background is Greg at the console, looping silently behind the type: "Can we use one of these for the
   top of the page? Like a background video?" (Carl, 10 Nov 2026, with three clips). Of the three it is
   `Contact_Vid.mov`; in the other two he stands facing the camera in the middle of the frame, where the headline sits.
