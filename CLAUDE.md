@@ -38,6 +38,11 @@ relative so the same page works there; its form only says it is a preview.
 - One wood surface from the video to the footer, the player and the form on it as dark panels in the cards' butter
   frame: "It feels so jarring from one to the next" (Carl, 10 Nov 2026, of black and wood bands taking turns), picked
   over an all-dark page on mockups ("Middle column"). The wood is tiled as itself and its mirror, so it has no seam.
+- Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
+  `--text-*` at the top of the styles, white only over the video, cream for everything else read, nothing faded.
+  `python3 tools/check_consistency.py` lists anything outside them; run it before every change. The rest of the
+  quiz (https://claude.ai/artifact/AM6gVs8Rb5PWBfe1Q6VbEG) saves its answers in its own database: read them with
+  ArtifactData `list`, collection `answers`. The officer's notes are in `.officers/` (not in git).
 - Every word is his, from the Squarespace page. Nothing on the page is written for him.
 - The player: four songs whose masters and art came from his StudioLand MGMT page (studiolandmgmt-site,
   `deploy-mgmt/greg-recchia/`). Each song's "vibe" is his own line from the Squarespace player. A song is one row in
