@@ -142,6 +142,9 @@ relative so the same page works there; its form only says it is a preview.
 - Beside "Hi, I'm Greg" is his photo against the white brick (`img/greg-portrait.webp`), and his live-room video moved
   under the contact section's words, in the same offset frame: "Could it be used in the hi in Greg section and then move
   that video down to the contact section?" (Carl, 10 Nov 2026).
+- Each video plays only while it's on screen; the one by the contact form waits on its first frame (its poster) and starts
+  from there when it first scrolls into view. It started as the page opened, off screen, and jumped as it came in: "The
+  video by the contact form" (Carl, 10 Nov 2026, of the glitch he saw "right on load").
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg

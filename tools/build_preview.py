@@ -31,7 +31,7 @@ document.querySelectorAll("video[data-clip]").forEach(async (v) => {
   const blob = await (await fetch("data:video/mp4;base64," + b64)).blob();
   v.muted = true;
   v.src = URL.createObjectURL(blob);
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().catch(() => {});
+  if (typeof holdStill === "function") holdStill();   // the page plays each video only while it is on screen
 });
 </script>
 """
