@@ -169,13 +169,13 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .tb-brand, .tb-links, .progress { visibility: hidden; }
 .topbar.on .tb-brand, .topbar.on .tb-links, .topbar.on .progress { visibility: visible; }
 .tb-brand { justify-self: start; display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.tb-mark { width: 28px; aspect-ratio: 1625 / 1517; background: var(--char);
+.tb-mark { height: var(--row); width: auto; aspect-ratio: 1625 / 1517; background: var(--char);
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
 .tb-name { width: clamp(120px, 14vw, 160px); aspect-ratio: 5832 / 631; background: var(--char);
   -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
 .tb-links { justify-self: end; display: flex; gap: 6px; }
 .tb-links a { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-big); text-transform: uppercase;
-  color: var(--char); text-decoration: none; padding: 12px 14px; }
+  color: var(--char); text-decoration: none; height: var(--row); padding: 0 14px; display: inline-flex; align-items: center; }
 .tb-links a:hover { color: var(--slate); }
 .tb-links a.go { background: var(--slate); color: var(--paper); }
 .tb-links a.go:hover { background: var(--char); }
@@ -184,26 +184,33 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 @supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
 @keyframes grow { to { transform: scaleX(1); } }
 
+/* ONE HEIGHT FOR EVERYTHING IN THE BAR: his mark, the play button, the cover, the two lines of the song and the Contact
+   button all stand 40px tall on one middle line ("Heights are all over the place", Carl, 10 Nov 2026, of the mark at
+   28, the play at 42, the cover at 36 and the button at 38, the song's progress hanging under the cover). */
+.topbar { --row: 40px; }
 /* the song: its play button, its cover, its title over its artist, and how far through it is */
 .tb-player { justify-self: center; position: relative; display: flex; align-items: center; gap: 12px; min-width: 0;
   max-width: min(420px, 56vw); }
-.tb-play { flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--ochre); color: var(--char);
+.tb-play { flex: none; width: var(--row); height: var(--row); border-radius: 50%; border: 0; background: var(--ochre); color: var(--char);
   display: grid; place-items: center; cursor: pointer; transition: transform .2s var(--ease); }
-.tb-play:hover { transform: scale(1.06); }
+@media (hover: hover) { .tb-play:hover { transform: scale(1.06); } }
 .tb-play svg { width: 20px; height: 20px; }
 .is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
 .tb-song { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 0; border: 0; background: none;
   color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.tb-song img { flex: none; width: 36px; height: 36px; object-fit: cover; }
+.tb-song { height: var(--row); }
+.tb-cover { flex: none; position: relative; width: var(--row); height: var(--row); overflow: hidden; }
+.tb-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .tb-song span { display: block; min-width: 0; }
 .tb-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tb-artist { font-size: var(--text-tiny); color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar.on .tb-artist { color: var(--ink-soft); }
-.tb-bar { position: absolute; left: 54px; right: 0; bottom: -6px; height: var(--line); background: var(--ochre);
+/* how far through the song: along the foot of its cover, inside it, so nothing hangs below the line */
+.tb-bar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre);
   transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
 @media (max-width: 640px) {
   .topbar { grid-template-columns: auto minmax(0, 1fr) auto; }
-  .tb-name, .tb-links a:not(.go), .tb-artist { display: none; }
+  .tb-name, .tb-links a:not(.go) { display: none; }
   .tb-player { max-width: none; justify-self: stretch; }
 }
 
@@ -329,10 +336,9 @@ footer a { color: var(--paper); }
       <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
     </button>
     <button class="tb-song" id="tb-song" type="button" aria-label="Go to the record player">
-      <img id="tb-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="36" height="36">
+      <span class="tb-cover"><img id="tb-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="40" height="40"><span class="tb-bar" aria-hidden="true"></span></span>
       <span><span class="tb-title" id="tb-title">i won’t see you anymore</span><span class="tb-artist" id="tb-artist">Rol3ert</span></span>
     </button>
-    <span class="tb-bar" aria-hidden="true"></span>
   </div>
   <div class="tb-links"><a href="#listen">Listen</a><a class="go" href="#contact">Contact</a></div>
   <span class="progress" aria-hidden="true"></span>
