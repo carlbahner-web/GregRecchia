@@ -1576,8 +1576,8 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 @media (prefers-reduced-motion: reduce) {
   :host([data-art~="tonearm"]) .tonearm::after { transition-duration: 1ms; }
 }
-.art-boil { translate: var(--boil-dx, 0px) var(--boil-dy, 0px); }
-@media (prefers-reduced-motion: reduce) { .art-boil { translate: none; } }
+/* NO BOIL ON GREG'S: "Oh we don't want boil for Greg" (Carl, 10 Nov 2026). The kit's hand-drawn edges boil only when a
+   page runs its boil script (installBoil, on the MGMT pages); Greg's never loads it, and its last hook here is gone. */
 /* ===== GREG'S DECK, AS CARL BUILT HIS ON CARLBAHNER.COM =====================================================
    "What did we do differently in my Carlbahner site deck? The 3d buttons, the placement of words. The removal of the
    weird shadow?", then "All of it, and we need to change the colors of any illustrations" (Carl, 10 Nov 2026). From

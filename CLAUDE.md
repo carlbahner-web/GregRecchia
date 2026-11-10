@@ -68,7 +68,8 @@ relative so the same page works there; its form only says it is a preview.
   illustrations"): the deck from carlbahner's own (`assets/deck-plinth.webp` there: no thick shadow along its bottom
   and right, a thinner outline) in slate; the platter a deep slate disc with Greg's mark where the STUDIOLAND MGMT
   watermark was; the record's black and the arm's ink his charcoal, their cream his off-white, the label squares and
-  the arm's yellow ochre. Its colours and fonts (his, not
+  the arm's yellow ochre. Nothing boils: "Oh we don't want boil for Greg" (Carl, 10 Nov 2026); the kit's boil script
+  (MGMT pages) is never loaded here, and carlbahner's boiling things are not brought over. Its colours and fonts (his, not
   StudioLand's licensed ones) are set on `vinyl-player` in the styles. It replaced a waveform deck built the same day.
   Four songs whose masters and art came from that MGMT page; a song is one row in the JSON inside `<vinyl-player>`
   plus its MP3 in `site/audio/` (keep each under ~40 MB) and cover in `site/img/`.
