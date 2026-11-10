@@ -39,6 +39,12 @@
   --body: 'Krub', system-ui, sans-serif;
   --slab: 'Alfa Slab One', Georgia, serif;
   --wrap: 1080px;
+  /* ONE PAIR OF COLUMNS FOR THE WHOLE PAGE: "so the columns still don't seem intentional" (Carl, 10 Nov 2026, of the intro's
+     words, the quote, the deck and the form each starting somewhere else). Every section side by side uses these, the
+     record player too (the covers left, the deck right), so the right-hand things all start on one line and end on the
+     page's edge. 5 to 7: the picture side the smaller. Everything stacks below 760, where the player does. */
+  --cols: minmax(0, 5fr) minmax(0, 7fr);
+  --gap-cols: clamp(32px, 5vw, 64px);
   /* Text sizes: the six Carl picked on the consistency quiz ("Draft set", 10 Nov 2026), laptop sizes; the two that
      scale shrink on a phone. Use these, never a number: tools/check_consistency.py lists any stray one. */
   --text-heading: clamp(36px, 6vw, 60px);  /* section headings */
@@ -235,19 +241,16 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 
 /* ---------- Hi, I'm Greg Recchia: Greg in the live room beside his words ---------- */
 .intro { padding-block: clamp(72px, 12vw, 130px); }
-.split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 7vw, 110px); align-items: center; }
-.portrait { margin: 0; position: relative; isolation: isolate; max-width: 460px; }
+.split { display: grid; grid-template-columns: var(--cols); gap: var(--gap-cols); align-items: center; }
+.portrait { margin: 0 22px 22px 0; position: relative; isolation: isolate; }  /* the margin is the offset frame's room, inside the column */
 .portrait video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--paper-deep); }
 .portrait::after { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
 .intro h2 { margin-bottom: var(--gap-words); }  /* a heading with words under it (the officers' round, 10 Nov 2026) */
-.intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); max-width: 25ch; margin: 0 0 var(--gap-words); color: var(--char); }
+.intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin: 0 0 var(--gap-words); color: var(--char); }
 .intro p.goal { color: var(--slate); margin: 0; }
 .intro em { font: 400 1em/1 var(--slab); color: var(--slate); white-space: nowrap; }
-@media (max-width: 860px) { .split { grid-template-columns: 1fr; } .portrait { max-width: 380px; margin-inline: 0 22px; } }
-/* GREG'S PORTRAIT DOESN'T JUMP EITHER: beside his words down to a phone, growing and shrinking with the window (it went
-   from 260 to 380 the moment the window narrowed past 860); stacked only on a phone. */
-.intro .split { grid-template-columns: clamp(150px, 30vw, 460px) minmax(0, 1fr); }
-@media (max-width: 560px) { .intro .split { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .split { grid-template-columns: 1fr; } .portrait { max-width: 340px; } }
+/* GREG'S PORTRAIT GROWS AND SHRINKS WITH ITS COLUMN, and stacked it stays about the size it was beside his words. */
 
 /* Things rise into place as they come into view, where the browser can tie it to scrolling (no script). */
 @media (prefers-reduced-motion: no-preference) {
@@ -292,23 +295,19 @@ vinyl-player {
 .q-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .q-track::-webkit-scrollbar { display: none; }
 .q { scroll-snap-align: start; margin: 0; }
-.q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; max-width: 460px; }
+.q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
 .q blockquote { margin: 0; }
-/* THE PHOTO GROWS AND SHRINKS WITH THE WINDOW, NEVER JUMPS ("things like the testimonial images ... get real weird as
-   things get resized", Carl, 10 Nov 2026): it was as wide as its column, 416 at a laptop and 328 just before the layout
-   stacked, then 150 at once. Now one size rule all the way, 150 on a phone to 340 on a laptop, beside the quote until
-   a phone, above it there (150, so the quote shows: the officers' round). */
-.q.split { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
-.q img { width: clamp(150px, 26vw, 340px); max-width: none; }
-@media (max-width: 560px) { .q.split { grid-template-columns: 1fr; } }
+/* The quote's photo fills the left column like Greg's portrait, and on a phone is 150 wide above the quote so the
+   quote shows (the officers' round, 10 Nov 2026). */
+@media (max-width: 760px) { .q img { width: 150px; } }
 .q blockquote::before { content: "\201C"; display: block; font: 400 var(--text-mark)/.7 var(--slab); color: var(--ochre); height: 56px; }
-.q blockquote p { font: 600 var(--text-big)/var(--lines-read) var(--head); color: var(--char); margin: 0 0 var(--gap-panel); max-width: 30ch; }
+.q blockquote p { font: 600 var(--text-big)/var(--lines-read) var(--head); color: var(--char); margin: 0 0 var(--gap-panel); }
 .q cite { font: 400 var(--text-read)/1 var(--slab); font-style: normal; letter-spacing: var(--caps-slab); color: var(--slate); }
 
 /* ---------- Let's make it happen: the page closes in charcoal ---------- */
 .contact { background: var(--char); color: var(--paper); padding-block: clamp(72px, 12vw, 130px) clamp(48px, 8vw, 90px); }
 .contact h2 { color: var(--paper); }
-.contact .lede { font-size: var(--text-read); color: var(--dusty); max-width: 32ch; margin: var(--gap-words) 0 0; }
+.contact .lede { font-size: var(--text-read); color: var(--dusty); margin: var(--gap-words) 0 0; }
 form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-words) var(--gap-panel); align-content: start; }
 form .full { grid-column: 1 / -1; }
 .field { position: relative; display: block; }

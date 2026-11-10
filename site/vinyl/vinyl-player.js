@@ -1668,6 +1668,12 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 .sleeve[data-state="deck"] .sleeve-art::before { content: "NOW PLAYING"; }
 :host([noframe]) .pp { padding: 0; }
 .sleeve { padding: 0; }   /* the room it kept was for a boiling outline, which Greg's page doesn't draw */
+/* THE PAGE'S COLUMNS: side by side, the covers and the deck take the page's own pair (--cols and --gap-cols, set on
+   Greg's page), so the deck starts where the intro's words, the quote and the form do ("so the columns still don't
+   seem intentional", Carl, 10 Nov 2026). Stacked below 720 as before. */
+@container player (min-width: 721px) {
+  :host([noframe]) .pp { grid-template-columns: var(--cols, minmax(0, 1fr) minmax(0, 1.35fr)); column-gap: var(--gap-cols, 56px); }
+}
 
 /* THE DECK DRAWN IN CODE, NOT A PICTURE: "can we replace the deck with something procedural?", then, of three drawn
    in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,

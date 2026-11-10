@@ -109,6 +109,10 @@ relative so the same page works there; its form only says it is a preview.
   plinth is gone. The quote's photo and Greg's portrait size with the window and stay beside their words down to a
   phone, and the footer is one row or one column: "things like the testimonial images and the footer text gets real
   weird as things get resized" (Carl, 10 Nov 2026).
+- One pair of columns for the whole page, 5 to 7 with one gap (`--cols`, `--gap-cols`), the record player's covers and
+  deck too: "so the columns still don't seem intentional" (Carl, 10 Nov 2026, of four sections each starting their
+  right-hand side somewhere else). The intro's words, the deck, the quote and the form all start on one line and run to
+  the page's edge, the reading text no longer stopped short by a character limit; everything stacks below 760.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
