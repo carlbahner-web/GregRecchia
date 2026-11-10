@@ -301,6 +301,20 @@ vinyl-player {
 .q-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .q-track::-webkit-scrollbar { display: none; }
 .q { scroll-snap-align: start; margin: 0; }
+.q-track { scroll-behavior: smooth; outline-offset: 6px; }
+/* A SIMPLE CAROUSEL ("i'm gonna send two more testimonaisl with photos, so can you wire it up to be a simple carousel?",
+   Carl, 10 Nov 2026): swipe or scroll it sideways, or the arrows and dots under it, which show once there are two
+   quotes. It never moves on its own. Under the quote's own column, so they sit under the words. */
+.q-nav { display: flex; align-items: center; gap: var(--gap); margin-top: var(--gap-panel); }
+@media (min-width: 761px) { .q-nav { margin-left: calc((100% - var(--gap-cols)) * 5 / 12 + var(--gap-cols)); } }
+.q-nav[hidden] { display: none; }
+.q-arrow { width: 44px; height: 44px; border-radius: 50%; border: var(--line) solid var(--slate); background: none; color: var(--slate);
+  display: grid; place-items: center; cursor: pointer; padding: 0; transition: background .2s, color .2s; }
+.q-arrow svg { width: 20px; height: 20px; }
+@media (hover: hover) { .q-arrow:hover { background: var(--slate); color: var(--paper); } }
+.q-dots { display: flex; gap: 10px; }
+.q-dots button { width: 12px; height: 12px; border-radius: 50%; border: var(--line) solid var(--slate); background: none; padding: 0; cursor: pointer; }
+.q-dots button[aria-current="true"] { background: var(--slate); }
 .q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
 .q blockquote { margin: 0; }
 /* The quote's photo fills the left column like Greg's portrait, and on a phone is 150 wide above the quote so the
@@ -421,14 +435,21 @@ footer a { color: var(--paper); }
   <section class="quotes" aria-labelledby="quotes-h">
     <div class="wrap">
       <h2 id="quotes-h" class="rise">What the artists are saying</h2>
-      <div class="q-track">
+      <!-- THE QUOTES CAROUSEL: one figure a quote. To add one, copy the whole <figure> below (photo in img/, its alt the
+           artist's name, the quote word for word, the name in <cite>); the arrows and dots appear once there are two. -->
+      <div class="q-track" id="q-track" tabindex="0" aria-label="Quotes">
         <figure class="q split">
           <div class="portrait"><img src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy"></div>
-          <blockquote class="rise">
+          <blockquote>
             <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
             <cite>Mishaal Tamer</cite>
           </blockquote>
         </figure>
+      </div>
+      <div class="q-nav" id="q-nav" hidden>
+        <button class="q-arrow" id="q-prev" type="button" aria-label="Previous quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+        <div class="q-dots" id="q-dots"></div>
+        <button class="q-arrow" id="q-next" type="button" aria-label="Next quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
       </div>
     </div>
   </section>
@@ -575,6 +596,24 @@ $("form").addEventListener("submit", async e => {
   }
   btn.disabled = false;
 });
+// ---- The quotes carousel: arrows and dots once there are two, going round at the ends; which dot is lit follows the
+// scroll, so a swipe lights it too.
+(() => {
+  const track = $("q-track"), slides = [...track.children];
+  if (slides.length < 2) return;
+  $("q-nav").hidden = false;
+  const at = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = i => track.scrollTo({ left: ((i + slides.length) % slides.length) * track.clientWidth, behavior: calm.matches ? "auto" : "smooth" });
+  const dots = slides.map((_, i) => {
+    const d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", `Quote ${i + 1} of ${slides.length}`);
+    d.addEventListener("click", () => go(i)); $("q-dots").append(d); return d;
+  });
+  const light = () => dots.forEach((d, i) => d.setAttribute("aria-current", String(i === at())));
+  track.addEventListener("scroll", light, { passive: true }); light();
+  $("q-prev").addEventListener("click", () => go(at() - 1));
+  $("q-next").addEventListener("click", () => go(at() + 1));
+  track.addEventListener("keydown", e => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); go(at() + (e.key === "ArrowRight" ? 1 : -1)); } });
+})();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.
 const videos = document.querySelectorAll("video");

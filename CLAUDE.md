@@ -52,8 +52,7 @@ relative so the same page works there; its form only says it is a preview.
   player at the foot of the screen; Greg
   standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; words rising into
   place as you scroll (CSS scroll-driven, no script, none for less motion; the photos no longer open in from cut edges:
-  "something weird happens when scrolling", Carl, 10 Nov 2026, so they hold still and the words are in by 60% on screen); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quote as a
-  snap row ready for more; the contact form in charcoal with labels that float up. The hero is untouched.
+  "something weird happens when scrolling", Carl, 10 Nov 2026, so they hold still and the words are in by 60% on screen); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quotes as a carousel (below); the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
   `--text-*` at the top of the styles, nothing faded. Colours: the hero's white and butter, the body's own set (above).
   `python3 tools/check_consistency.py` lists anything outside them; run it before every change. The rest of the
@@ -126,6 +125,10 @@ relative so the same page works there; its form only says it is a preview.
   need that unnecessary header?" (Carl, 10 Nov 2026).
 - The quote's photo has the same offset frame behind it as Greg's portrait (both are a `.portrait`): "can we put the
   little box layer thing behind the quote photos too? like you have behind the hi i'm greg video" (Carl, 10 Nov 2026).
+- The quotes are a simple carousel: "i'm gonna send two more testimonaisl with photos, so can you wire it up to be a
+  simple carousel?" (Carl, 10 Nov 2026). Swipe or scroll sideways, or arrows and dots under the quote's column, which
+  show once there are two; round at the ends; the arrow keys when it has focus; never moves on its own. A quote is one
+  `<figure class="q split">` (the comment above them says how), its photo in `img/`.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
