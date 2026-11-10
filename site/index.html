@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Greg Recchia Productions</title>
-<meta name="description" content="Mixer & co-producer helping dedicated indie artists capture the raw, the catchy, and the quirky.">
-<meta property="og:title" content="Greg Recchia Productions">
+<title>Greg Recchia // Mixer &amp; Co-Producer</title>
+<meta name="description" content="I’m a mixer & co-producer who helps dedicated indie artists capture the raw, the catchy, and the quirky.">
+<meta property="og:title" content="Greg Recchia // Mixer &amp; Co-Producer">
 <meta property="og:description" content="Earworm Architect for Hook-Obsessed Indie Artists.">
 <meta property="og:image" content="img/share.jpg">
 <meta property="og:type" content="website">
@@ -147,7 +147,6 @@ main { background: var(--paper); color: var(--char); }
 main h2 { color: var(--char); text-align: left; }
 main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .contact :focus-visible, footer :focus-visible { outline-color: var(--ochre); }
-.kicker { color: var(--slate); text-align: left; margin: 0 0 12px; }
 
 /* Buttons in the body: his slab type, square, slate. (The hero keeps its own.) */
 .b-btn { display: inline-flex; align-items: center; gap: 10px; font: 400 var(--text-name)/1 var(--slab);
@@ -169,8 +168,8 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
   transition: background-color .35s, box-shadow .35s, color .35s; }
 .topbar.on { background: rgba(242, 238, 229, .86); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
   box-shadow: 0 1px 0 var(--hair); color: var(--char); }
-.tb-brand, .tb-links, .progress { visibility: hidden; }
-.topbar.on .tb-brand, .topbar.on .tb-links, .topbar.on .progress { visibility: visible; }
+.tb-brand, .tb-links { visibility: hidden; }
+.topbar.on .tb-brand, .topbar.on .tb-links { visibility: visible; }
 .tb-brand { justify-self: start; display: flex; align-items: center; gap: 10.5px; text-decoration: none; } /* + the name's own 1.5px edge = 12 */
 .tb-mark { height: var(--bar-h); width: auto; aspect-ratio: 1625 / 1517; background: var(--char);
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
@@ -181,15 +180,11 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
   color: var(--char); text-decoration: none; height: var(--bar-h); display: inline-flex; align-items: center;
   /* spaced capitals end on a letter's worth of space, so the right side gives it back: CONTACT sits in the middle of its
      button, and LISTEN's last letter stands 12 from the button's edge */
-  padding: 0 calc(14px - var(--caps-big)) 0 14px; }
-.tb-links a:not(.go) { padding-right: calc(12px - var(--caps-big)); }
+  padding: 0; margin-right: calc(-1 * var(--caps-big)); }
 .tb-links a:hover { color: var(--slate); }
-.tb-links a.go { background: var(--slate); color: var(--paper); }
-.tb-links a.go:hover { background: var(--char); }
-.progress { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre);
-  transform-origin: 0 50%; transform: scaleX(0); }
-@supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
-@keyframes grow { to { transform: scaleX(1); } }
+/* CONTACT IS A PLAIN WORD and LISTEN is out of the bar (the officers' round, 10 Nov 2026, "Do it"): with the form on
+   screen there were two filled buttons, and the play button and the song already lead to the songs. Its last letter
+   ends on the bar's edge, the spaced capitals' trailing space given back. */
 
 /* INK TO INK, ON TWO NUMBERS: "Ok look at in to ink padding" (Carl, 10 Nov 2026), measured off the drawn bar, not its boxes.
    12 between things in one group (his mark and name; the play button, the cover and the song's words; LISTEN and
@@ -216,12 +211,19 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .tb-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tb-artist { font-size: var(--text-tiny); line-height: 1.2; color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar.on .tb-artist { color: var(--slate); }
+/* OVER THE VIDEO, THE HERO'S COLOURS: the play button butter like LISTEN and CONTACT under it, the artist white ("Use
+   the DRAFT set"). And nothing over the video until a song is on: LISTEN under the headline is the way in now
+   ("if listen is already there then we dont need the play button on page load right?", Carl, 10 Nov 2026). */
+.topbar:not(.on) .tb-play { background: var(--butter); color: var(--black); }
+.topbar:not(.on) .tb-artist { color: var(--white); }
+html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 /* how far through the song: along the foot of its cover, inside it, so nothing hangs below the line */
 .tb-bar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre);
   transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
 @media (max-width: 640px) {
   .topbar { grid-template-columns: auto minmax(0, 1fr) auto; }
-  .tb-name, .tb-links a:not(.go) { display: none; }
+  .topbar { grid-template-columns: minmax(0, 1fr) auto; }
+  .tb-brand { display: none; }   /* his name and mark are at the top and in the footer; the song's name gets the room */
   .tb-player { max-width: none; justify-self: stretch; }
 }
 
@@ -231,7 +233,7 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .portrait { margin: 0; position: relative; isolation: isolate; max-width: 460px; }
 .portrait video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--paper-deep); }
 .portrait::after { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
-.intro h2 { margin-bottom: var(--gap-panel); }
+.intro h2 { margin-bottom: var(--gap-words); }  /* a heading with words under it (the officers' round, 10 Nov 2026) */
 .intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); max-width: 25ch; margin: 0 0 var(--gap-words); color: var(--char); }
 .intro p.goal { color: var(--slate); margin: 0; }
 .intro em { font: 400 1em/1 var(--slab); color: var(--slate); white-space: nowrap; }
@@ -282,6 +284,7 @@ vinyl-player {
 .q { scroll-snap-align: start; margin: 0; }
 .q img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; max-width: 460px; }
 .q blockquote { margin: 0; }
+@media (max-width: 860px) { .q img { width: 150px; } }  /* on a phone the photo had filled the screen before the quote (the officers' round) */
 .q blockquote::before { content: "\201C"; display: block; font: 400 var(--text-mark)/.7 var(--slab); color: var(--ochre); height: 56px; }
 .q blockquote p { font: 600 var(--text-big)/var(--lines-read) var(--head); color: var(--char); margin: 0 0 var(--gap-panel); max-width: 30ch; }
 .q cite { font: 400 var(--text-read)/1 var(--slab); font-style: normal; letter-spacing: var(--caps-slab); color: var(--slate); }
@@ -307,6 +310,10 @@ form .full { grid-column: 1 / -1; }
 .contact .b-btn:hover { background: var(--paper); }
 .sent { font: 600 var(--text-name)/1.3 var(--head); color: var(--paper); margin: 0; min-height: 1.3em; }
 .sent a { color: var(--dusty); }
+form[hidden], .thanks[hidden] { display: none; }   /* the form's own display would otherwise keep it on screen */
+.thanks { align-self: center; border-block: var(--line) solid var(--ochre); padding-block: var(--gap-panel); outline: none; }
+.thanks h3 { font: 800 var(--text-now)/var(--lines-title) var(--head); color: var(--paper); margin: 0 0 var(--gap); }
+.thanks p { font: 400 var(--text-name)/var(--lines-read) var(--body); color: var(--paper); margin: 0; }
 @media (max-width: 560px) { form { grid-template-columns: 1fr; } }
 
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
@@ -351,8 +358,7 @@ footer a { color: var(--paper); }
       <span><span class="tb-title" id="tb-title">i won’t see you anymore</span><span class="tb-artist" id="tb-artist">Rol3ert</span></span>
     </button>
   </div>
-  <div class="tb-links"><a href="#listen">Listen</a><a class="go" href="#contact">Contact</a></div>
-  <span class="progress" aria-hidden="true"></span>
+  <div class="tb-links"><a href="#contact">Contact</a></div>
 </nav>
 
 <main>
@@ -372,13 +378,13 @@ footer a { color: var(--paper); }
 
   <section class="listen" id="listen" aria-labelledby="listen-h">
     <div class="wrap">
-      <div class="listen-head rise"><p class="kicker">Selected work</p><h2 id="listen-h">Hear for yourself</h2></div>
+      <div class="listen-head rise"><h2 id="listen-h">Hear for yourself</h2></div>
       <!-- The songs, in his Squarespace player's order. To add one: its MP3 in audio/, its cover in img/, and a row here. -->
-      <vinyl-player id="deck" max="4" data-art="plinth record tonearm" noframe><script type="application/json">[
-  {"title": "i won’t see you anymore", "artist": "Rol3ert", "role": "Mixed", "sleeve": "img/i-won-t-see-you-anymore.webp", "src": "audio/I-Won-t-See-You-Anymore.mp3"},
-  {"title": "Painful Paradise", "artist": "Mishaal Tamer", "role": "Mixed", "sleeve": "img/painful-paradise.webp", "src": "audio/Painful-Paradise.mp3"},
-  {"title": "Forgive Them", "artist": "Essence Natay & Vic Lucas", "role": "Mixed", "sleeve": "img/forgive-them.webp", "src": "audio/Forgive-Them.mp3"},
-  {"title": "Won’t Let You Down", "artist": "MONZ", "role": "Mixed", "sleeve": "img/wont-let-you-down.webp", "src": "audio/Wont-Let-You-Down.mp3"}
+      <vinyl-player id="deck" max="4" data-art="plinth record tonearm" noframe autoadvance><script type="application/json">[
+  {"title": "i won’t see you anymore", "artist": "Rol3ert", "role": "Mixed", "style": "dark catchy alt pop", "sleeve": "img/i-won-t-see-you-anymore.webp", "src": "audio/I-Won-t-See-You-Anymore.mp3"},
+  {"title": "Painful Paradise", "artist": "Mishaal Tamer", "role": "Mixed", "style": "deep emotional pop", "sleeve": "img/painful-paradise.webp", "src": "audio/Painful-Paradise.mp3"},
+  {"title": "Forgive Them", "artist": "Essence Natay & Vic Lucas", "role": "Mixed", "style": "soulfully uplifting pop", "sleeve": "img/forgive-them.webp", "src": "audio/Forgive-Them.mp3"},
+  {"title": "Won’t Let You Down", "artist": "MONZ", "role": "Mixed", "style": "smooth emotional pop", "sleeve": "img/wont-let-you-down.webp", "src": "audio/Wont-Let-You-Down.mp3"}
 ]</script></vinyl-player>
     </div>
   </section>
@@ -407,8 +413,7 @@ footer a { color: var(--paper); }
       <form name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="company" id="form" class="rise">
         <input type="hidden" name="form-name" value="contact">
         <p class="sr" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
-        <label class="field"><input id="f-first" name="first-name" required autocomplete="given-name" placeholder=" "><span>First name</span></label>
-        <label class="field"><input id="f-last" name="last-name" required autocomplete="family-name" placeholder=" "><span>Last name</span></label>
+        <label class="field full"><input id="f-name" name="name" required autocomplete="name" placeholder=" "><span>Name</span></label>
         <label class="field"><input id="f-email" name="email" type="email" required autocomplete="email" placeholder=" "
           pattern="[^@\s]+@(?![^@\s]*\.(con|cmo|ocm|comm|vom|xom)$)[^@\s]+\.[A-Za-z]{2,}"><span>Email</span></label>
         <label class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder=" "><span>Phone (optional)</span></label>
@@ -418,6 +423,7 @@ footer a { color: var(--paper); }
           <p class="sent" id="sent" role="status"></p>
         </div>
       </form>
+      <div class="thanks" id="thanks" hidden tabindex="-1" role="status"><h3 id="thanks-h">Thanks!</h3><p>I’ll be in touch with you shortly.</p></div>
     </div>
   </section>
 </main>
@@ -425,8 +431,9 @@ footer a { color: var(--paper); }
 <footer>
   <div class="inner">
     <div class="sig"><div class="mark" aria-hidden="true"></div><div class="wordmark" role="img" aria-label="Greg Recchia"></div></div>
+    <p><strong>Instagram:</strong> <a href="https://instagram.com/greg_recchia_productions" target="_blank" rel="noopener">@greg_recchia_productions</a></p>
     <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
-    <p>© <span id="year">2026</span> Greg Recchia Productions</p>
+    <p>© <span id="year">2026</span> Greg Recchia</p>
   </div>
 </footer>
 
@@ -450,7 +457,7 @@ function hookUp() {
   audio.addEventListener("play", state); audio.addEventListener("pause", state); audio.addEventListener("ended", state);
   audio.addEventListener("timeupdate", () => bar.style.setProperty("--p", audio.duration ? audio.currentTime / audio.duration : 0));
   vp.addEventListener("trackchange", ({ detail: { index, track } }) => {
-    playing = index; bar.style.setProperty("--p", 0);
+    playing = index; bar.style.setProperty("--p", 0); root.classList.add("has-song");
     $("tb-art").src = track.sleeve; $("tb-title").textContent = track.title; $("tb-artist").textContent = track.artist;
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({ title: track.title, artist: track.artist,
@@ -490,18 +497,28 @@ function glideToDeck() {
    tap on its sleeve would. The song's file starts loading inside the click itself, so a phone that only lets sound
    start from a tap still counts this as one. After that the button plays and pauses what is on the deck. */
 let starting = false;
-$("tb-play").addEventListener("click", async () => {
-  if (vp.current !== -1) return vp.audio.paused ? vp.play() : vp.pause();
-  if (starting) return;
+async function startFirst() {
+  if (starting || vp.current !== -1) return;
   starting = true;
   const first = vp.tracks[0];
   if (first && vp.audio) { vp.audio.src = first.src; vp.audio.load(); }
   await glideToDeck();
   starting = false;
   if (vp.current === -1) vp.play(0);   // a record they picked while it glided wins
+}
+$("tb-play").addEventListener("click", () => vp.current !== -1 ? (vp.audio.paused ? vp.play() : vp.pause()) : startFirst());
+/* LISTEN PLAYS: the big button under the headline goes down to the record player and puts the first record on, as the
+   bar's play does ("Should the big LISTEN button start the first song", the officers' round, "Do it"). Once a song is
+   on it only goes down to the player. */
+document.querySelector('.hero-ctas a[href="#listen"]').addEventListener("click", e => {
+  if (vp.current !== -1) return;
+  e.preventDefault(); startFirst();
 });
 $("tb-song").addEventListener("click", () => glideToDeck());
-new IntersectionObserver(([e]) => bar.classList.toggle("on", !e.isIntersecting), { threshold: 0.05 }).observe(document.querySelector(".hero"));
+/* THE BAR FILLS IN FROM THE FIRST SCROLL, not once the video has gone, so the song never slides over the headline with
+   nothing behind it (the officers' round, 10 Nov 2026, "Do it"). */
+const fillBar = () => bar.classList.toggle("on", scrollY > 4);
+addEventListener("scroll", fillBar, { passive: true }); fillBar();
 
 // ---- Contact: sent to Netlify Forms without leaving the page
 /* A BOX OF SPACES IS EMPTY, AND AN EMAIL GREG CAN'T REPLY TO IS CAUGHT (as on carlbahner.com, 8 and 9 Nov): before the
@@ -519,7 +536,11 @@ $("form").addEventListener("submit", async e => {
   try {
     const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });
     if (!r.ok) throw 0;
-    f.reset(); msg.textContent = "Thanks! I’ll be in touch shortly.";
+    /* THE THANK-YOU TAKES THE FORM'S PLACE, with their first name and his own sentence word for word ("Use DRAFT 1"
+       twice on the officers' round, 10 Nov 2026), so the visit ends on something finished, not an empty form. */
+    const first = (new FormData(f).get("name") || "").trim().split(/\s+/)[0];
+    $("thanks-h").textContent = first ? `Thanks, ${first}!` : "Thanks!";
+    f.reset(); f.hidden = true; $("thanks").hidden = false; $("thanks").focus({ preventScroll: true }); msg.textContent = "";
   } catch {
     msg.innerHTML = 'That didn’t send. Email <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a> instead?';
   }

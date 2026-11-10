@@ -1659,6 +1659,15 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 .sleeve-art, .flier-sleeve { border-width: 3px; border-radius: 0; }
 .sleeve-art img, .flier-sleeve img { border-radius: 0; }
 .scrub:focus-visible { outline: 3px solid var(--pp-accent); outline-offset: 3px; }
+/* His answers on the same round: his own words for each song under its artist, as his Squarespace player had them
+   ("Use DRAFT 1"); the playing song's cover says NOW PLAYING ("CHOOSE A RECORD / NOW PLAYING"); and the player draws
+   no inside edge of its own, so it lines up with the page's edges and sits under its heading as the quote does
+   ("Use the DRAFT set"). */
+.sleeve-style { display: block; font: italic 400 13px/1.3 var(--pp-font-body); color: var(--pp-muted);
+                overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sleeve[data-state="deck"] .sleeve-art::before { content: "NOW PLAYING"; }
+:host([noframe]) .pp { padding: 0; }
+.sleeve { padding: 0; }   /* the room it kept was for a boiling outline, which Greg's page doesn't draw */
 `;
 
 
@@ -2027,7 +2036,8 @@ class VinylPlayer extends HTMLElement {
         </span>
         <span class="sleeve-meta">
           <span class="sleeve-title">${escapeHTML(track.title)}</span>
-          <span class="sleeve-sub">${escapeHTML(track.artist || '')}</span>
+          <span class="sleeve-sub">${escapeHTML(track.artist || '')}</span>${track.style ? `
+          <span class="sleeve-style">${escapeHTML(track.style)}</span>` : ''}
         </span>`;
       btn.addEventListener('click', () => this._onSleeveClick(i));
       li.appendChild(btn);
@@ -2135,18 +2145,12 @@ class VinylPlayer extends HTMLElement {
        run end to end, which is not what anyone does with a deck: you start it
        turning and reach for the arm while it settles. Overlapping them is both
        truer and 0.9s shorter. */
-    await Promise.all([
-      this._rampSpin(rpmRate(track.rpm), reduced ? 0 : 1100),
-      (async () => {
-        this._setArm('start', { lift: true });
-        if (!reduced) await wait(900);
-      })(),
-    ]);
-    if (gen !== this._gen) return;
-
-    if (this._pickNext(index)) return;
+    /* THE MUSIC AS THE RECORD LANDS (the officers' round, 10 Nov 2026: "Do it", of the 1.5s of quiet after it landed
+       while the motor came up and the arm swung over). The motor comes up under the music, the arm swings straight
+       down onto the record, and the song starts as it touches. */
+    this._rampSpin(rpmRate(track.rpm), reduced ? 0 : 700);
     this._setArm('start', { lift: false });
-    if (!reduced) await wait(260);
+    if (!reduced) await wait(320);
     if (gen !== this._gen) return;
 
     this._busy = false;
@@ -2618,7 +2622,7 @@ class VinylPlayer extends HTMLElement {
       const track = this._tracks[this.current];
       this._busy = false;
       this._setStatus(
-        `Couldn't load ${track ? `"${track.title}"` : 'that track'}. Check the file path and that the server sends audio/mpeg.`,
+        'That one didn’t load. Tap it to try again.',   // DRAFT 1 on the officers' round (10 Nov 2026)
         true,
       );
       this._rampSpin(0, 500);
@@ -2804,6 +2808,7 @@ function normaliseTrack(raw) {
     // Default the record label to the sleeve art, centre-cropped by the CSS.
     label: raw.label ?? raw.sleeve ?? '',
     rpm: raw.rpm ?? 33.333,
+    style: raw.style ?? '',
   };
 }
 

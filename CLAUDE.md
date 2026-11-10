@@ -41,7 +41,7 @@ relative so the same page works there; its form only says it is a preview.
   whole page scheme"). In it: a bar at the top carrying the song: "Can the audio player stay at the top in the header? And maybe even have
   the play button visible on page load and if someone clicks it, it scrolls to the player section, then pulls the vinyl
   etc" (Carl, 10 Nov 2026). From the start, over the video, its play button, the song's cover, title and artist; past the
-  video it fills in with his name, the links and a scroll progress line. Its first play glides down to the record player
+  video it fills in with his name and CONTACT (since the officers' round, below, from the first scroll). Its first play glides down to the record player
   (the turntable just under the bar where the whole player won't fit, a phone) and puts the first record on; after that
   it plays and pauses what's on the deck; the song's cover or title glides down without playing. It replaced a small
   player at the foot of the screen; Greg
@@ -86,6 +86,19 @@ relative so the same page works there; its form only says it is a preview.
   from screen readers; the covers' words in two of the six sizes (15 Encode, 13 Krub) and frames 3 and square; the deck's
   artist at most three quarters of the title (his carlbahner ratio); one blue-grey for quiet words (slate); the progress
   line's focus ring the page's. THE OFFICERS' ROUND at the end of the player's styles. Grandma got through every job.
+- His answers to that round's taste questions (the same quiz, 10 Nov 2026), all built the same day: LISTEN under the
+  headline plays the first song as the bar's play did, and nothing shows over the video until a song is on ("i guess if
+  listen is already there then we dont need the play button on page load right?", Carl), which undoes "have the play
+  button visible on page load"; the bar fills in from the first scroll, its CONTACT a plain word and no LISTEN in it, no
+  scroll line, no mark on a phone, its play butter and artist white over the video; the song starts as the record lands
+  (sound 3.4 s after LISTEN, was 4.5) and the next comes on by itself (`autoadvance`); his style words under each cover
+  (`style` in the track list); NOW PLAYING on the playing cover; no SELECTED WORK; the player with no inside edge, lined
+  up with the page; the drawings in the page's exact charcoal, ochre and off-white (`tools/vinyl_art.py`); one Name box;
+  the thank-you takes the form's place ("Thanks, <first name>!" and his "I'll be in touch with you shortly."); the
+  page's name "Greg Recchia // Mixer & Co-Producer" with his intro sentence for search results and "© Greg Recchia";
+  his Instagram (@greg_recchia_productions, from his MGMT page) in the footer; the quote's photo 150 wide on a phone; the
+  intro's heading 22 above its words. Kept: the song in the bar while the player is on screen, CHOOSE A RECORD, Listen,
+  Hear for yourself, no prices. One test send once it's on Netlify.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
