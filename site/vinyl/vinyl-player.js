@@ -1,6 +1,10 @@
 /* <vinyl-player>, the portfolio record player from StudioLand MGMT's profile pages, copied from studiolandmgmt-site
    (portfolio-player-kit/src/vinyl-player.js, 10 Nov 2026) for Greg's own site. Its drawings here are Greg's versions (vinyl/art/),
-   not StudioLand's; its colours and fonts are set from the page. Change it there first and copy it again. */
+   not StudioLand's; its colours and fonts are set from the page.
+   It now differs from the kit: three fixes Carl made to the record's movement on carlbahner.com (src/nav.mjs there) are
+   carried over, each marked FROM CARLBAHNER below: the old record fades away on the deck rather than flying home, one
+   record moves at a time, and no tap flash or touch-held hover slide on a phone ("can you look at the mechanics from
+   the Carlbahner site repo? I fixed some quirks with the vinyl movement", Carl, 10 Nov 2026). */
 /**
  * Styles for <vinyl-player>.
  *
@@ -588,10 +592,17 @@ button svg { width: 18px; height: 18px; display: block; fill: currentColor; }
 /* NO ROTATION, for the same reason the flight has none: a record coming out of
    a sleeve slides, it does not tilt. This is now the whole hover -- the artwork
    holds still and the record is the only thing that moves. */
-.sleeve:hover .sleeve-peek,
+/* FROM CARLBAHNER (index.html there, NO TAP FLASH): under a mouse only. A finger's tap left a phone's hover on, so
+   the record jumped out of its sleeve before it flew; and the browser's own pale tap box flashed over the sleeve:
+   "there is a quick white flash/glitch when selecting a vinyl", "On the sleeve", "Phone" (Carl, 9 Nov 2026). */
+@media (hover: hover) { .sleeve:hover .sleeve-peek { transform: translateX(30%); } }
 .sleeve:focus-visible .sleeve-peek { transform: translateX(30%); }
+:host { -webkit-tap-highlight-color: transparent; }
 
 .sleeve[data-state="deck"] .sleeve-peek { opacity: 0; transition: none; }
+/* a sleeve whose record is fading away on the deck reads as empty until it has gone (FROM CARLBAHNER, A RECORD
+   FADES AWAY) */
+.sleeve[data-state="flying"] .sleeve-peek { opacity: 0; transition: none; }
 
 .sleeve-art {
   display: block;
@@ -1672,6 +1683,8 @@ class VinylPlayer extends HTMLElement {
     this._gen = 0;
     /** True while a record is travelling. */
     this._busy = false;
+    /** A sleeve picked while a record was on its way, played once it has landed (ONE RECORD MOVING AT A TIME). */
+    this._next = null;
 
     this._spin = null;          // WAAPI animation driving platter rotation
     this._spinRamp = null;      // rAF id for the spin-up/down ramp
@@ -1957,6 +1970,13 @@ class VinylPlayer extends HTMLElement {
   async _select(index) {
     const track = this._tracks[index];
     if (!track) return;
+    /* FROM CARLBAHNER, ONE RECORD MOVING AT A TIME (src/nav.mjs there; "Yes fix them", Carl, 2 Nov 2026): while a pick is
+       under way, the same sleeve again does nothing, and another is held (the latest one) until this record has landed,
+       then runs as an ordinary switch. Each pick used to cancel the one in the air, and that record vanished mid-flight. */
+    if (this._busy) {
+      if (index !== this.current) this._next = index;
+      return;
+    }
 
     const gen = ++this._gen;
     this._abortFlights();
@@ -2022,6 +2042,7 @@ class VinylPlayer extends HTMLElement {
     //    trip back to the crate, not after it.
     await Promise.all([leaving, this._takeRecord(index, gen, reduced)]);
     if (gen !== this._gen) return;
+    if (this._pickNext(index)) return;
 
     /* 4. THE MOTOR COMES UP TO SPEED WHILE THE ARM SWINGS OVER. These used to
        run end to end, which is not what anyone does with a deck: you start it
@@ -2036,12 +2057,24 @@ class VinylPlayer extends HTMLElement {
     ]);
     if (gen !== this._gen) return;
 
+    if (this._pickNext(index)) return;
     this._setArm('start', { lift: false });
     if (!reduced) await wait(260);
     if (gen !== this._gen) return;
 
     this._busy = false;
+    this._next = null;
     await this._startPlayback(gen);
+  }
+
+  /* Another sleeve was picked while this record was on its way: that one now, this one off the deck. */
+  _pickNext(index) {
+    const j = this._next;
+    this._next = null;
+    if (j === null || j === index) return false;
+    this._busy = false;
+    this._select(j);
+    return true;
   }
 
   /** Fly a record from its sleeve in the shelf onto the platter. */
@@ -2201,88 +2234,34 @@ class VinylPlayer extends HTMLElement {
     this._clearFlight(flier, sleeve);
   }
 
-  /** Reverse of `_takeRecord`: platter back to sleeve. */
+  /* FROM CARLBAHNER, A RECORD FADES AWAY (src/nav.mjs returnRecord there): the record off the platter fades away where it
+     lies, over FADE_MS, while the next one comes out of its sleeve, and its own sleeve has it back once it has gone. It
+     flew home until then (two beats, platter to the sleeve's mouth and pushed in), and on carlbahner.com the trip home
+     glitched: "what if the vinyl just fades away over the course of a second or so" (Carl, 2 Nov 2026).
+
+     Everything here before the first await is synchronous, as before: _select calls this without awaiting it, and
+     _takeRecord then overwrites the disc with the incoming record, so the stand-in has to copy the outgoing one first.
+     The stand-in lies exactly as the record does: the same middle, its LAYOUT width (offsetWidth; the disc is rotated,
+     so its bounding box is too big at most angles) and the turn the motor left it at. */
   async _returnRecord(index, gen, reduced) {
     const sleeveEl = this._sleeveEl(index);
-    this.el.disc.dataset.loaded = 'false';
-
+    const disc = this.el.disc;
+    const box = disc.getBoundingClientRect();
+    const w = disc.offsetWidth || box.width;
+    const turn = getComputedStyle(disc).transform;
+    const markup = disc.innerHTML;
+    disc.dataset.loaded = 'false';
     if (!sleeveEl) return;
-    if (reduced) { sleeveEl.dataset.state = ''; return; }
+    if (reduced || !w) { sleeveEl.dataset.state = ''; return; }
 
-    const artEl = sleeveEl.querySelector('.sleeve-art');
-    const to = artEl.getBoundingClientRect();
-    const from = this.el.disc.getBoundingClientRect();
-    if (!to.width || !from.width) { sleeveEl.dataset.state = ''; return; }
-
-  /* THE PLATTER RECORD'S SIZE CANNOT COME FROM A BOUNDING BOX. .disc is the
-     element the spin animation rotates, and getBoundingClientRect on a rotated
-     square returns its AXIS-ALIGNED box -- |cos| + |sin| times the real width,
-     which is 1.0 at rest and up to 1.414 at 45 degrees. Carl: "when the record
-     begins the animation to go back to its sleeve, it jumps immediately in
-     size." It did: measured at one resting angle the flier came out 16.4% too
-     big, and since a stopped platter now holds whatever angle the motor left it
-     at, the error was different every time.
-
-     offsetWidth is the LAYOUT width and ignores transforms entirely. The centre
-     of the bounding box is still correct -- rotating a square about its own
-     centre does not move that centre -- so position keeps using the rect. */
-    const discW = this.el.disc.offsetWidth || from.width;
-
-    const track = this._tracks[index];
-    const inset = to.width * 0.03;
-    const size = to.width - inset * 2;
-    const scale = discW / size;
-
-    // Start the flier where the record *is* (platter), expressed as a
-    // transform off its resting place in the sleeve — same frame of reference
-    // as the outbound trip, just played backwards.
-    const dx = (from.left + from.width / 2) - (to.left + inset + size / 2);
-    const dy = (from.top + from.height / 2) - (to.top + inset + size / 2);
-
-    const flier = this._makeFlier('flier', to.left + inset, to.top + inset, size, size);
-    flier.innerHTML = vinylHTML(track.label, '');
-    sleeveEl.dataset.state = '';
-    this._hideSleeveArt(sleeveEl, true);
-
-    const sleeve = this._makeFlier('flier-sleeve', to.left, to.top, to.width, to.height);
-    sleeve.innerHTML = `<img src="${escapeHTML(track.sleeve)}" alt="" draggable="false">`;
-    /* The sleeve is THERE the whole time -- it never left the crate. It used to
-       fade in 480ms into the return trip, which left the slot empty until then. */
-    const lift = Math.min(60, Math.hypot(dx, dy) * 0.11);
-    const outX = to.width - inset;      // the sleeve's mouth, same as going out
-
-    // Two beats back, mirroring the way out: down out of the air to the sleeve's
-    // mouth, in front the whole way, then behind it and pushed home.
-    flier.style.zIndex = '3';
-    sleeve.style.zIndex = '2';
-    await this._fly(flier, [
-      { transform: `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${scale.toFixed(4)})`, offset: 0 },
-      { transform: `translate(${(outX + (dx - outX) * 0.5).toFixed(1)}px, ${(dy * 0.5 - lift).toFixed(1)}px) scale(${((1 + scale) / 2).toFixed(4)})`, offset: 0.5 },
-      { transform: `translate(${outX.toFixed(1)}px, 0) scale(1)`, offset: 1 },
-      /* THE SAME 1150ms AS THE CARRY OUT. It was 1050 against the outbound's
-         1150 over the same distance, so the way home really was quicker than the
-         way out -- 1453 px/s at its peak. Putting a record away is not a
-         hurried gesture, and an asymmetry nobody asked for is just a bug with a
-         better name. */
-    ], { duration: 1150, easing: 'cubic-bezier(.36,.06,.22,1)' });
-
-    if (gen !== this._gen) { this._clearFlight(flier, sleeve); this._hideSleeveArt(sleeveEl, false); return; }
-
-    flier.style.zIndex = '1';           // behind it again for the one move that goes in
-    await this._fly(flier, [
-      { transform: `translate(${outX.toFixed(1)}px, 0)` },
-      { transform: 'translate(0, 0)' },
-      /* and 1000ms to slide it home, the same as the pull-out. At 700 it went
-         in at 294 px/s against the 206 px/s it came out at. */
-    ], { duration: 1000, easing: 'cubic-bezier(.4,0,.2,1)' });
-
-    /* Same hole as the outbound handoff: a superseded return still restored the
-       sleeve it was carrying to, which by then might be the sleeve the NEW
-       selection had just hidden to fly a record out of. */
-    if (gen !== this._gen) { this._clearFlight(flier, sleeve); return; }
-
-    this._hideSleeveArt(sleeveEl, false);
-    this._clearFlight(flier, sleeve);
+    const ghost = this._makeFlier('flier', box.left + box.width / 2 - w / 2, box.top + box.height / 2 - w / 2, w, w);
+    ghost.innerHTML = markup;
+    ghost.style.transform = turn === 'none' ? '' : turn;
+    ghost.style.zIndex = '0';          // under the record coming in
+    sleeveEl.dataset.state = 'flying';
+    await this._fly(ghost, [{ opacity: 1 }, { opacity: 0 }], { duration: FADE_MS, easing: 'ease-in-out' });
+    this._clearFlight(ghost);
+    if (sleeveEl.dataset.state === 'flying') sleeveEl.dataset.state = '';
   }
 
   /* Hide only the SLEEVE ITSELF while its fixed-position clone stands in for
@@ -2654,9 +2633,10 @@ class VinylPlayer extends HTMLElement {
     this.el.played.style.width = '0%';
     this.el.knob.style.left = '0%';
 
-    // Reset every other sleeve back to "in the crate".
+    // Reset every other sleeve back to "in the crate" -- but not one whose record is still fading off the deck,
+    // which has it back once it has gone (FROM CARLBAHNER, A RECORD FADES AWAY).
     this.el.shelf.querySelectorAll('.sleeve').forEach((el) => {
-      if (el.dataset.index !== String(this.current)) el.dataset.state = '';
+      if (el.dataset.index !== String(this.current) && el.dataset.state !== 'flying') el.dataset.state = '';
     });
 
     this.dispatchEvent(new CustomEvent('trackchange', {
@@ -2688,6 +2668,8 @@ class VinylPlayer extends HTMLElement {
 /* small utilities                                                             */
 /* -------------------------------------------------------------------------- */
 
+/* How long a record takes to fade away off the deck (FROM CARLBAHNER: "over the course of a second or so"). */
+const FADE_MS = 1000;
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

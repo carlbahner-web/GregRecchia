@@ -53,7 +53,13 @@ relative so the same page works there; its form only says it is a preview.
 - The player is the record player from his StudioLand MGMT profile page, `<vinyl-player>`: "I want to take the
   portfolio player from his profile page and migrate it to his website but with different images instead of my Slmgmt
   branded art" (Carl, 10 Nov 2026). Copied from studiolandmgmt-site `portfolio-player-kit/src/vinyl-player.js` into
-  `site/vinyl/vinyl-player.js` (change it there first, then copy). Its four drawings are Greg's versions of Carl's,
+  `site/vinyl/vinyl-player.js`. It now differs from the kit: three of Carl's fixes to the record's movement on
+  carlbahner.com (its `src/nav.mjs`) are carried over, each marked FROM CARLBAHNER: the old record fades away on the
+  deck instead of flying home, one record moves at a time (a pick mid-flight is held, not cancelled), and on a phone
+  no tap flash and no hover slide ("can you look at the mechanics from the Carlbahner site repo? I fixed some quirks
+  with the vinyl movement", Carl, 10 Nov 2026). The kit and his MGMT pages don't have them yet. Never put `.rise` (or
+  any transform) on the player or round it: it shifts the flight layer and every record in the air is drawn off its
+  path. Its four drawings are Greg's versions of Carl's,
   `site/vinyl/art/`, made by `tools/vinyl_art.py`: the plinth slate, the platter a deep slate disc with Greg's mark
   where the STUDIOLAND MGMT watermark was, the label squares and tonearm ochre. Its colours and fonts (his, not
   StudioLand's licensed ones) are set on `vinyl-player` in the styles. It replaced a waveform deck built the same day.

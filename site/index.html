@@ -203,6 +203,9 @@ main :focus-visible, .topbar :focus-visible, .mini :focus-visible { outline-colo
 /* ---------- Hear for yourself: the record player from his MGMT page, in his colours ---------- */
 .listen { padding-block: 0 clamp(72px, 12vw, 130px); scroll-margin-top: 60px; }
 .listen-head { margin-bottom: var(--gap-panel); }
+/* NEVER .rise ON THE PLAYER, nor on anything round it: a transform on an ancestor, even one an animation is running,
+   becomes where the player's flight layer (position: fixed) is measured from, and every record in the air was drawn
+   180px right and 188px low of its path (found 10 Nov 2026, looking at the fade from carlbahner). */
 /* "I want to take the portfolio player from his profile page and migrate it to his website but with different images
    instead of my Slmgmt branded art" (Carl, 10 Nov 2026). The component is vinyl/vinyl-player.js; its four drawings are
    Greg's versions of Carl's (vinyl/art/, made by tools/vinyl_art.py): the plinth in slate, the platter a deep slate disc
@@ -322,7 +325,7 @@ footer a { color: var(--paper); }
     <div class="wrap">
       <div class="listen-head rise"><p class="kicker">Selected work</p><h2 id="listen-h">Hear for yourself</h2></div>
       <!-- The songs, in his Squarespace player's order. To add one: its MP3 in audio/, its cover in img/, and a row here. -->
-      <vinyl-player class="rise" id="deck" max="4" data-art="plinth record tonearm" noframe><script type="application/json">[
+      <vinyl-player id="deck" max="4" data-art="plinth record tonearm" noframe><script type="application/json">[
   {"title": "i won’t see you anymore", "artist": "Rol3ert", "role": "Mixed", "sleeve": "img/i-won-t-see-you-anymore.webp", "src": "audio/I-Won-t-See-You-Anymore.mp3"},
   {"title": "Painful Paradise", "artist": "Mishaal Tamer", "role": "Mixed", "sleeve": "img/painful-paradise.webp", "src": "audio/Painful-Paradise.mp3"},
   {"title": "Forgive Them", "artist": "Essence Natay & Vic Lucas", "role": "Mixed", "sleeve": "img/forgive-them.webp", "src": "audio/Forgive-Them.mp3"},
