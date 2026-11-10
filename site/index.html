@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greg Recchia Productions</title>
+<meta name="description" content="Mixer & co-producer helping dedicated indie artists capture the raw, the catchy, and the quirky.">
+<meta property="og:title" content="Greg Recchia Productions">
+<meta property="og:description" content="Earworm Architect for Hook-Obsessed Indie Artists.">
+<meta property="og:image" content="/img/share.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/img/logo.png">
+<link rel="preload" href="/fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Fonts: the three his Squarespace site used, saved here (latin) so nothing loads from Google. */
+@font-face { font-family: 'Encode Sans Condensed'; font-weight: 600; font-display: swap; src: url(/fonts/EncodeSansCondensed-600.woff2) format('woff2'); }
+@font-face { font-family: 'Encode Sans Condensed'; font-weight: 800; font-display: swap; src: url(/fonts/EncodeSansCondensed-800.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 400; font-display: swap; src: url(/fonts/Krub-400.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 400; font-style: italic; font-display: swap; src: url(/fonts/Krub-400i.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 600; font-display: swap; src: url(/fonts/Krub-600.woff2) format('woff2'); }
+@font-face { font-family: 'Alfa Slab One'; font-weight: 400; font-display: swap; src: url(/fonts/AlfaSlabOne-400.woff2) format('woff2'); }
+
+/* His colours, read off his Squarespace page: black, the wood, butter-cream type, and the five tinted cards. */
+:root {
+  --black: #000;
+  --ink: #1d1c1f;          /* the player's dark */
+  --cream: #fdf6d3;        /* body type on wood */
+  --butter: #fbe9a6;       /* headings and card frames */
+  --navy: #2d4a8c;         /* the logo's blue */
+  --steel: #9a9ca1;        /* the logo's grey */
+  --tint-1: rgba(44, 74, 60, .88);   /* green */
+  --tint-2: rgba(112, 52, 38, .88);  /* rust */
+  --tint-3: rgba(128, 78, 22, .88);  /* amber */
+  --tint-4: rgba(78, 66, 92, .88);   /* plum */
+  --tint-5: rgba(58, 62, 78, .9);    /* slate */
+  --head: 'Encode Sans Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Krub', system-ui, sans-serif;
+  --slab: 'Alfa Slab One', Georgia, serif;
+  --wrap: 1080px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--black); color: var(--cream); font: 400 18px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+svg[hidden] { display: none; }
+a { color: inherit; }
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+h1, h2, h3 { font-family: var(--head); font-weight: 800; line-height: 1.02; margin: 0; letter-spacing: -.01em; }
+h2 { font-size: clamp(36px, 6vw, 60px); color: var(--butter); text-align: center; }
+.kicker { font: 600 14px/1 var(--head); letter-spacing: .32em; text-transform: uppercase; color: var(--steel); text-align: center; margin: 0 0 14px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons: his slab CONTACT button, made a real button. */
+.btn { display: inline-block; font: 400 20px/1 var(--slab); letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+  padding: 16px 30px; border: 3px solid currentColor; color: var(--butter); background: transparent; cursor: pointer;
+  transition: background .15s, color .15s; }
+.btn:hover, .btn:focus-visible { background: var(--butter); color: var(--black); }
+.btn.solid { background: var(--butter); color: var(--black); border-color: var(--butter); }
+.btn.solid:hover, .btn.solid:focus-visible { background: var(--cream); }
+:focus-visible { outline: 3px solid var(--butter); outline-offset: 3px; }
+
+/* ---------- Hero ---------- */
+.hero { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 48px 16px; position: relative; overflow: hidden; }
+.hero-in { position: relative; z-index: 1; display: grid; justify-items: center; gap: clamp(28px, 6vh, 56px); }
+.logo { width: clamp(180px, 26vw, 280px); height: auto; }
+.hero h1 { font-size: clamp(50px, 10.5vw, 128px); font-style: italic; color: #fff; max-width: 11.5ch; line-height: .96; }
+.hero h1 em { font-style: italic; color: var(--butter); }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- Wood sections ---------- */
+.wood { background: #8a6440 url(/img/wood.webp) center top / max(100%, 1290px) auto repeat-y; position: relative; }
+.wood::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(50, 26, 14, .55), rgba(50, 26, 14, .3) 30%, rgba(50, 26, 14, .3) 70%, rgba(50, 26, 14, .55)); }
+.wood > * { position: relative; }
+
+.intro { padding: clamp(72px, 12vw, 130px) 0; text-align: center; }
+.intro h2 { margin-bottom: 30px; }
+.intro p { font: 600 clamp(21px, 2.6vw, 28px)/1.35 var(--head); max-width: 30ch; margin: 0 auto 22px; color: var(--cream); text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.intro p:last-child { margin-bottom: 0; color: var(--butter); }
+.intro em { font-family: var(--body); font-weight: 600; }
+
+/* ---------- How he works ---------- */
+.process { padding: 0 0 clamp(72px, 12vw, 130px); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; grid-template-columns: repeat(6, 1fr); counter-reset: step; }
+.step { grid-column: span 2; padding: 34px 28px 30px; border: 6px solid var(--butter); text-align: center; counter-increment: step;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35); backdrop-filter: blur(2px); }
+.step:nth-child(4) { grid-column: 2 / span 2; }
+.step:nth-child(1) { background: var(--tint-1); } .step:nth-child(2) { background: var(--tint-2); }
+.step:nth-child(3) { background: var(--tint-3); } .step:nth-child(4) { background: var(--tint-4); }
+.step:nth-child(5) { background: var(--tint-5); }
+.step::before { content: counter(step, decimal-leading-zero); display: block; font: 400 22px/1 var(--slab); color: var(--butter); opacity: .65; margin-bottom: 14px; }
+.step h3 { font-size: 30px; color: var(--butter); margin-bottom: 14px; font-weight: 600; }
+.step p { margin: 0; font-style: italic; font-size: 17px; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step, .step:nth-child(4) { grid-column: auto; }
+  .step:nth-child(5) { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+
+/* ---------- Listen ---------- */
+.listen { background: var(--black); padding: clamp(72px, 12vw, 130px) 0; }
+.listen h2 { margin-bottom: 40px; }
+.player { background: var(--ink); border-radius: 10px; padding: clamp(18px, 3vw, 32px); display: grid; grid-template-columns: minmax(220px, 340px) 1fr; gap: clamp(20px, 4vw, 44px); box-shadow: 0 0 0 1px #2b2a30; }
+.now { display: grid; gap: 16px; align-content: start; }
+.now img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; background: #2b2a30; }
+.now-title { font: 800 28px/1.05 var(--head); color: #fff; }
+.now-artist { color: var(--steel); font-size: 16px; margin-top: 4px; }
+.controls { display: flex; align-items: center; gap: 14px; }
+.play { width: 58px; height: 58px; flex: none; border-radius: 50%; border: 0; background: var(--butter); color: var(--black); cursor: pointer; display: grid; place-items: center; }
+.play:hover { background: var(--cream); }
+.play svg { width: 22px; height: 22px; }
+.bar { flex: 1; display: grid; gap: 6px; }
+.bar input { width: 100%; accent-color: var(--butter); margin: 0; }
+.time { font-size: 13px; color: var(--steel); font-variant-numeric: tabular-nums; display: flex; justify-content: space-between; }
+.tracks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; align-content: start; }
+.tracks button { width: 100%; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 16px; text-align: left; padding: 10px; border: 0; border-radius: 6px; background: transparent; color: var(--cream); font: inherit; cursor: pointer; }
+.tracks button:hover { background: #29282e; }
+.tracks button[aria-current="true"] { background: #2f2d33; box-shadow: inset 3px 0 0 var(--butter); }
+.tracks img { width: 56px; height: 56px; object-fit: cover; border-radius: 4px; }
+.t-vibe { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--steel); }
+.t-title { display: block; font: 600 20px/1.15 var(--head); color: #fff; }
+.t-artist { display: block; font-size: 15px; color: var(--steel); }
+.t-role { font-size: 13px; color: var(--butter); opacity: .8; }
+.listen .after { text-align: center; margin-top: 40px; }
+@media (max-width: 760px) {
+  .player { grid-template-columns: 1fr; }
+  .now { grid-template-columns: 110px 1fr; align-items: center; }
+  .now .controls { grid-column: 1 / -1; }
+  .t-role { display: none; }
+}
+
+/* ---------- What the artists say ---------- */
+.quotes { padding: clamp(72px, 12vw, 130px) 0; }
+.quotes h2 { margin-bottom: 44px; }
+.quote { display: grid; grid-template-columns: minmax(240px, 400px) 1fr; gap: 0; align-items: stretch; background: var(--tint-2); border: 6px solid var(--butter); box-shadow: 0 10px 30px rgba(0,0,0,.35); margin: 0; }
+.quote img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; min-height: 360px; }
+.quote blockquote { margin: 0; padding: clamp(28px, 5vw, 56px); align-self: center; }
+.quote blockquote p { font: 600 clamp(22px, 2.6vw, 30px)/1.3 var(--head); margin: 0 0 22px; color: #fff; }
+.quote blockquote p::before { content: "\201C"; font: 400 80px/0 var(--slab); color: var(--butter); display: block; height: 40px; margin-bottom: 4px; }
+.quote cite { font: 400 18px/1 var(--slab); font-style: normal; color: var(--butter); letter-spacing: .04em; }
+@media (max-width: 760px) { .quote { grid-template-columns: 1fr; } .quote img { aspect-ratio: 4 / 4.2; min-height: 0; height: auto; } }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--black); padding: clamp(72px, 12vw, 130px) 0 60px; }
+.contact h2 { margin-bottom: 18px; }
+.contact .lede { text-align: center; max-width: 34ch; margin: 0 auto 40px; font-size: 19px; }
+form { width: min(620px, 100%); margin: 0 auto; display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+form .full { grid-column: 1 / -1; }
+label { display: grid; gap: 6px; font: 600 15px/1 var(--head); letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+input, textarea { font: 400 18px/1.4 var(--body); color: var(--cream); background: var(--ink); border: 2px solid #3a3940; border-radius: 4px; padding: 12px 14px; width: 100%; }
+input:focus, textarea:focus { border-color: var(--butter); outline: none; }
+textarea { min-height: 150px; resize: vertical; }
+form .btn { justify-self: center; }
+.sent { grid-column: 1 / -1; text-align: center; font: 600 22px/1.3 var(--head); color: var(--butter); min-height: 1.3em; margin: 0; }
+@media (max-width: 560px) { form { grid-template-columns: 1fr; } }
+
+footer { background: var(--black); border-top: 1px solid #222; padding: 36px 16px 44px; text-align: center; font-size: 15px; color: var(--steel); }
+footer img { width: 120px; margin: 0 auto 18px; opacity: .9; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--cream); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <img class="logo" src="/img/logo.webp" width="447" height="231" alt="Greg Recchia Productions">
+    <h1>Earworm Architect for <em>Hook-Obsessed</em> Indie Artists</h1>
+    <div class="hero-ctas">
+      <a class="btn solid" href="#listen">Listen</a>
+      <a class="btn" href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wood">
+  <section class="intro" id="hi">
+    <div class="wrap">
+      <h2>Hi, I’m Greg Recchia</h2>
+      <p>I’m a mixer &amp; co-producer who helps dedicated indie artists capture the raw, the catchy, and the quirky.</p>
+      <p>Whether it’s tightening up transitions, spicing things up with ear candy, or highlighting the emotional core of your vocals…</p>
+      <p>…my only goal is that your unique creative voice is heard <em>loud and clear.</em></p>
+    </div>
+  </section>
+
+  <section class="process" aria-labelledby="how">
+    <div class="wrap">
+      <h2 id="how" class="sr">How I work</h2>
+      <ol class="steps">
+        <li class="step"><h3>It Starts With the Feeling</h3><p>First, we tune into what the song actually feels like: the vibe, the tension, the pulse. That sets the direction for everything that follows.</p></li>
+        <li class="step"><h3>Lift What’s Already There</h3><p>From there, I zero in on the parts that make your track <strong>you</strong>. The grit, the warmth, and the attitude in the lyrics. Your intention leads; the production follows.</p></li>
+        <li class="step"><h3>Let the Vocal Lead</h3><p>Your vocal carries the story. I shape it so the emotion hits clear, intentional, and impossible to miss.</p></li>
+        <li class="step"><h3>Dial In the Final 3%</h3><p>The small things matter: transitions, ear candy, shifts in momentum. Those subtle details that make the listener wanna hit repeat.</p></li>
+        <li class="step"><h3>Build It Together</h3><p>This is a collaborative process: making decisions that feel natural, purposeful, and true to your sound.</p></li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<section class="listen" id="listen" aria-labelledby="listen-h">
+  <div class="wrap">
+    <p class="kicker">Selected work</p>
+    <h2 id="listen-h">Hear for yourself</h2>
+    <div class="player">
+      <div class="now">
+        <img id="now-art" src="/img/i-won-t-see-you-anymore.webp" alt="" width="600" height="600">
+        <div>
+          <div class="now-title" id="now-title">i won’t see you anymore</div>
+          <div class="now-artist" id="now-artist">Rol3ert</div>
+        </div>
+        <div class="controls">
+          <button class="play" id="play" type="button" aria-label="Play">
+            <svg id="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
+            <svg id="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
+          </button>
+          <div class="bar">
+            <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Position in song">
+            <div class="time"><span id="cur">0:00</span><span id="dur">–:––</span></div>
+          </div>
+        </div>
+      </div>
+      <ol class="tracks" id="tracks"></ol>
+    </div>
+    <div class="after"><a class="btn" href="#contact">Contact</a></div>
+  </div>
+  <audio id="audio" preload="none"></audio>
+</section>
+
+<div class="wood">
+  <section class="quotes" aria-labelledby="quotes-h">
+    <div class="wrap">
+      <h2 id="quotes-h">What the artists are saying</h2>
+      <figure class="quote">
+        <img src="/img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy">
+        <blockquote>
+          <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
+          <cite>Mishaal Tamer</cite>
+        </blockquote>
+      </figure>
+    </div>
+  </section>
+</div>
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <h2 id="contact-h">Let’s make it happen</h2>
+    <p class="lede">I’m approachable, easy to work and communicate with. Fill out some brief info and I’ll be in touch with you shortly. Looking forward to hearing from you!</p>
+    <form name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="company" id="form">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <label>First name <input name="first-name" required autocomplete="given-name"></label>
+      <label>Last name <input name="last-name" required autocomplete="family-name"></label>
+      <label>Email <input name="email" type="email" required autocomplete="email"></label>
+      <label>Phone (optional) <input name="phone" type="tel" autocomplete="tel"></label>
+      <label class="full">Message <textarea name="message" required></textarea></label>
+      <button class="btn solid full" type="submit">Submit</button>
+      <p class="sent" id="sent" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <img src="/img/logo.webp" width="447" height="231" alt="" loading="lazy">
+  <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
+  <p>© <span id="year">2026</span> Greg Recchia Productions</p>
+</footer>
+
+<script>
+// The songs, in his Squarespace player's order. "vibe" is his own line for each one there.
+// To add one: put the MP3 in /audio and its art in /img, and add a row.
+const TRACKS = [
+  { vibe: "Dark catchy alt pop",     title: "i won’t see you anymore", artist: "Rol3ert",                  role: "Mixed", art: "i-won-t-see-you-anymore.webp", src: "I-Won-t-See-You-Anymore.mp3" },
+  { vibe: "Deep emotional pop",      title: "Painful Paradise",         artist: "Mishaal Tamer",            role: "Mixed", art: "painful-paradise.webp",        src: "Painful-Paradise.mp3" },
+  { vibe: "Soulfully uplifting pop", title: "Forgive Them",             artist: "Essence Natay & Vic Lucas", role: "Mixed", art: "forgive-them.webp",            src: "Forgive-Them.mp3" },
+  { vibe: "Smooth emotional pop",    title: "Won’t Let You Down",       artist: "MONZ",                     role: "Mixed", art: "wont-let-you-down.webp",       src: "Wont-Let-You-Down.mp3" },
+];
+
+const $ = id => document.getElementById(id);
+const audio = $("audio"), list = $("tracks"), seek = $("seek");
+let current = -1, dragging = false;
+
+TRACKS.forEach((t, i) => {
+  const li = document.createElement("li");
+  li.innerHTML = `<button type="button"><img src="/img/${t.art}" alt="" width="56" height="56" loading="lazy">
+    <span><span class="t-vibe"></span><span class="t-title"></span><span class="t-artist"></span></span>
+    <span class="t-role"></span></button>`;
+  li.querySelector(".t-vibe").textContent = t.vibe;
+  li.querySelector(".t-title").textContent = t.title;
+  li.querySelector(".t-artist").textContent = t.artist;
+  li.querySelector(".t-role").textContent = t.role;
+  li.querySelector("button").addEventListener("click", () => current === i ? toggle() : load(i, true));
+  list.append(li);
+});
+
+const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "–:––";
+
+function load(i, play) {
+  current = i;
+  const t = TRACKS[i];
+  audio.src = "/audio/" + t.src;
+  $("now-art").src = "/img/" + t.art;
+  $("now-title").textContent = t.title;
+  $("now-artist").textContent = `${t.artist} · ${t.role}`;
+  [...list.querySelectorAll("button")].forEach((b, j) => b.setAttribute("aria-current", j === i));
+  seek.value = 0; $("cur").textContent = "0:00"; $("dur").textContent = "–:––";
+  if (play) audio.play().catch(() => {});
+}
+function toggle() {
+  if (current < 0) return load(0, true);
+  audio.paused ? audio.play().catch(() => {}) : audio.pause();
+}
+function showState() {
+  const playing = !audio.paused;
+  $("icon-play").hidden = playing; $("icon-pause").hidden = !playing;
+  $("play").setAttribute("aria-label", playing ? "Pause" : "Play");
+}
+$("play").addEventListener("click", toggle);
+audio.addEventListener("play", showState);
+audio.addEventListener("pause", showState);
+audio.addEventListener("loadedmetadata", () => $("dur").textContent = fmt(audio.duration));
+audio.addEventListener("timeupdate", () => {
+  if (!dragging && audio.duration) seek.value = audio.currentTime / audio.duration * 1000;
+  $("cur").textContent = fmt(audio.currentTime);
+});
+audio.addEventListener("ended", () => current + 1 < TRACKS.length ? load(current + 1, true) : showState());
+seek.addEventListener("input", () => { dragging = true; if (audio.duration) $("cur").textContent = fmt(seek.value / 1000 * audio.duration); });
+seek.addEventListener("change", () => { dragging = false; if (current < 0) load(0, false); if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration; });
+
+// The first song is shown before anything plays.
+$("now-artist").textContent = `${TRACKS[0].artist} · ${TRACKS[0].role}`;
+list.querySelector("button").setAttribute("aria-current", "false");
+
+// Contact: sent to Netlify Forms without leaving the page.
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, msg = $("sent"), btn = f.querySelector("button[type=submit]");
+  btn.disabled = true; msg.textContent = "Sending…";
+  try {
+    const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });
+    if (!r.ok) throw 0;
+    f.reset(); msg.textContent = "Thanks! I’ll be in touch shortly.";
+  } catch {
+    msg.innerHTML = 'That didn’t send. Email <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a> instead?';
+  }
+  btn.disabled = false;
+});
+$("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
