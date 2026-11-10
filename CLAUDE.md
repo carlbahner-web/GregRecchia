@@ -129,6 +129,10 @@ relative so the same page works there; its form only says it is a preview.
   simple carousel?" (Carl, 10 Nov 2026). Swipe or scroll sideways, or arrows and dots under the quote's column, which
   show once there are two; round at the ends; the arrow keys when it has focus; never moves on its own. A quote is one
   `<figure class="q split">` (the comment above them says how), its photo in `img/`.
+- The covers meet the deck ink to ink at any width: the first row starts on its top edge and the last line of words
+  ends on its bottom edge, the rows spread to its height and the covers shrinking when the deck gets short (`--shelf-rows`,
+  INK TO INK WITH THE DECK in the player): "can we make the ink-to-ink of the left column match the ink-to-ink of the
+  deck, even during resizing?" (Carl, 10 Nov 2026). Measured within 1px from 1440 to 770 wide.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg

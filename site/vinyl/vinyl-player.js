@@ -1674,6 +1674,18 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 @container player (min-width: 721px) {
   :host([noframe]) .pp { grid-template-columns: var(--cols, minmax(0, 1fr) minmax(0, 1.35fr)); column-gap: var(--gap-cols, 56px); }
 }
+/* INK TO INK WITH THE DECK: "can we make the ink-to-ink of the left column match the ink-to-ink of the deck, even during
+   resizing?" (Carl, 10 Nov 2026). Side by side, the first row of covers starts on the deck's top edge and the last
+   line of words ends on its bottom edge, at any width: the rows spread to the deck's height (the space goes between
+   them), and the last line's space under its letters is trimmed so its descenders sit on the deck's bottom line. */
+@container player (min-width: 721px) {
+  :host([noframe]) .shelf { align-content: space-between;
+    /* two across, each cover the smaller of half the column and what lets every row (cover and its three lines of
+       words, 64) fit the deck's height, which is 7/5 of this column's width */
+    grid-template-columns: repeat(2, min(calc((100cqi - 16px) / 2),
+      calc((140cqi - (var(--shelf-rows, 2) - 1) * 16px - var(--shelf-rows, 2) * 64px) / var(--shelf-rows, 2)))); }
+  :host([noframe]) .sleeve-style { text-box: trim-end text text; }
+}
 
 /* THE DECK DRAWN IN CODE, NOT A PICTURE: "can we replace the deck with something procedural?", then, of three drawn
    in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,
@@ -2044,6 +2056,7 @@ class VinylPlayer extends HTMLElement {
   /* ---- shelf ----------------------------------------------------------- */
 
   _renderShelf() {
+    this.style.setProperty('--shelf-rows', Math.max(1, Math.ceil(this._tracks.length / 2)));   // INK TO INK WITH THE DECK
     const { shelf } = this.el;
     shelf.innerHTML = '';
 
