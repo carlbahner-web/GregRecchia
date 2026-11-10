@@ -124,6 +124,8 @@ relative so the same page works there; its form only says it is a preview.
 - No heading over the record player: its deck says HEAR FOR YOURSELF until a record is picked, where it said CHOOSE A
   RECORD (the player's `idle` attribute): "instead of "CHOOSE A RECORD" can we put "HEAR FOR YOURSELF" there so we don't
   need that unnecessary header?" (Carl, 10 Nov 2026).
+- The quote's photo has the same offset frame behind it as Greg's portrait (both are a `.portrait`): "can we put the
+  little box layer thing behind the quote photos too? like you have behind the hi i'm greg video" (Carl, 10 Nov 2026).
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
