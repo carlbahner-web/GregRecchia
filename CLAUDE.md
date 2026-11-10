@@ -77,6 +77,15 @@ relative so the same page works there; its form only says it is a preview.
   StudioLand's licensed ones) are set on `vinyl-player` in the styles. It replaced a waveform deck built the same day.
   Four songs whose masters and art came from that MGMT page; a song is one row in the JSON inside `<vinyl-player>`
   plus its MP3 in `site/audio/` (keep each under ~40 MB) and cover in `site/img/`.
+- His officers' round, 10 Nov 2026 (https://claude.ai/artifact/PDMZagr8SRjMTXWGgeXJvS; Godzilla, Grandma, simplicity,
+  clutter, delight, words and a second consistency round, their notes in `.officers/`). The plain bugs and what fell
+  outside his own sets were fixed straight away: "fix those objective ones and update the quiz with just the taste ones"
+  (Carl). A box of only spaces is empty and an email with no dot after the @ or ending .con is turned away, in the
+  browser's own words; a song that didn't load loads again on play; the browser leaves the bar's room above whatever it
+  scrolls to (`scroll-padding-top`); a record picked while the bar's play glides down stays on; the spam trap is hidden
+  from screen readers; the covers' words in two of the six sizes (15 Encode, 13 Krub) and frames 3 and square; the deck's
+  artist at most three quarters of the title (his carlbahner ratio); one blue-grey for quiet words (slate); the progress
+  line's focus ring the page's. THE OFFICERS' ROUND at the end of the player's styles. Grandma got through every job.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg

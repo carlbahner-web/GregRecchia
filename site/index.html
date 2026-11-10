@@ -74,6 +74,9 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* NOTHING THE KEYBOARD IS ON HIDES UNDER THE BAR: the browser leaves the bar's room above whatever it scrolls to (Tab,
+   and the links to the sections, which used to land 60 under the top on their own). */
+html { scroll-padding-top: calc(60px + env(safe-area-inset-top, 0px)); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: var(--black); color: var(--cream); font: 400 var(--text-read)/1.55 var(--body); -webkit-font-smoothing: antialiased; }
 img { display: block; max-width: 100%; height: auto; }
@@ -132,10 +135,10 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
   --paper: #f2eee5;        /* the page */
   --paper-deep: #e8e2d6;   /* a row under the mouse, the portrait before it loads */
   --char: #2c3739;         /* words on the page; the player and the contact section */
-  --slate: #4a6777;        /* buttons, links, the line that sums things up */
+  --slate: #4a6777;        /* buttons, links, the line that sums things up, quiet words (one blue-grey: a second,
+                              #4d636e, was too close to tell apart; the officers' round, 10 Nov 2026) */
   --dusty: #92a6b1;        /* quiet words on charcoal */
   --ochre: #af945f;        /* accents you don't read */
-  --ink-soft: #4d636e;     /* quiet words on the page */
   --hair: rgba(44, 55, 57, .14);        /* the hairline between song rows */
   --hair-dark: rgba(146, 166, 177, .28); /* the same, on charcoal */
   --ease: cubic-bezier(.2, .7, .2, 1);
@@ -144,7 +147,7 @@ main { background: var(--paper); color: var(--char); }
 main h2 { color: var(--char); text-align: left; }
 main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .contact :focus-visible, footer :focus-visible { outline-color: var(--ochre); }
-.kicker { color: var(--ink-soft); text-align: left; margin: 0 0 12px; }
+.kicker { color: var(--slate); text-align: left; margin: 0 0 12px; }
 
 /* Buttons in the body: his slab type, square, slate. (The hero keeps its own.) */
 .b-btn { display: inline-flex; align-items: center; gap: 10px; font: 400 var(--text-name)/1 var(--slab);
@@ -212,7 +215,7 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .tb-song span { display: block; min-width: 0; }
 .tb-title { font: 600 var(--text-small)/var(--lines-title) var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tb-artist { font-size: var(--text-tiny); line-height: 1.2; color: var(--dusty); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topbar.on .tb-artist { color: var(--ink-soft); }
+.topbar.on .tb-artist { color: var(--slate); }
 /* how far through the song: along the foot of its cover, inside it, so nothing hangs below the line */
 .tb-bar { position: absolute; left: 0; right: 0; bottom: 0; height: var(--line); background: var(--ochre);
   transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
@@ -245,7 +248,7 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 @keyframes unveil { from { clip-path: inset(14% 14% 14% 14%); } }
 
 /* ---------- Hear for yourself: the record player from his MGMT page, in his colours ---------- */
-.listen { padding-block: 0 clamp(72px, 12vw, 130px); scroll-margin-top: 60px; }
+.listen { padding-block: 0 clamp(72px, 12vw, 130px); }
 .listen-head { margin-bottom: var(--gap-panel); }
 /* NEVER .rise ON THE PLAYER, nor on anything round it: a transform on an ancestor, even one an animation is running,
    becomes where the player's flight layer (position: fixed) is measured from, and every record in the air was drawn
@@ -260,7 +263,7 @@ vinyl-player {
   --art-record: url("vinyl/art/record.webp"); --art-tonearm: url("vinyl/art/tonearm.webp");
   --pp-font: "Encode Sans Condensed", "Arial Narrow", sans-serif; --pp-font-body: "Krub", system-ui, sans-serif;
   --pp-bg: var(--paper); --pp-panel: var(--paper-deep); --pp-board: var(--paper); --pp-cream: var(--paper);
-  --pp-line: var(--char); --pp-text: var(--char); --pp-ink: var(--char); --pp-muted: var(--ink-soft);
+  --pp-line: var(--char); --pp-text: var(--char); --pp-ink: var(--char); --pp-muted: var(--slate);
   --pp-accent: var(--slate); --pp-teal: var(--slate); --pp-plinth-1: var(--slate); --pp-plinth-2: var(--slate);
   --pp-mustard: var(--ochre); --pp-mint: var(--dusty); --pp-vinyl-1: var(--char); --pp-vinyl-2: var(--char);
   --pp-radius: 0px;
@@ -284,7 +287,7 @@ vinyl-player {
 .q cite { font: 400 var(--text-read)/1 var(--slab); font-style: normal; letter-spacing: var(--caps-slab); color: var(--slate); }
 
 /* ---------- Let's make it happen: the page closes in charcoal ---------- */
-.contact { background: var(--char); color: var(--paper); padding-block: clamp(72px, 12vw, 130px) clamp(48px, 8vw, 90px); scroll-margin-top: 60px; }
+.contact { background: var(--char); color: var(--paper); padding-block: clamp(72px, 12vw, 130px) clamp(48px, 8vw, 90px); }
 .contact h2 { color: var(--paper); }
 .contact .lede { font-size: var(--text-read); color: var(--dusty); max-width: 32ch; margin: var(--gap-words) 0 0; }
 form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-words) var(--gap-panel); align-content: start; }
@@ -403,10 +406,11 @@ footer a { color: var(--paper); }
       </div>
       <form name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="company" id="form" class="rise">
         <input type="hidden" name="form-name" value="contact">
-        <p class="sr"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <p class="sr" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
         <label class="field"><input id="f-first" name="first-name" required autocomplete="given-name" placeholder=" "><span>First name</span></label>
         <label class="field"><input id="f-last" name="last-name" required autocomplete="family-name" placeholder=" "><span>Last name</span></label>
-        <label class="field"><input id="f-email" name="email" type="email" required autocomplete="email" placeholder=" "><span>Email</span></label>
+        <label class="field"><input id="f-email" name="email" type="email" required autocomplete="email" placeholder=" "
+          pattern="[^@\s]+@(?![^@\s]*\.(con|cmo|ocm|comm|vom|xom)$)[^@\s]+\.[A-Za-z]{2,}"><span>Email</span></label>
         <label class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder=" "><span>Phone (optional)</span></label>
         <label class="field full"><textarea id="f-msg" name="message" required placeholder=" "></textarea><span>Message</span></label>
         <div class="send-row full">
@@ -494,12 +498,19 @@ $("tb-play").addEventListener("click", async () => {
   if (first && vp.audio) { vp.audio.src = first.src; vp.audio.load(); }
   await glideToDeck();
   starting = false;
-  vp.play(0);
+  if (vp.current === -1) vp.play(0);   // a record they picked while it glided wins
 });
 $("tb-song").addEventListener("click", () => glideToDeck());
 new IntersectionObserver(([e]) => bar.classList.toggle("on", !e.isIntersecting), { threshold: 0.05 }).observe(document.querySelector(".hero"));
 
 // ---- Contact: sent to Netlify Forms without leaving the page
+/* A BOX OF SPACES IS EMPTY, AND AN EMAIL GREG CAN'T REPLY TO IS CAUGHT (as on carlbahner.com, 8 and 9 Nov): before the
+   browser checks the form, every box loses the spaces round it, so one of only spaces is empty and the browser's own
+   "fill out this field" comes up; the email box's pattern wants a dot after the @ and turns away .con and its cousins,
+   with the browser's own words. */
+$("form").querySelector("button[type=submit]").addEventListener("click", () => {
+  for (const el of $("form").querySelectorAll("input:not([type=hidden]), textarea")) el.value = el.value.trim();
+});
 $("form").addEventListener("submit", async e => {
   e.preventDefault();
   const f = e.target, msg = $("sent"), btn = f.querySelector("button[type=submit]");

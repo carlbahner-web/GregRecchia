@@ -1648,6 +1648,17 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 .np.wait .np-title, .np.wait .np-meta { opacity: 0; filter: blur(1.4cqi); transition: none; }
 @media (prefers-reduced-motion: reduce) { .np-title, .np-meta { transition: none; } }
 
+
+/* ===== THE OFFICERS' ROUND, 10 Nov 2026: the player inside the page's own sets =====================================
+   The covers' words were 12.5 and 11 and ON THE DECK 9, outside Carl's six sizes; they are the bar's own now (the song
+   15 in Encode, the artist and ON THE DECK 13). Their frames were 2.5 with rounded corners in a page drawn in 3 and
+   square. The progress line took the browser's thin ring where every other stop has the 3 one. */
+.sleeve-title { font: 600 15px/1.3 var(--pp-font); letter-spacing: 0; }
+.sleeve-sub { font-size: 13px; }
+.sleeve[data-state="deck"] .sleeve-art::before { font-size: 13px; }
+.sleeve-art, .flier-sleeve { border-width: 3px; border-radius: 0; }
+.sleeve-art img, .flier-sleeve img { border-radius: 0; }
+.scrub:focus-visible { outline: 3px solid var(--pp-accent); outline-offset: 3px; }
 `;
 
 
@@ -2153,6 +2164,13 @@ class VinylPlayer extends HTMLElement {
       const floor = fs * 0.6;
       while (el.scrollWidth > el.clientWidth + 1 && fs > floor) { fs *= 0.94; el.style.fontSize = fs + 'px'; }
     }
+    /* THE ARTIST NEVER OUTGROWS THE SONG: each line shrank on its own, so a long title ended up smaller than the artist
+       under it. The artist stays at most three quarters of the title, the two lines' ratio on Carl's deck (5.6 to 4.2). */
+    const t = this.el.npTitle, m = this.el.npMeta;
+    if (t && m) {
+      const cap = parseFloat(getComputedStyle(t).fontSize) * 0.75;
+      if (parseFloat(getComputedStyle(m).fontSize) > cap) m.style.fontSize = cap + 'px';
+    }
   }
 
   /* THE WORDS WAIT FOR THE RECORD: off while it travels, in once it is down (GREG'S DECK, above). */
@@ -2536,6 +2554,9 @@ class VinylPlayer extends HTMLElement {
     if (this.current === -1 || this._busy) return;
     const gen = this._gen;
     const track = this._tracks[this.current];
+    /* A SONG THAT DIDN'T LOAD LOADS AGAIN: after a failed load, play (here, the bar's, or its sleeve tapped again) did
+       nothing until another song was picked (the officers' round, 10 Nov 2026). Now it asks for the file again. */
+    if (this.audio.error) { this._setStatus(''); this.audio.src = track.src; this.audio.load(); }
     this._setArm(this._progress(), { lift: true });
     await this._rampSpin(rpmRate(track.rpm), 700);
     if (gen !== this._gen) return;
