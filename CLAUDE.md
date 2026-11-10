@@ -12,6 +12,11 @@ No framework, no build step. Netlify publishes `site/` (`netlify.toml`).
 - His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood.webp`),
   butter-cream type, the five tinted cards with butter frames, his logo (`img/logo.webp`, from the PDF), and his three
   fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
+- His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
+  GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
+  sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
+  it replaces the logo's small navy name, under the headphone G (`img/mark.webp`, cut from his logo), with
+  PRODUCTIONS spaced under it. It is a commercial font: Greg needs a licence for it as a logo if he keeps it.
 - Every word is his, from the Squarespace page. Nothing on the page is written for him.
 - The player: four songs whose masters and art came from his StudioLand MGMT page (studiolandmgmt-site,
   `deploy-mgmt/greg-recchia/`). Each song's "vibe" is his own line from the Squarespace player. A song is one row in

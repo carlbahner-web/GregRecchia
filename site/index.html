@@ -12,6 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/logo.png">
 <link rel="preload" href="/fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/img/wordmark.svg" as="image">
 <style>
 /* Fonts: the three his Squarespace site used, saved here (latin) so nothing loads from Google. */
 @font-face { font-family: 'Encode Sans Condensed'; font-weight: 600; font-display: swap; src: url(/fonts/EncodeSansCondensed-600.woff2) format('woff2'); }
@@ -64,8 +65,14 @@ h2 { font-size: clamp(36px, 6vw, 60px); color: var(--butter); text-align: center
 /* ---------- Hero ---------- */
 .hero { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 48px 16px; position: relative; overflow: hidden; }
 .hero-in { position: relative; z-index: 1; display: grid; justify-items: center; gap: clamp(28px, 6vh, 56px); }
-.logo { width: clamp(180px, 26vw, 280px); height: auto; }
-.hero h1 { font-size: clamp(50px, 10.5vw, 128px); font-style: italic; color: #fff; max-width: 11.5ch; line-height: .96; }
+.brand { display: grid; justify-items: center; gap: 14px; width: min(760px, 100%); }
+.mark { width: clamp(84px, 11vw, 120px); }
+/* His name in FBS Funegral, traced from the type sample Carl sent (10 Nov 2026) into img/wordmark.svg, and painted
+   through it as a mask so it takes any colour. */
+.wordmark { width: 100%; aspect-ratio: 5832 / 631; background: #fff;
+  -webkit-mask: url(/img/wordmark.svg) center / contain no-repeat; mask: url(/img/wordmark.svg) center / contain no-repeat; }
+.productions { font: 600 clamp(12px, 1.5vw, 17px)/1 var(--head); letter-spacing: .9em; margin-right: -.9em; text-transform: uppercase; color: var(--steel); }
+.hero h1 { font-size: clamp(38px, 6.6vw, 84px); font-style: italic; color: #fff; max-width: 12ch; line-height: .98; }
 .hero h1 em { font-style: italic; color: var(--butter); }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
@@ -157,7 +164,8 @@ form .btn { justify-self: center; }
 @media (max-width: 560px) { form { grid-template-columns: 1fr; } }
 
 footer { background: var(--black); border-top: 1px solid #222; padding: 36px 16px 44px; text-align: center; font-size: 15px; color: var(--steel); }
-footer img { width: 120px; margin: 0 auto 18px; opacity: .9; }
+footer .mark { width: 64px; margin: 0 auto 14px; }
+footer .wordmark { width: 240px; margin: 0 auto 22px; background: var(--cream); }
 footer p { margin: 4px 0; }
 footer strong { color: var(--cream); font-weight: 600; }
 </style>
@@ -166,7 +174,11 @@ footer strong { color: var(--cream); font-weight: 600; }
 
 <header class="hero">
   <div class="hero-in">
-    <img class="logo" src="/img/logo.webp" width="447" height="231" alt="Greg Recchia Productions">
+    <div class="brand">
+      <img class="mark" src="/img/mark.webp" width="171" height="144" alt="">
+      <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
+      <div class="productions">Productions</div>
+    </div>
     <h1>Earworm Architect for <em>Hook-Obsessed</em> Indie Artists</h1>
     <div class="hero-ctas">
       <a class="btn solid" href="#listen">Listen</a>
@@ -264,7 +276,8 @@ footer strong { color: var(--cream); font-weight: 600; }
 </main>
 
 <footer>
-  <img src="/img/logo.webp" width="447" height="231" alt="" loading="lazy">
+  <img class="mark" src="/img/mark.webp" width="171" height="144" alt="" loading="lazy">
+  <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
   <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
   <p>© <span id="year">2026</span> Greg Recchia Productions</p>
 </footer>
