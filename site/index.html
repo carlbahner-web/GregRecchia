@@ -10,7 +10,7 @@
 <meta property="og:image" content="img/share.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="img/logo.png">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/wordmark.svg" as="image">
 <style>
@@ -71,7 +71,10 @@ h2 { font-size: clamp(36px, 6vw, 60px); color: var(--butter); text-align: center
   background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,.55), rgba(0,0,0,.8) 75%), linear-gradient(transparent 70%, #000); }
 .hero-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: clamp(28px, 6vh, 56px); }
 .brand { display: grid; justify-items: center; gap: 14px; width: min(760px, 100%); }
-.mark { width: clamp(84px, 11vw, 120px); }
+/* His mark, the circle and two arcs, flipped as Carl asked (10 Nov 2026), traced into img/mark.svg and painted
+   through it like the wordmark. It replaced the headphone-and-waveform G from his old logo. */
+.mark { width: clamp(64px, 8vw, 92px); aspect-ratio: 1625 / 1517; background: #fff;
+  -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
 /* His name in FBS Funegral, traced from the type sample Carl sent (10 Nov 2026) into img/wordmark.svg, and painted
    through it as a mask so it takes any colour. */
 .wordmark { width: 100%; aspect-ratio: 5832 / 631; background: #fff;
@@ -169,7 +172,7 @@ form .btn { justify-self: center; }
 @media (max-width: 560px) { form { grid-template-columns: 1fr; } }
 
 footer { background: var(--black); border-top: 1px solid #222; padding: 36px 16px 44px; text-align: center; font-size: 15px; color: var(--steel); }
-footer .mark { width: 64px; margin: 0 auto 14px; }
+footer .mark { width: 48px; margin: 0 auto 14px; background: var(--cream); }
 footer .wordmark { width: 240px; margin: 0 auto 22px; background: var(--cream); }
 footer p { margin: 4px 0; }
 footer strong { color: var(--cream); font-weight: 600; }
@@ -181,7 +184,7 @@ footer strong { color: var(--cream); font-weight: 600; }
   <video class="hero-video" src="video/console.mp4" poster="video/console.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-in">
     <div class="brand">
-      <img class="mark" src="img/mark.webp" width="171" height="144" alt="">
+      <div class="mark" aria-hidden="true"></div>
       <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
       <div class="productions">Mixer &amp; Co-Producer</div>
     </div>
@@ -282,7 +285,7 @@ footer strong { color: var(--cream); font-weight: 600; }
 </main>
 
 <footer>
-  <img class="mark" src="img/mark.webp" width="171" height="144" alt="" loading="lazy">
+  <div class="mark" aria-hidden="true"></div>
   <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
   <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
   <p>© <span id="year">2026</span> Greg Recchia Productions</p>
