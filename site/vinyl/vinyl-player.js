@@ -1668,6 +1668,27 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 .sleeve[data-state="deck"] .sleeve-art::before { content: "NOW PLAYING"; }
 :host([noframe]) .pp { padding: 0; }
 .sleeve { padding: 0; }   /* the room it kept was for a boiling outline, which Greg's page doesn't draw */
+
+/* THE DECK DRAWN IN CODE, NOT A PICTURE: "can we replace the deck with something procedural?", then, of three drawn
+   in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,
+   an off-white line inset round it and a screw in each corner, all sized to the deck so it scales with it. */
+:host([data-art~="plinth"]) .plinth {
+  --inset: 2.4cqi; --at: 5.2cqi;
+  background-color: var(--pp-teal); border: 3px solid var(--pp-ink); border-radius: 0;
+  box-shadow: inset 0 0 0 var(--inset) var(--pp-teal), inset 0 0 0 calc(var(--inset) + 3px) var(--pp-cream);
+  background-size: auto; background-image:
+    radial-gradient(circle at var(--at) var(--at), var(--screw)),
+    radial-gradient(circle at calc(100% - var(--at)) var(--at), var(--screw)),
+    radial-gradient(circle at var(--at) calc(100% - var(--at)), var(--screw)),
+    radial-gradient(circle at calc(100% - var(--at)) calc(100% - var(--at)), var(--screw));
+  --screw: var(--pp-ink) 0 .35cqi, var(--pp-cream) .4cqi 1.1cqi, var(--pp-ink) 1.15cqi 1.45cqi, transparent 1.5cqi;
+}
+/* CENTRED ON THE SQUARE ("and then it will be centered too right?", Carl): placed for the drawing's lopsided board, the
+   record and arm stood 87 from its left edge and 116 from its right (of 591). Everything on the deck moves 2.4% right. */
+:host([data-art~="plinth"]) .platter { left: 17%; }
+:host([data-art~="tonearm"]) .tonearm { translate: calc(1% + 2.4cqi) 1.5%; }
+:host([data-art~="plinth"]) .onDeck { left: 16.6%; }
+:host([data-art~="plinth"]) .scrub { left: 18%; right: 16.2%; }
 `;
 
 

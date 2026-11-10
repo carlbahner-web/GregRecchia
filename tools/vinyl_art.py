@@ -1,4 +1,5 @@
-"""Makes Greg's versions of the record player's four drawings (site/vinyl/art/) from Carl's:
+"""Makes Greg's versions of the record player's drawings (the record, the tonearm and the platter; the deck is drawn in
+code since 10 Nov 2026) (site/vinyl/art/) from Carl's:
 
     python3 tools/vinyl_art.py ../studiolandmgmt-site/portfolio-player-kit/art <carlbahner deck-plinth.webp> site/img/mark.svg
 
@@ -42,7 +43,7 @@ def recolour(src, dst, warm, warm_from):
     a[..., :3] = rgb
     Image.fromarray(a.astype("uint8"), "RGBA").save(out / dst, quality=90)
 
-recolour(cb_plinth, "plinth.webp", SLATE, (178, 104, 46))          # carlbahner's wood deck, no shadow
+# The deck itself is drawn in code now (vinyl-player.js, THE DECK DRAWN IN CODE), so no plinth.webp is made.
 recolour(kit / "record.webp", "record.webp", OCHRE, (210, 112, 40))  # the label's orange squares
 recolour(kit / "tonearm.webp", "tonearm.webp", OCHRE, (236, 194, 98))  # the yellow
 

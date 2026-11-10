@@ -99,6 +99,13 @@ relative so the same page works there; its form only says it is a preview.
   his Instagram (@greg_recchia_productions, from his MGMT page) in the footer; the quote's photo 150 wide on a phone; the
   intro's heading 22 above its words. Kept: the song in the bar while the player is on screen, CHOOSE A RECORD, Listen,
   Hear for yourself, no prices. One test send once it's on Netlify.
+- The deck is drawn in code, not a picture: "can we replace the deck with something procedural?", then, shown three,
+  "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board, charcoal edge, an off-white line
+  inset round it and a screw in each corner (THE DECK DRAWN IN CODE, end of the player's styles); the record, arm, keys
+  and words on it moved 2.4% right so they sit in its middle ("and then it will be centered too right?"). The drawn
+  plinth is gone. The quote's photo and Greg's portrait size with the window and stay beside their words down to a
+  phone, and the footer is one row or one column: "things like the testimonial images and the footer text gets real
+  weird as things get resized" (Carl, 10 Nov 2026).
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
