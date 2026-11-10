@@ -59,9 +59,16 @@ relative so the same page works there; its form only says it is a preview.
   no tap flash and no hover slide ("can you look at the mechanics from the Carlbahner site repo? I fixed some quirks
   with the vinyl movement", Carl, 10 Nov 2026). The kit and his MGMT pages don't have them yet. Never put `.rise` (or
   any transform) on the player or round it: it shifts the flight layer and every record in the air is drawn off its
-  path. Its four drawings are Greg's versions of Carl's,
-  `site/vinyl/art/`, made by `tools/vinyl_art.py`: the plinth slate, the platter a deep slate disc with Greg's mark
-  where the STUDIOLAND MGMT watermark was, the label squares and tonearm ochre. Its colours and fonts (his, not
+  path. And his deck from carlbahner.com ("The 3d buttons, the placement of words. The removal of the weird shadow?",
+  then "All of it", Carl, 10 Nov 2026), GREG'S DECK at the end of the component's styles: play and stop as raised keys
+  that press down while held, a raised knob on a cream progress line, the title over the artist in capitals that blur
+  in once the record lands and shrink to fit, keys and words sized and moved as he set them, the record and arm 1% to
+  the corner and 1.5% to the front, the whole cover on the label. Its four drawings are Greg's versions of Carl's,
+  `site/vinyl/art/`, made by `tools/vinyl_art.py`, every colour Greg's ("we need to change the colors of any
+  illustrations"): the deck from carlbahner's own (`assets/deck-plinth.webp` there: no thick shadow along its bottom
+  and right, a thinner outline) in slate; the platter a deep slate disc with Greg's mark where the STUDIOLAND MGMT
+  watermark was; the record's black and the arm's ink his charcoal, their cream his off-white, the label squares and
+  the arm's yellow ochre. Its colours and fonts (his, not
   StudioLand's licensed ones) are set on `vinyl-player` in the styles. It replaced a waveform deck built the same day.
   Four songs whose masters and art came from that MGMT page; a song is one row in the JSON inside `<vinyl-player>`
   plus its MP3 in `site/audio/` (keep each under ~40 MB) and cover in `site/img/`.

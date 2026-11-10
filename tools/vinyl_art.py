@@ -1,30 +1,45 @@
-"""Makes Greg's versions of the record player's four drawings (site/vinyl/art/) from Carl's in studiolandmgmt-site:
+"""Makes Greg's versions of the record player's four drawings (site/vinyl/art/) from Carl's:
 
-    python3 tools/vinyl_art.py ../studiolandmgmt-site/portfolio-player-kit/art site/img/mark.svg
+    python3 tools/vinyl_art.py ../studiolandmgmt-site/portfolio-player-kit/art <carlbahner deck-plinth.webp> site/img/mark.svg
 
-Carl's teal plinth goes to Greg's slate; the record label's orange squares and the tonearm's yellow go to his ochre,
-each keeping the drawing's own shading; the platter becomes a deep slate disc with Greg's mark faint on it, where the
-STUDIOLAND MGMT watermark was ("different images instead of my Slmgmt branded art", Carl, 10 Nov 2026).
+Every colour in them is Greg's (Carl, 10 Nov 2026: "we need to change the colors of any illustrations"), each pixel
+keeping the drawing's own shading: Carl's cream becomes Greg's off-white (#f2eee5), his ink and the black of the record
+become Greg's charcoal (#2c3739, lighter or darker as drawn), the deck becomes slate (#4a6777), the label's squares and
+the tonearm's yellow ochre (#af945f).
+
+The deck comes from carlbahner.com's (its assets/deck-plinth.webp, in its wood): the kit's drawing with the thick charcoal
+shadow along its bottom and right edges taken off and a thinner outline ("The removal of the weird shadow?", Carl,
+10 Nov 2026). The platter is a deep slate disc with Greg's mark faint on it, where the STUDIOLAND MGMT watermark was.
 Needs Pillow, numpy, and Node with Playwright (to draw the mark)."""
-import json, pathlib, subprocess, sys, tempfile
+import colorsys, json, pathlib, subprocess, sys, tempfile
 import numpy as np
 from PIL import Image, ImageDraw
 
-src, mark_svg = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
+kit, cb_plinth, mark_svg = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2]), pathlib.Path(sys.argv[3])
 out = pathlib.Path(__file__).resolve().parent.parent / "site/vinyl/art"; out.mkdir(parents=True, exist_ok=True)
-L = lambda c: .299 * c[0] + .587 * c[1] + .114 * c[2]
+PAPER, CHAR, SLATE, OCHRE = (0xf2, 0xee, 0xe5), (0x2c, 0x37, 0x39), (0x4a, 0x67, 0x77), (0xaf, 0x94, 0x5f)
+lum = lambda c: .299 * c[..., 0] + .587 * c[..., 1] + .114 * c[..., 2]
 
-def tint(name, test, target, from_colour):
-    a = np.array(Image.open(src / f"{name}.webp").convert("RGBA")).astype(float)
-    rgb = a[:, :, :3]; pick = test(rgb) & (a[:, :, 3] > 0)
-    lum = (rgb * [.299, .587, .114]).sum(2, keepdims=True)
-    rgb[pick] = np.clip(np.array(target, float) * lum / L(from_colour), 0, 255)[pick]
-    Image.fromarray(a.astype("uint8"), "RGBA").save(out / f"{name}.webp", quality=90)
+def recolour(src, dst, warm, warm_from):
+    """Neutral light pixels to paper, neutral dark ones to charcoal, warm ones (orange, wood, yellow) to `warm`; each
+    scaled by its brightness against the colour it was drawn in, so the drawing's shading and grain stay."""
+    a = np.array(Image.open(src).convert("RGBA")).astype(float)
+    rgb = a[..., :3]; L = lum(rgb)
+    mx, mn = rgb.max(-1), rgb.min(-1); sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0)
+    cream = (sat < .22) & (L > 165)
+    dark = (sat < .22) & ~cream
+    hot = sat >= .22
+    def paint(mask, to, ref):
+        rgb[mask] = np.clip(np.array(to, float) * (L[mask] / ref)[:, None], 0, 255)
+    paint(cream, PAPER, lum(np.array([238., 232, 214])))
+    paint(dark, CHAR, lum(np.array([44., 44, 42])))
+    paint(hot, warm, lum(np.array(warm_from, float)))
+    a[..., :3] = rgb
+    Image.fromarray(a.astype("uint8"), "RGBA").save(out / dst, quality=90)
 
-tint("plinth", lambda c: (c[:, :, 2] > c[:, :, 0] + 12) & (c[:, :, 1] > c[:, :, 0] + 8), (0x4a, 0x67, 0x77), (0x3a, 0x61, 0x68))
-tint("record", lambda c: (c[:, :, 0] > 150) & (c[:, :, 0] > c[:, :, 2] + 80), (0xaf, 0x94, 0x5f), (210, 112, 40))
-tint("tonearm", lambda c: (c[:, :, 0] > 180) & (c[:, :, 1] > 140) & (c[:, :, 2] < 150) & (c[:, :, 0] > c[:, :, 2] + 60),
-     (0xc8, 0xae, 0x78), (236, 194, 98))
+recolour(cb_plinth, "plinth.webp", SLATE, (178, 104, 46))          # carlbahner's wood deck, no shadow
+recolour(kit / "record.webp", "record.webp", OCHRE, (210, 112, 40))  # the label's orange squares
+recolour(kit / "tonearm.webp", "tonearm.webp", (0xc8, 0xae, 0x78), (236, 194, 98))  # the yellow
 
 svg = mark_svg.read_text().replace('fill="currentColor"', 'fill="#fff"').replace("<svg", '<svg style="width:400px"', 1)
 with tempfile.TemporaryDirectory() as tmp:

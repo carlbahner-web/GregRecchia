@@ -4,7 +4,9 @@
    It now differs from the kit: three fixes Carl made to the record's movement on carlbahner.com (src/nav.mjs there) are
    carried over, each marked FROM CARLBAHNER below: the old record fades away on the deck rather than flying home, one
    record moves at a time, and no tap flash or touch-held hover slide on a phone ("can you look at the mechanics from
-   the Carlbahner site repo? I fixed some quirks with the vinyl movement", Carl, 10 Nov 2026). */
+   the Carlbahner site repo? I fixed some quirks with the vinyl movement", Carl, 10 Nov 2026). And his deck from there:
+   raised keys that press down, a raised knob, the title and artist on two lines in capitals that blur in once the record
+   lands, the record and arm moved as he moved them (GREG'S DECK, at the end of the styles). */
 /**
  * Styles for <vinyl-player>.
  *
@@ -1576,6 +1578,76 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 }
 .art-boil { translate: var(--boil-dx, 0px) var(--boil-dy, 0px); }
 @media (prefers-reduced-motion: reduce) { .art-boil { translate: none; } }
+/* ===== GREG'S DECK, AS CARL BUILT HIS ON CARLBAHNER.COM =====================================================
+   "What did we do differently in my Carlbahner site deck? The 3d buttons, the placement of words. The removal of the
+   weird shadow?", then "All of it, and we need to change the colors of any illustrations" (Carl, 10 Nov 2026). From
+   carlbahner.com's src/props.mjs: GREG'S CONTROLS, ON THE DECK; THE KEYS; THE KNOB; THE DECK'S BUTTONS AND WORDS, with
+   his saved sizes and moves (DECK_UI); DECK_MOVE; and src/nav.mjs THE WORDS WAIT FOR THE RECORD. The shadow is gone
+   from the drawing itself (vinyl/art/plinth.webp, made by tools/vinyl_art.py from carlbahner's deck). Colours come
+   from the page's --pp-* (Greg's), never StudioLand's. Only the 3D room's own parts (thickness, the post) stay there. */
+
+/* the record and the arm 1% toward the corner and 1.5% toward the front, moved as one so the arm's angles hold
+   (carlbahner DECK_MOVE: x 0.01, z 0.015) */
+:host([data-art~="plinth"]) .platter { left: 14.6%; top: 14%; }
+:host([data-art~="tonearm"]) .tonearm { translate: 1% 1.5%; }
+
+/* THE KEYS: play and stop as real keys, raised off the deck and pressed down while held, springing back up: "can the play
+   buttons have depth? and then when they're clicked they actually depress?", "do they come back up after the click is
+   released?" (Carl, 2 Nov 2026). A cream top with a charcoal line, on its side in a darker cream down to the deck. Both
+   the same size, 1.23 times the kit's, the pair 1.4% left and 0.8% up (his DECK_UI keySize, keysX, keysY). */
+:host([data-art~="plinth"]) .onDeck { left: 14.2%; top: 69.7%; bottom: auto; height: 10.5%; gap: 4.6cqi; }
+:host([data-art~="plinth"]) .controls { gap: 2.3cqi; }
+:host([data-art~="plinth"]) .controls button,
+:host([data-art~="plinth"]) .controls .play {
+  --k: clamp(26px, 8.4cqi, 54px); --side: clamp(3px, 1cqi, 7px); --pen: clamp(2px, .42cqi, 3px);
+  width: var(--k); height: var(--k); padding: 0; border-radius: 22%;
+  background: var(--pp-cream); color: var(--pp-ink); border: var(--pen) solid var(--pp-ink);
+  box-shadow: 0 var(--side) 0 0 var(--pp-key-side, #c9c2b2), 0 var(--side) 0 var(--pen) var(--pp-ink);
+  transform: translateY(0); transition: transform 70ms ease, box-shadow 70ms ease;
+}
+:host([data-art~="plinth"]) .controls button:hover:not(:disabled) { background: var(--pp-key-hover, #fbf9f4); }
+:host([data-art~="plinth"]) .controls button:active:not(:disabled),
+:host([data-art~="plinth"]) .controls button.pressed {
+  transform: translateY(calc(var(--side) * .7));
+  box-shadow: 0 calc(var(--side) * .3) 0 0 var(--pp-key-side, #c9c2b2), 0 calc(var(--side) * .3) 0 var(--pen) var(--pp-ink);
+}
+:host([data-art~="plinth"]) .controls button:disabled { background: var(--pp-panel); color: var(--pp-muted); }
+:host([data-art~="plinth"]) .controls button > svg:not(.boil) { width: 46%; height: 46%; }
+
+/* THE PROGRESS LINE: a cream track with a charcoal line round it, the played part charcoal, and THE KNOB, raised as the
+   keys are, always riding it: "can the scrubber/circle thing also have depth?" (Carl, 2 Nov 2026). It drags; it does
+   not press down ("You should be able to drag it and skip through the song but it won't depress"). */
+:host([data-art~="plinth"]) .scrub-track { height: 30%; background: var(--pp-cream); }
+:host([data-art~="plinth"]) .scrub-played { background: var(--pp-ink); }
+:host([data-art~="plinth"]) .scrub-knob {
+  --side: clamp(2px, .7cqi, 5px); --pen: clamp(2px, .42cqi, 3px);
+  width: clamp(14px, 4.6cqi, 30px); background: var(--pp-cream); border: var(--pen) solid var(--pp-ink);
+  box-shadow: 0 var(--side) 0 0 var(--pp-key-side, #c9c2b2), 0 var(--side) 0 var(--pen) var(--pp-ink);
+  transform: translate(-50%, calc(-50% - var(--side) / 2)) scale(1);
+}
+:host([data-art~="plinth"]) .scrub[aria-disabled="true"] { opacity: 1; }
+
+/* THE WORDS: the song's title on top, its artist under it, in the heading face in capitals, in the deck's cream, bigger
+   than the kit's: "it should be Top line song title, bottom line artist name", "the text on the deck needs to be bigger"
+   (Carl, 3 Nov 2026). The title 5.6% of the deck, the artist 4.2%; each line shrinks to fit (_fitWords), and only then
+   is cut short. Moved 2.2% right and 1.4% up (his DECK_UI textX, textY). His artist line is at 72%; here it is full,
+   Greg's site having nothing faded (his consistency quiz). */
+:host([data-art~="plinth"]) .np { padding-left: 2.2cqi; transform: translateY(-1.4cqi); }
+:host([data-art~="plinth"]) .np-title,
+:host([data-art~="plinth"]) .np-meta {
+  font-family: var(--pp-font); font-weight: 600; text-transform: uppercase; letter-spacing: .01em;
+  color: var(--pp-cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0;
+}
+:host([data-art~="plinth"]) .np-title { font-size: 5.6cqi; line-height: 1.05; }
+:host([data-art~="plinth"]) .np-meta { font-size: 4.2cqi; line-height: 1.1; margin-top: .15em; }
+
+/* THE WORDS WAIT FOR THE RECORD: off while it is on its way, and once it is down they come in out of a blur, the whole of
+   them at once: "can we make the words on the player not show up until the vinyl lands? it can fade in?", then "make the
+   fade be a blur-in not like, entering line by line" (Carl, 8 Nov 2026). */
+.np-title, .np-meta { transition: opacity 900ms ease, filter 900ms ease; }
+.np.wait .np-title, .np.wait .np-meta { opacity: 0; filter: blur(1.4cqi); transition: none; }
+@media (prefers-reduced-motion: reduce) { .np-title, .np-meta { transition: none; } }
+
 `;
 
 
@@ -1746,6 +1818,8 @@ class VinylPlayer extends HTMLElement {
 
   connectedCallback() {
     if (!this._built) this._build();
+    // the deck's words re-fit when the deck changes size (GREG'S DECK, _fitWords)
+    if (!this._fitRO) { this._fitRO = new ResizeObserver(() => this._fitWords()); this._fitRO.observe(this); }
 
     // Tracks may arrive from an attribute, an inline JSON block, or the
     // property setter having run before upgrade. Handle all three.
@@ -2029,6 +2103,7 @@ class VinylPlayer extends HTMLElement {
     }
 
     this.current = index;
+    this._wordsWait(true);
     this._updateNowPlaying(track);
     this._setStatus('');
 
@@ -2042,6 +2117,7 @@ class VinylPlayer extends HTMLElement {
     //    trip back to the crate, not after it.
     await Promise.all([leaving, this._takeRecord(index, gen, reduced)]);
     if (gen !== this._gen) return;
+    this._wordsWait(false);
     if (this._pickNext(index)) return;
 
     /* 4. THE MOTOR COMES UP TO SPEED WHILE THE ARM SWINGS OVER. These used to
@@ -2066,6 +2142,21 @@ class VinylPlayer extends HTMLElement {
     this._next = null;
     await this._startPlayback(gen);
   }
+
+  /* EACH LINE SHRINKS TO FIT, and only then is cut short (Carl's deck: "Each line shrinks to fit, and only then is cut
+     short"), down to 60% of its size. */
+  _fitWords() {
+    for (const el of [this.el.npTitle, this.el.npMeta]) {
+      if (!el) continue;
+      el.style.fontSize = '';
+      let fs = parseFloat(getComputedStyle(el).fontSize);
+      const floor = fs * 0.6;
+      while (el.scrollWidth > el.clientWidth + 1 && fs > floor) { fs *= 0.94; el.style.fontSize = fs + 'px'; }
+    }
+  }
+
+  /* THE WORDS WAIT FOR THE RECORD: off while it travels, in once it is down (GREG'S DECK, above). */
+  _wordsWait(on) { this.el.npTitle?.parentElement?.classList.toggle('wait', on); }
 
   /* Another sleeve was picked while this record was on its way: that one now, this one off the deck. */
   _pickNext(index) {
@@ -2628,8 +2719,10 @@ class VinylPlayer extends HTMLElement {
 
   _updateNowPlaying(track) {
     this.el.npTitle.textContent = track.title;
-    this.el.npMeta.textContent = [track.artist, track.role, track.year]
-      .filter(Boolean).join(' · ') || 'On the deck';
+    // the artist alone under the title, as on Carl's deck (GREG'S DECK, above)
+    this.el.npMeta.textContent = this.hasAttribute('data-art') ? (track.artist || '')
+      : [track.artist, track.role, track.year].filter(Boolean).join(' · ') || 'On the deck';
+    this._fitWords();
     this.el.played.style.width = '0%';
     this.el.knob.style.left = '0%';
 

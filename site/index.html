@@ -220,6 +220,11 @@ vinyl-player {
   --pp-accent: var(--slate); --pp-teal: var(--slate); --pp-plinth-1: var(--slate); --pp-plinth-2: var(--slate);
   --pp-mustard: var(--ochre); --pp-mint: var(--dusty); --pp-vinyl-1: var(--char); --pp-vinyl-2: var(--char);
   --pp-radius: 0px;
+  /* the whole cover on the label, as on Carl's deck ("shrink the scale of the image that is used for the center of the
+     vinyl", carlbahner LABEL_ZOOM), not the kit's zoomed middle */
+  --pp-label-zoom: 1;
+  /* the keys' and the knob's sides, a darker off-white; a key under the mouse, a lighter one (GREG'S DECK) */
+  --pp-key-side: #cfc6b4; --pp-key-hover: #fbf9f4;
 }
 /* The song keeps you company: a small player at the foot of the screen once the big one is out of sight. */
 .mini { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 30;
