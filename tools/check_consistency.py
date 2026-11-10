@@ -1,4 +1,4 @@
-"""Lists any text size, text colour or faded text in site/index.html outside the set Carl picked on the
+"""Lists any text size, text colour, faded text, corner, line thickness or letter spacing in site/index.html outside the set Carl picked on the
 consistency quiz (10 Nov 2026; the rules are in .officers/consistency-rules.md). Run before every change:
 
     python3 tools/check_consistency.py
@@ -23,4 +23,12 @@ for line_no, line in enumerate(rest.splitlines(), 1):
             problems.append(f"text colour {v} outside the set: {line.strip()[:110]}")
     if re.search(r"(?<![-\w])opacity\s*:\s*(?!1\b)", line) and not line.strip().startswith(("footer .mark", ".down")):
         problems.append(f"faded: {line.strip()[:110]}")
+    for m in re.finditer(r"border-radius\s*:\s*([^;}]+)", line):
+        if m.group(1).strip() != "50%": problems.append(f"a round corner (only the play button is round): {line.strip()[:110]}")
+    for m in re.finditer(r"(?:border(?!-radius)(?:-\w+)?|outline|box-shadow:\s*inset)\s*:?\s*(\d+px)", line):
+        if m.group(1) != "0px": problems.append(f"line {m.group(1)} outside the set (var(--line), var(--line-frame)): {line.strip()[:110]}")
+    for m in re.finditer(r"letter-spacing\s*:\s*([^;}]+)", line):
+        v = m.group(1).strip()
+        if not (v.startswith("var(--caps-") or v in (".42em", "-.01em")):
+            problems.append(f"letter spacing {v} outside the set: {line.strip()[:110]}")
 print("\n".join(problems)); sys.exit(1 if problems else 0)
