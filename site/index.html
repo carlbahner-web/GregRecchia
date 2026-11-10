@@ -483,7 +483,7 @@ footer a { color: var(--paper); }
         <h2 id="contact-h">Let’s make it happen</h2>
         <p class="lede">I’m approachable, easy to work and communicate with. Fill out some brief info and I’ll be in touch with you shortly. Looking forward to hearing from you!</p>
         <figure class="portrait contact-video">
-        <video src="video/greg.mp4" poster="video/greg.jpg" muted loop playsinline preload="auto" aria-hidden="true"></video>
+        <video src="video/greg.mp4" poster="video/greg.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
       </figure>
       </div>
       <form name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="company" id="form" class="rise">
@@ -644,13 +644,19 @@ $("form").addEventListener("submit", async e => {
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.
-/* EACH VIDEO PLAYS ONLY WHILE IT'S ON SCREEN, and the one by the contact form starts from its first frame when it first
-   comes into view. It used to start as the page opened, off screen, and a browser that holds an off-screen video on an
-   old frame then jumped it forward as it scrolled in ("The video by the contact form" glitches, Carl, 10 Nov 2026). */
-const videos = [...document.querySelectorAll("video")], seen = new Map();
-const holdStill = () => videos.forEach(v => (calm.matches || !seen.get(v)) ? v.pause() : v.play().catch(() => {}));
+/* EACH VIDEO PLAYS WHILE IT'S ON SCREEN, and one that comes into view for the first time goes back to its first frame (its
+   poster) and plays from there. The one by the contact form had played from the moment the page opened, off screen,
+   and a browser that holds an off-screen video on an old frame then jumped it forward as it scrolled in ("The video by
+   the contact form" glitches, Carl, 10 Nov 2026). They keep autoplay so every browser loads them: without it Safari
+   never did ("Now it's not loading"). */
+const videos = [...document.querySelectorAll("video")], seen = new Map(), started = new Set();
+const holdStill = () => videos.forEach(v => {
+  if (calm.matches || seen.get(v) === false) return v.pause();
+  if (!started.has(v) && seen.get(v)) { started.add(v); if (v.currentTime > 0.1) v.currentTime = 0; }
+  v.play().catch(() => {});
+});
 const watch = new IntersectionObserver(es => es.forEach(e => { seen.set(e.target, e.isIntersecting); holdStill(); }), { threshold: 0.01 });
-videos.forEach(v => { v.removeAttribute("autoplay"); v.autoplay = false; watch.observe(v); });
+videos.forEach(v => watch.observe(v));
 calm.addEventListener("change", holdStill);
 </script>
 </body>
