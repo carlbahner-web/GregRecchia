@@ -50,7 +50,8 @@ relative so the same page works there; its form only says it is a preview.
   (the turntable just under the bar where the whole player won't fit, a phone) and puts the first record on; after that
   it plays and pauses what's on the deck; the song's cover or title glides down without playing. It replaced a small
   player at the foot of the screen; Greg
-  standing in the live room (`video/greg.mp4`, cut from his `For_Website.mov`) beside his intro; words rising into
+  standing in the live room (`video/greg.mp4`, now cut from his `For_Website_4.mov`: `For_Website.mov` freezes and
+  jumps four times about 5.5 s in, a second each, which was the glitch: "the video is still glitchy?", Carl, 10 Nov 2026) beside his intro; words rising into
   place as you scroll (CSS scroll-driven, no script, none for less motion; the photos no longer open in from cut edges:
   "something weird happens when scrolling", Carl, 10 Nov 2026, so they hold still and the words are in by 60% on screen); the record player from his MGMT page (below), and the phone's lock-screen controls (Media Session); the quotes as a carousel (below); the contact form in charcoal with labels that float up. The hero is untouched.
 - Text sizes and colours are sets, picked by Carl on the consistency officer's quiz (10 Nov 2026): six sizes as
@@ -119,7 +120,7 @@ relative so the same page works there; its form only says it is a preview.
 - The intro's heading is "Hi, I'm Greg": "can we remove "RECCHIA" from the "hi, i'm greg recchia" line?" (Carl, 10 Nov
   2026). His portrait video plays forward then backward and round again, made into the file itself (forward, then the
   same frames reversed less the two at the turns, so nothing stutters): "the hi i'm greg video seem a bit glitchy, can
-  we try making it loop/boomerang?" (Carl, 10 Nov 2026). The forward-only cut is the first half of `video/greg.mp4`.
+  we try making it loop/boomerang?" (Carl, 10 Nov 2026). Its first 290 frames, cropped to him, then back.
 - No heading over the record player: its deck says HEAR FOR YOURSELF until a record is picked, where it said CHOOSE A
   RECORD (the player's `idle` attribute): "instead of "CHOOSE A RECORD" can we put "HEAR FOR YOURSELF" there so we don't
   need that unnecessary header?" (Carl, 10 Nov 2026).
