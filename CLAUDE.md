@@ -31,7 +31,9 @@ relative so the same page works there; its form only says it is a preview.
   top of the page? Like a background video?" (Carl, 10 Nov 2026, with three clips). Of the three it is
   `Contact_Vid.mov`; in the other two he stands facing the camera in the middle of the frame, where the headline sits.
   `video/console.mp4` (H.264, no sound, 1.1 MB) with its first frame as the poster; darkened by `.hero::before`;
-  held on that frame for anyone who asks for less motion. Upright phones crop toward him.
+  held on that frame for anyone who asks for less motion. Held to its right edge, where he sits, so any narrow
+  screen crops the speakers on the left and never him: "can we fix the top video so that it always has greg in frame? like,
+  maybe right-align it?" (Carl, 10 Nov 2026).
 - His mark, a circle with two arcs, flipped: "Can we flip this horizontally and use it to replace the old waveform
   logo?" (Carl, 10 Nov 2026). Traced into `img/mark.svg` and painted as a mask like the wordmark: white in the hero,
   cream in the footer, butter as the tab icon (`img/favicon.svg`). The old headphone-and-waveform logo is gone from

@@ -111,9 +111,11 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
    the name and headline sit higher with it. */
 .hero { min-height: 66svh; }
 /* Greg at the console, behind everything, darkened so the type reads ("Contact_Vid.mov", Carl, 10 Nov 2026). */
-.hero-video { position: absolute; inset: 0 0 auto; width: 100%; height: max(100%, 100svh); object-fit: cover; object-position: 60% 0%; }
+.hero-video { position: absolute; inset: 0 0 auto; width: 100%; height: max(100%, 100svh); object-fit: cover; object-position: 100% 0%; }
+/* GREG ALWAYS IN FRAME: held to its right edge, where he sits at the console, so a narrow window crops the speakers
+   on the left, never him ("can we fix the top video so that it always has greg in frame? like, maybe right-align it?",
+   Carl, 10 Nov 2026). */
 /* (the video keeps the full screen's size it always had, so nothing shrinks: the hero just ends two thirds down it) */
-@media (max-aspect-ratio: 3/4) { .hero-video { object-position: 82% 0%; } }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: 1;
   background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,.55), rgba(0,0,0,.8) 75%), linear-gradient(transparent 70%, #000); }
 .hero-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: clamp(28px, 6vh, 56px); }
