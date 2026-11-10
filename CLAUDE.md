@@ -13,7 +13,7 @@ relative so the same page works there; its form only says it is a preview.
 ## What's in it
 - `site/index.html`: the whole page, styles and script inline. Sections in his Squarespace order: hero, intro, his five
   steps, the player, testimonials, contact.
-- His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood.webp`),
+- His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black, the wood (`img/wood-tile.webp`),
   butter-cream type, the five tinted cards with butter frames, and his three
   fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
@@ -30,6 +30,9 @@ relative so the same page works there; its form only says it is a preview.
   logo?" (Carl, 10 Nov 2026). Traced into `img/mark.svg` and painted as a mask like the wordmark: white in the hero,
   cream in the footer, butter as the tab icon (`img/favicon.svg`). The old headphone-and-waveform logo is gone from
   the site. `img/share.jpg`, the picture a shared link shows, is the hero's mark and name over the console clip.
+- One wood surface from the video to the footer, the player and the form on it as dark panels in the cards' butter
+  frame: "It feels so jarring from one to the next" (Carl, 10 Nov 2026, of black and wood bands taking turns), picked
+  over an all-dark page on mockups ("Middle column"). The wood is tiled as itself and its mirror, so it has no seam.
 - Every word is his, from the Squarespace page. Nothing on the page is written for him.
 - The player: four songs whose masters and art came from his StudioLand MGMT page (studiolandmgmt-site,
   `deploy-mgmt/greg-recchia/`). Each song's "vibe" is his own line from the Squarespace player. A song is one row in
