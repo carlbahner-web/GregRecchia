@@ -7,20 +7,20 @@
 <meta name="description" content="Mixer & co-producer helping dedicated indie artists capture the raw, the catchy, and the quirky.">
 <meta property="og:title" content="Greg Recchia Productions">
 <meta property="og:description" content="Earworm Architect for Hook-Obsessed Indie Artists.">
-<meta property="og:image" content="/img/share.jpg">
+<meta property="og:image" content="img/share.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/img/logo.png">
-<link rel="preload" href="/fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/img/wordmark.svg" as="image">
+<link rel="icon" href="img/logo.png">
+<link rel="preload" href="fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/wordmark.svg" as="image">
 <style>
 /* Fonts: the three his Squarespace site used, saved here (latin) so nothing loads from Google. */
-@font-face { font-family: 'Encode Sans Condensed'; font-weight: 600; font-display: swap; src: url(/fonts/EncodeSansCondensed-600.woff2) format('woff2'); }
-@font-face { font-family: 'Encode Sans Condensed'; font-weight: 800; font-display: swap; src: url(/fonts/EncodeSansCondensed-800.woff2) format('woff2'); }
-@font-face { font-family: 'Krub'; font-weight: 400; font-display: swap; src: url(/fonts/Krub-400.woff2) format('woff2'); }
-@font-face { font-family: 'Krub'; font-weight: 400; font-style: italic; font-display: swap; src: url(/fonts/Krub-400i.woff2) format('woff2'); }
-@font-face { font-family: 'Krub'; font-weight: 600; font-display: swap; src: url(/fonts/Krub-600.woff2) format('woff2'); }
-@font-face { font-family: 'Alfa Slab One'; font-weight: 400; font-display: swap; src: url(/fonts/AlfaSlabOne-400.woff2) format('woff2'); }
+@font-face { font-family: 'Encode Sans Condensed'; font-weight: 600; font-display: swap; src: url(fonts/EncodeSansCondensed-600.woff2) format('woff2'); }
+@font-face { font-family: 'Encode Sans Condensed'; font-weight: 800; font-display: swap; src: url(fonts/EncodeSansCondensed-800.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 400; font-display: swap; src: url(fonts/Krub-400.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/Krub-400i.woff2) format('woff2'); }
+@font-face { font-family: 'Krub'; font-weight: 600; font-display: swap; src: url(fonts/Krub-600.woff2) format('woff2'); }
+@font-face { font-family: 'Alfa Slab One'; font-weight: 400; font-display: swap; src: url(fonts/AlfaSlabOne-400.woff2) format('woff2'); }
 
 /* His colours, read off his Squarespace page: black, the wood, butter-cream type, and the five tinted cards. */
 :root {
@@ -70,14 +70,14 @@ h2 { font-size: clamp(36px, 6vw, 60px); color: var(--butter); text-align: center
 /* His name in FBS Funegral, traced from the type sample Carl sent (10 Nov 2026) into img/wordmark.svg, and painted
    through it as a mask so it takes any colour. */
 .wordmark { width: 100%; aspect-ratio: 5832 / 631; background: #fff;
-  -webkit-mask: url(/img/wordmark.svg) center / contain no-repeat; mask: url(/img/wordmark.svg) center / contain no-repeat; }
+  -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
 .productions { font: 600 clamp(12px, 1.5vw, 17px)/1 var(--head); letter-spacing: .9em; margin-right: -.9em; text-transform: uppercase; color: var(--steel); }
 .hero h1 { font-size: clamp(38px, 6.6vw, 84px); font-style: italic; color: #fff; max-width: 12ch; line-height: .98; }
 .hero h1 em { font-style: italic; color: var(--butter); }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
 /* ---------- Wood sections ---------- */
-.wood { background: #8a6440 url(/img/wood.webp) center top / max(100%, 1290px) auto repeat-y; position: relative; }
+.wood { background: #8a6440 url(img/wood.webp) center top / max(100%, 1290px) auto repeat-y; position: relative; }
 .wood::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(50, 26, 14, .55), rgba(50, 26, 14, .3) 30%, rgba(50, 26, 14, .3) 70%, rgba(50, 26, 14, .55)); }
 .wood > * { position: relative; }
 
@@ -175,7 +175,7 @@ footer strong { color: var(--cream); font-weight: 600; }
 <header class="hero">
   <div class="hero-in">
     <div class="brand">
-      <img class="mark" src="/img/mark.webp" width="171" height="144" alt="">
+      <img class="mark" src="img/mark.webp" width="171" height="144" alt="">
       <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
       <div class="productions">Productions</div>
     </div>
@@ -218,7 +218,7 @@ footer strong { color: var(--cream); font-weight: 600; }
     <h2 id="listen-h">Hear for yourself</h2>
     <div class="player">
       <div class="now">
-        <img id="now-art" src="/img/i-won-t-see-you-anymore.webp" alt="" width="600" height="600">
+        <img id="now-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="600" height="600">
         <div>
           <div class="now-title" id="now-title">i won’t see you anymore</div>
           <div class="now-artist" id="now-artist">Rol3ert</div>
@@ -246,7 +246,7 @@ footer strong { color: var(--cream); font-weight: 600; }
     <div class="wrap">
       <h2 id="quotes-h">What the artists are saying</h2>
       <figure class="quote">
-        <img src="/img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy">
+        <img src="img/mishaal-tamer.webp" width="900" height="1445" alt="Mishaal Tamer" loading="lazy">
         <blockquote>
           <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
           <cite>Mishaal Tamer</cite>
@@ -276,7 +276,7 @@ footer strong { color: var(--cream); font-weight: 600; }
 </main>
 
 <footer>
-  <img class="mark" src="/img/mark.webp" width="171" height="144" alt="" loading="lazy">
+  <img class="mark" src="img/mark.webp" width="171" height="144" alt="" loading="lazy">
   <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
   <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
   <p>© <span id="year">2026</span> Greg Recchia Productions</p>
@@ -298,7 +298,7 @@ let current = -1, dragging = false;
 
 TRACKS.forEach((t, i) => {
   const li = document.createElement("li");
-  li.innerHTML = `<button type="button"><img src="/img/${t.art}" alt="" width="56" height="56" loading="lazy">
+  li.innerHTML = `<button type="button"><img src="img/${t.art}" alt="" width="56" height="56" loading="lazy">
     <span><span class="t-vibe"></span><span class="t-title"></span><span class="t-artist"></span></span>
     <span class="t-role"></span></button>`;
   li.querySelector(".t-vibe").textContent = t.vibe;
@@ -314,8 +314,8 @@ const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60
 function load(i, play) {
   current = i;
   const t = TRACKS[i];
-  audio.src = "/audio/" + t.src;
-  $("now-art").src = "/img/" + t.art;
+  audio.src = "audio/" + t.src;
+  $("now-art").src = "img/" + t.art;
   $("now-title").textContent = t.title;
   $("now-artist").textContent = `${t.artist} · ${t.role}`;
   [...list.querySelectorAll("button")].forEach((b, j) => b.setAttribute("aria-current", j === i));
@@ -351,6 +351,7 @@ list.querySelector("button").setAttribute("aria-current", "false");
 $("form").addEventListener("submit", async e => {
   e.preventDefault();
   const f = e.target, msg = $("sent"), btn = f.querySelector("button[type=submit]");
+  if (window.PREVIEW) { msg.textContent = "Preview only: the form sends once the site is live."; return; }
   btn.disabled = true; msg.textContent = "Sending…";
   try {
     const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });

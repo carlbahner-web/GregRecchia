@@ -6,6 +6,10 @@ Carl, 10 Nov 2026: "something more like a one pager rather than an elaborate thr
 
 No framework, no build step. Netlify publishes `site/` (`netlify.toml`).
 
+Until it is on Netlify, Carl sees it at https://claude.ai/artifact/XA2wrXqQrUkxmvVJyUHMHd (private to him), built by
+`python3 tools/build_preview.py <dir>` and published with its `img/` and `audio/` beside it. The site's paths are
+relative so the same page works there; its form only says it is a preview.
+
 ## What's in it
 - `site/index.html`: the whole page, styles and script inline. Sections in his Squarespace order: hero, intro, his five
   steps, the player, testimonials, contact.
