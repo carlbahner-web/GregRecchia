@@ -117,6 +117,10 @@ relative so the same page works there; its form only says it is a preview.
   the page's edge, the reading text no longer stopped short by a character limit; everything stacks below 760.
 - The section headings (and the thank-you's) in capitals, ready for the font Carl will set them in: "can you meak the
   header texts all caps? i'll be replacing it with that one font" (Carl, 10 Nov 2026). The words themselves are unchanged.
+- The intro's heading is "Hi, I'm Greg": "can we remove "RECCHIA" from the "hi, i'm greg recchia" line?" (Carl, 10 Nov
+  2026). His portrait video plays forward then backward and round again, made into the file itself (forward, then the
+  same frames reversed less the two at the turns, so nothing stutters): "the hi i'm greg video seem a bit glitchy, can
+  we try making it loop/boomerang?" (Carl, 10 Nov 2026). The forward-only cut is the first half of `video/greg.mp4`.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
