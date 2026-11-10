@@ -135,12 +135,13 @@ relative so the same page works there; its form only says it is a preview.
   deck, even during resizing?" (Carl, 10 Nov 2026). Measured within 1px from 1440 to 770 wide.
 - The quotes' photos are landscape, 3 to 2, each placed on its subject with `--at` (Mishaal's head near the top): "I'm
   thinking we could maybe crop the images to all be a bit landscape? The three testimonials I mean" (Carl, 10 Nov 2026).
-  So a phone no longer needs a smaller photo. Waiting in `img/`: `matt.webp` and `essence.webp` (her "In The Light" cover,
-  "a better one for Essence Natay") for their quotes, and `greg-portrait.webp`, a new photo of Greg, place not chosen.
+  So a phone no longer needs a smaller photo. Three quotes, from his Squarespace page as Carl sent them (10 Nov 2026),
+  word for word: Mishaal Tamer, Essence Natay (her photo her "In The Light" cover, "a better one for Essence Natay"),
+  Ryan Matthew. Each takes its own height and the carousel grows or shrinks to the one showing. Waiting in `img/`:
+  `greg-portrait.webp`, a new photo of Greg, place not chosen.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
 - The other five songs from his Squarespace player: Naskar (Mishaal Tamer), Just Chill, Daylight (Ryan Pol…),
   Small Talk (JUST …), To My Grave (iiswe…). Their names were cut off in the PDF.
-- The rest of his testimonials (only Mishaal Tamer's slide was in the PDF), each with a photo.
 - His domain pointed at Netlify.
