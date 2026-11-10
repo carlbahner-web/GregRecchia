@@ -113,6 +113,8 @@ relative so the same page works there; its form only says it is a preview.
   deck too: "so the columns still don't seem intentional" (Carl, 10 Nov 2026, of four sections each starting their
   right-hand side somewhere else). The intro's words, the deck, the quote and the form all start on one line and run to
   the page's edge, the reading text no longer stopped short by a character limit; everything stacks below 760.
+- The section headings (and the thank-you's) in capitals, ready for the font Carl will set them in: "can you meak the
+  header texts all caps? i'll be replacing it with that one font" (Carl, 10 Nov 2026). The words themselves are unchanged.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
