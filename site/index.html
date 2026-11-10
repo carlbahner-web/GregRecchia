@@ -162,20 +162,24 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
    it, the bar fills in behind it with his name and the links. Its first play glides down to the record player and puts
    the first record on; after that it plays and pauses whatever is on the deck. */
 .topbar { position: fixed; inset: 0 0 auto; z-index: 30; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-  gap: var(--gap); padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, 4vw) 10px; color: var(--white);
+  gap: var(--gap); padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, 4vw) calc(10px + var(--line)); color: var(--white);
   transition: background-color .35s, box-shadow .35s, color .35s; }
 .topbar.on { background: rgba(242, 238, 229, .86); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
   box-shadow: 0 1px 0 var(--hair); color: var(--char); }
 .tb-brand, .tb-links, .progress { visibility: hidden; }
 .topbar.on .tb-brand, .topbar.on .tb-links, .topbar.on .progress { visibility: visible; }
-.tb-brand { justify-self: start; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.tb-brand { justify-self: start; display: flex; align-items: center; gap: 10.5px; text-decoration: none; } /* + the name's own 1.5px edge = 12 */
 .tb-mark { height: var(--bar-h); width: auto; aspect-ratio: 1625 / 1517; background: var(--char);
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
 .tb-name { width: clamp(120px, 14vw, 160px); aspect-ratio: 5832 / 631; background: var(--char);
   -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
-.tb-links { justify-self: end; display: flex; gap: 6px; }
+.tb-links { justify-self: end; display: flex; gap: 0; }
 .tb-links a { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-big); text-transform: uppercase;
-  color: var(--char); text-decoration: none; height: var(--bar-h); padding: 0 14px; display: inline-flex; align-items: center; }
+  color: var(--char); text-decoration: none; height: var(--bar-h); display: inline-flex; align-items: center;
+  /* spaced capitals end on a letter's worth of space, so the right side gives it back: CONTACT sits in the middle of its
+     button, and LISTEN's last letter stands 12 from the button's edge */
+  padding: 0 calc(14px - var(--caps-big)) 0 14px; }
+.tb-links a:not(.go) { padding-right: calc(12px - var(--caps-big)); }
 .tb-links a:hover { color: var(--slate); }
 .tb-links a.go { background: var(--slate); color: var(--paper); }
 .tb-links a.go:hover { background: var(--char); }
@@ -184,6 +188,10 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 @supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
 @keyframes grow { to { transform: scaleX(1); } }
 
+/* INK TO INK, ON TWO NUMBERS: "Ok look at in to ink padding" (Carl, 10 Nov 2026), measured off the drawn bar, not its boxes.
+   12 between things in one group (his mark and name; the play button, the cover and the song's words; LISTEN and
+   CONTACT), 16 between groups and at a phone's edges, and the same 10 above the line as below it to the progress line
+   (padding-bottom carries the line's own 3px). Each gap gives back what a shape or a letter keeps round itself. */
 /* ONE HEIGHT FOR EVERYTHING IN THE BAR: his mark, the play button, the cover, the two lines of the song and the Contact
    button all stand 34px tall on one middle line ("Heights are all over the place", Carl, 10 Nov 2026, of the mark at
    28, the play at 42, the cover at 36 and the button at 38, the song's progress hanging under the cover). 40 at first, then "What if they're 34 instead of 42?" (the same day). */
@@ -196,7 +204,7 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 @media (hover: hover) { .tb-play:hover { transform: scale(1.06); } }
 .tb-play svg { width: 56%; height: 56%; }
 .is-playing .i-play, html:not(.is-playing) .i-pause { display: none; }
-.tb-song { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 0; border: 0; background: none;
+.tb-song { flex: 1 1 auto; display: flex; align-items: center; gap: 11px; min-width: 0; padding: 0; border: 0; background: none;
   color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .tb-song { height: var(--bar-h); }
 .tb-cover { flex: none; position: relative; width: var(--bar-h); height: var(--bar-h); overflow: hidden; }
