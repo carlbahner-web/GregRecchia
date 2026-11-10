@@ -16,6 +16,22 @@ def font(m):
     return f"url(data:font/woff2;base64,{data})"
 s = re.sub(r"url\((fonts/[^)]+\.woff2)\)", font, s)
 s = s.replace("<script>", "<script>window.PREVIEW = true;", 1)
+# The hero video goes inside the page and plays from a blob: Safari plays a video only from a server that answers
+# range requests, and the preview's file host may not, so a published video showed only its poster there.
+mp4 = base64.b64encode((root / "video/console.mp4").read_bytes()).decode()
+s = s.replace('src="video/console.mp4" ', '')
+s = s.replace("</body>", "")
+s += f"""<script type="text/plain" id="hero-mp4">{mp4}</script>
+<script>
+(() => {{
+  const v = document.querySelector(".hero-video"), b64 = document.getElementById("hero-mp4").textContent;
+  const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+  v.muted = true;
+  v.src = URL.createObjectURL(new Blob([bytes], {{ type: "video/mp4" }}));
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().catch(() => {{}});
+}})();
+</script>
+"""
 (out / "index.html").write_text(s)
 for d in ("img", "audio", "video"):
     shutil.copytree(root / d, out / d, dirs_exist_ok=True)
