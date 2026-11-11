@@ -211,7 +211,7 @@ relative so the same page works there; its form only says it is a preview.
   (`.bio-body`, the photo floated). A phone: heading, first paragraph, photo, the rest. No word alone on a paragraph's
   last line anywhere on the page (`text-wrap: pretty`), and the lead's own margin gone so 64 is 64: "the padding is a bit
   weird, maybe it's because there's one word on that last line?" (Carl, 11 Nov 2026). The whole line where the charcoal and the off-white meet (along under the form, round, down beside the
-  video, round, along under it) is one smooth curve with rounded corners, wandering about 2px in slow uneven waves like his
+  video, round, along under it) is one smooth curve with rounded corners, wandering about 1px (halved from 2 on Carl's "1/2 the amplitude") in slow uneven waves like his
   mark and the Gelateria letters, drawn by the script to the page's size (`#bio-edge`; THE EDGE, ONE RIPPLING LINE): rounded
   picked over square and diagonal, then "can you give a little bit of uneven ripple to the rounded lcorners? just subtle",
   then "it still has too many elbows" and "it should happen on the entirety of the line not just the corners" (Carl, 11
