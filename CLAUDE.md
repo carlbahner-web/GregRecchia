@@ -164,9 +164,13 @@ relative so the same page works there; its form only says it is a preview.
   frame (its poster) and plays from there. The one by the contact form had played from page open, off screen, and jumped
   as it came in: "The video by the contact form" (Carl, 10 Nov 2026, of the glitch he saw "right on load"). Both keep
   `autoplay`: without it the contact video never loaded on his phone ("Now it's not loading").
+- His domain, gregrecchiaproductions.com (registered at Squarespace), points at Netlify since 11 Nov 2026: in Squarespace's
+  DNS the "Squarespace Defaults" were deleted and an A record `@` to `75.2.60.5` and a CNAME `www` to
+  `gregrecchia.netlify.app` added; his "Squarespace Email Forwarding" records (Mailgun MX and TXT) stay untouched. The
+  domain renews on its own at Squarespace, apart from the website plan. The shared-link picture, `og:url` and canonical
+  use the full address.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
 
 ## Waiting on Greg
 - The other five songs from his Squarespace player: Naskar (Mishaal Tamer), Just Chill, Daylight (Ryan Pol…),
   Small Talk (JUST …), To My Grave (iiswe…). Their names were cut off in the PDF.
-- His domain pointed at Netlify.
