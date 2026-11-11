@@ -435,7 +435,8 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 .bio .split { align-items: start; }
 .bio-photo img { aspect-ratio: 3 / 2; object-position: 30% 40%; }
 .bio-words p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
-.bio-words p:first-child { font: 600 var(--text-big)/var(--lines-read) var(--head); }
+.bio-words h2 { margin-bottom: var(--gap-words); }   /* ABOUT GREG (Carl, 11 Nov 2026), in capitals and the Gelateria font like the others */
+.bio-words h2 + p { font: 600 var(--text-big)/var(--lines-read) var(--head); }
 .bio-words p:last-child { margin-bottom: 0; }
 /* THE BIO LOCKS INTO THE CONTACT SECTION (a laptop): its off-white rises into the charcoal on the right, under the form,
    while the charcoal carries on down the left round Greg's video; the studio photo starts below where the charcoal ends
@@ -452,6 +453,9 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
      on the entirety of the line not just the corners", Carl, 11 Nov 2026). Drawn by the script to the page's size. */
   .bio-edge { display: block; color: var(--paper); position: absolute; left: 0; top: 0; width: 100%; height: calc(var(--rise, 0px) + 2px); z-index: 0; pointer-events: none; }
   .bio > .wrap { position: relative; z-index: 1; }
+  /* THE WORDS 64 IN FROM THE PANEL'S EDGE, as they are from its top ("see how the bio text is too close on the left?",
+     Carl, 11 Nov 2026): the edge stands half the column gap left of the words' column, so they step in the rest. */
+  .bio-words { padding-left: calc(64px - var(--gap-cols) / 2); }
   .bio .bio-photo { margin-top: calc(var(--rise, 0px) + 22px); align-self: stretch; }
   /* the studio photo fills the column from 64 under the charcoal to the bio's last line, cropped round Greg, so neither
      end leaves a gap */
@@ -603,11 +607,12 @@ footer a { color: var(--paper); }
   </section>
   <!-- HIS BIO, after the contact form: "i want to add a bio section at the bottom after the contact form", then the words
        and "the studio photo" (Carl, 11 Nov 2026). -->
-  <section class="bio" id="bio" aria-label="About Greg">
+  <section class="bio" id="bio" aria-labelledby="bio-h">
     <svg class="bio-edge" id="bio-edge" aria-hidden="true"><path fill="currentColor"/></svg>
     <div class="wrap split">
       <figure class="portrait bio-photo"><img src="img/greg-studio.webp" width="1400" height="994" alt="Greg at the console in the studio" loading="lazy"></figure>
       <div class="bio-words">
+        <h2 id="bio-h">About Greg</h2>
         <p>Greg Recchia has spent over twenty years chasing the same thing… whatever it is that makes a song special, and making sure the listener can’t ignore it.</p>
         <p>He came up the old-school way: audio engineering at SAE in New York City, then years in real rooms like Eastside Sound, Studio Crash in Philly and Water Music in Hoboken. Along the way he got to work on projects with Masego, Nile Rodgers, Pino Palladino, Idris Elba, and a bunch more.</p>
         <p>He learned guitar and a handful of other instruments completely by ear, with no theory at all. That sounds like a limitation until you work with him and realize he hears your song the same way the people streaming it will… by whether it moves him or not.</p>
