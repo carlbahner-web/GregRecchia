@@ -261,6 +261,10 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
   .contact h2, .contact .lede { order: 0; }
   .contact #form, .contact .thanks { order: 1; }
   .contact-video { order: 2; margin-top: 0; }
+  /* GREG'S TWO, CENTRED: each picture and its two frames are one unit, and on a phone his photo and his video sit in the
+     middle of the screen, not on the left ("make both of Greg's centered on phone? They're left aligned and it looks
+     weird", Carl, 11 Nov 2026). The frames are equal and opposite, so centring the picture centres the unit. */
+  .intro .portrait, .contact .contact-video { margin-inline: auto; max-width: min(340px, 100% - 44px); }   /* the unit inside the page's edges */
   .contact .split { row-gap: var(--gap-panel); }
   .contact .lede { margin-top: calc(var(--gap-words) - var(--gap-panel)); }
 }

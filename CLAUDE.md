@@ -155,6 +155,8 @@ relative so the same page works there; its form only says it is a preview.
 - Every framed picture (Greg's photo, the quotes' photos, the contact video) has two offset frames, one down and right and
   one equal and opposite, up and left: "The box behind him that's diagonally southeast of him... can we add another that is
   equal and opposite? Northwest" (Carl, 11 Nov 2026). The pictures sit 22 in from every side to leave them room.
+  A picture and its two frames are one unit: on a phone Greg's photo and video are centred, the unit inside the page's
+  edges ("make both of Greg's centered on phone? They're left aligned and it looks weird", Carl, 11 Nov 2026).
 - Each video plays while it's on screen and pauses off it; one coming into view for the first time goes back to its first
   frame (its poster) and plays from there. The one by the contact form had played from page open, off screen, and jumped
   as it came in: "The video by the contact form" (Carl, 10 Nov 2026, of the glitch he saw "right on load"). Both keep
