@@ -1667,6 +1667,11 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
                 overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sleeve[data-state="deck"] .sleeve-art::before { content: "NOW PLAYING"; }
 :host([noframe]) .pp { padding: 0; }
+/* THE DECK'S OUTLINE RIPPLES like the page's section edges, about 1px in slow uneven waves, its corners square ("Add it to
+   the record deck outline too please", Carl, 11 Nov 2026). The board is cut to the rippling line and the charcoal line
+   drawn along it, half of a 6px stroke kept inside the cut: 3px, as before. */
+.plinth-edge { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.plinth-edge path { fill: none; stroke: var(--pp-ink); stroke-width: 6px; stroke-linejoin: miter; }
 :host .np-title[data-idle], :host([data-art~="plinth"]) .np-title[data-idle] { font-family: 'Portofino Gelateria Caps', var(--pp-font); font-weight: 400; letter-spacing: 0;
   white-space: nowrap; overflow: visible; text-overflow: clip; }
 .sleeve { padding: 0; }   /* the room it kept was for a boiling outline, which Greg's page doesn't draw */
@@ -1708,8 +1713,10 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
    in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,
    an off-white line inset round it and a screw in each corner, all sized to the deck so it scales with it. */
 :host([data-art~="plinth"]) .plinth {
-  --inset: 2.4cqi; --at: 5.2cqi;
-  background-color: var(--pp-teal); border: 3px solid var(--pp-ink); border-radius: 0;
+  /* the outline is drawn rippling by _rippleDeck (THE DECK'S OUTLINE RIPPLES, below), so no border: the inset line and the
+     screws step in its 3px to stay where they were */
+  --inset: calc(2.4cqi + 3px); --at: calc(5.2cqi + 3px);
+  background-color: var(--pp-teal); border: 0; border-radius: 0;
   box-shadow: inset 0 0 0 var(--inset) var(--pp-teal), inset 0 0 0 calc(var(--inset) + 3px) var(--pp-cream);
   background-size: auto; background-image:
     radial-gradient(circle at var(--at) var(--at), var(--screw)),
@@ -1895,7 +1902,7 @@ class VinylPlayer extends HTMLElement {
   connectedCallback() {
     if (!this._built) this._build();
     // the deck's words re-fit when the deck changes size (GREG'S DECK, _fitWords)
-    if (!this._fitRO) { this._fitRO = new ResizeObserver(() => this._fitWords()); this._fitRO.observe(this); }
+    if (!this._fitRO) { this._fitRO = new ResizeObserver(() => { this._fitWords(); this._rippleDeck(); }); this._fitRO.observe(this); }
     document.fonts?.ready.then(() => this._fitWords());   // measured again once the headings' font is in
 
     // Tracks may arrive from an attribute, an inline JSON block, or the
@@ -1939,7 +1946,7 @@ class VinylPlayer extends HTMLElement {
       <div class="pp" part="container">
         <div class="deck-col">
           <div class="deck" part="deck">
-            <div class="plinth">
+            <div class="plinth"><svg class="plinth-edge" aria-hidden="true"><path/></svg>
             </div>
             <div class="frame">
               <div class="platter">
@@ -2246,6 +2253,35 @@ class VinylPlayer extends HTMLElement {
       const cap = parseFloat(getComputedStyle(t).fontSize) * 0.75;
       if (parseFloat(getComputedStyle(m).fontSize) > cap) m.style.fontSize = cap + 'px';
     }
+  }
+
+  /* THE DECK'S OUTLINE RIPPLES (in the styles): each side sampled every 6px and nudged across itself by three slow
+     uneven waves (1.1px at most), smooth along the side, the corners kept square; the board is cut to it. */
+  _rippleDeck() {
+    const p = this.shadowRoot?.querySelector('.plinth'), path = p?.querySelector('.plinth-edge path');
+    if (!p || !path) return;
+    const w = p.offsetWidth, h = p.offsetHeight;
+    if (!w || !h) return;
+    const n = (s, k) => 1.1 * (.55 * Math.sin(s / 53 + k) + .3 * Math.sin(s / 23 + k * 2.3) + .15 * Math.sin(s / 11 + k * 3.1));
+    const side = (x0, y0, x1, y1, nx, ny, k) => {
+      const len = Math.hypot(x1 - x0, y1 - y0), steps = Math.max(2, Math.round(len / 6)), pts = [];
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps, o = n(t * len, k) * Math.min(1, t * steps / 2, (steps - i) / 2);   // ripple eases to 0 at the corners
+        pts.push([x0 + (x1 - x0) * t + nx * o, y0 + (y1 - y0) * t + ny * o]);
+      }
+      let d = '';
+      for (let i = 0; i < pts.length - 1; i++) {
+        const a = pts[Math.max(i - 1, 0)], b = pts[i], c = pts[i + 1], e = pts[Math.min(i + 2, pts.length - 1)];
+        d += ` C${(b[0] + (c[0] - a[0]) / 6).toFixed(2)},${(b[1] + (c[1] - a[1]) / 6).toFixed(2)} ${(c[0] - (e[0] - b[0]) / 6).toFixed(2)},${(c[1] - (e[1] - b[1]) / 6).toFixed(2)} ${c[0].toFixed(2)},${c[1].toFixed(2)}`;
+      }
+      return { start: pts[0], d };
+    };
+    const c = 1.2;   // the line's middle 1.2 in from the box, so the ripple stays inside it and the corners meet exactly
+    const t = side(c, c, w - c, c, 0, 1, .9), r = side(w - c, c, w - c, h - c, -1, 0, 2.2), b = side(w - c, h - c, c, h - c, 0, -1, 3.6), l = side(c, h - c, c, c, 1, 0, 5.1);
+    const d = `M${t.start[0].toFixed(2)},${t.start[1].toFixed(2)}${t.d} L${r.start[0].toFixed(2)},${r.start[1].toFixed(2)}${r.d} L${b.start[0].toFixed(2)},${b.start[1].toFixed(2)}${b.d} L${l.start[0].toFixed(2)},${l.start[1].toFixed(2)}${l.d} Z`;
+    path.setAttribute('d', d);
+    p.querySelector('.plinth-edge').setAttribute('viewBox', `0 0 ${w} ${h}`);
+    p.style.clipPath = `path('${d}')`;
   }
 
   /* THE WORDS WAIT FOR THE RECORD: off while it travels, in once it is down (GREG'S DECK, above). */

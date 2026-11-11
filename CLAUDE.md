@@ -221,7 +221,9 @@ relative so the same page works there; its form only says it is a preview.
   video, the contact under the bricks (or the bio on a phone), the footer under the bio, and on a phone the bio under the
   bricks (EVERY HARD SECTION EDGE RIPPLES; a strip in the lower section's colour drawn by the script). "Can we do the
   ripple on all the section birders? Not necessarily making them angled, I just mean the subtle ripple" (Carl, 11 Nov
-  2026). The bricks' top fades instead.
+  2026). The bricks' top fades instead. The record deck's charcoal outline ripples the same way, corners square ("Add it to the record
+  deck outline too please", Carl, 11 Nov 2026): the board cut to the line and the line drawn along it (THE DECK'S OUTLINE
+  RIPPLES, `_rippleDeck` in the player).
 - The officers' second round, 11 Nov 2026 (on the live site; notes in `.officers/*/round-2026-11-11.md`). Fixed straight
   away, as plain bugs or breaks from Carl's own picks: the bio's rise measured by layout (not mid-animation) and again
   whenever the form or thank-you changes size, so a message box dragged taller no longer slides Submit under the panel
