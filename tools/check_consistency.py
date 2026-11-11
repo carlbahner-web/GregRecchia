@@ -25,7 +25,7 @@ for line_no, line in enumerate(rest.splitlines(), 1):
     if re.search(r"(?<![-\w])opacity\s*:\s*(?!1\b)", line) and not line.strip().startswith("@keyframes"):
         problems.append(f"faded: {line.strip()[:110]}")
     for m in re.finditer(r"border-radius\s*:\s*([^;}]+)", line):
-        if m.group(1).strip() != "50%": problems.append(f"a round corner (only the play button is round): {line.strip()[:110]}")
+        if m.group(1).strip() not in ("50%", "0", "0px"): problems.append(f"a round corner (only the play button is round): {line.strip()[:110]}")
     for m in re.finditer(r"(?:border(?!-radius)(?:-\w+)?|outline|box-shadow:\s*inset)\s*:?\s*(\d+px)", line):
         if m.group(1) != "0px": problems.append(f"line {m.group(1)} outside the set (var(--line), var(--line-frame)): {line.strip()[:110]}")
     for m in re.finditer(r"letter-spacing\s*:\s*([^;}]+)", line):

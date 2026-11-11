@@ -173,6 +173,14 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 main { background: var(--paper); color: var(--char); }
+/* ON A PHONE ABOUT GREG COMES BEFORE THE FORM, so his credits are read on the way to it ("Do it on phone", Carl, 11 Nov
+   2026, the officers' second round); a laptop keeps his mockup, the bio locked in under the form. And a phone's CONTACT
+   lands on the heading, not the section's top, so Submit is on screen ("Do it"). */
+@media (max-width: 760px) {
+  main { display: flex; flex-direction: column; }
+  main > .bio { order: 4; } main > .contact { order: 5; }
+  #contact { scroll-margin-top: calc(16px - clamp(72px, 12vw, 130px)); }
+}
 main h2 { color: var(--char); text-align: left; }
 /* THE HEADINGS IN CAPITALS, ready for the font Carl will set them in: "can you meak the header texts all caps? i'll be
    replacing it with that one font" (Carl, 10 Nov 2026). The thank-you's heading too. */
@@ -365,13 +373,24 @@ vinyl-player {
 .q-nav { display: flex; align-items: center; gap: var(--gap); margin-top: var(--gap-panel); }
 @media (min-width: 761px) { .q-nav { margin-left: calc((100% - var(--gap-cols)) * 5 / 12 + var(--gap-cols)); } }
 .q-nav[hidden] { display: none; }
-.q-arrow { width: 44px; height: 44px; border-radius: 50%; border: var(--line) solid var(--slate); background: none; color: var(--slate);
+.q-arrow { width: 44px; height: 44px; border-radius: 0;   /* square, as the set ("Use DRAFT 2") */ border: var(--line) solid var(--slate); background: none; color: var(--slate);
   display: grid; place-items: center; cursor: pointer; padding: 0; transition: background .2s, color .2s; }
 .q-arrow svg { width: 20px; height: 20px; }
 @media (hover: hover) { .q-arrow:hover { background: var(--slate); color: var(--paper); } }
 .q-dots { display: flex; gap: 10px; }
-.q-dots button { width: 12px; height: 12px; border-radius: 50%; border: var(--line) solid var(--slate); background: none; padding: 0; cursor: pointer; }
+.q-dots button { width: 12px; height: 12px; border-radius: 0; border: var(--line) solid var(--slate); background: none; padding: 0; cursor: pointer; }
 .q-dots button[aria-current="true"] { background: var(--slate); }
+/* THEIR SONG FROM THEIR QUOTE: an artist quoted who's on the deck gets a small button under their name that plays their
+   song where they're reading, the bar at the top showing it ("Do it", Carl, 11 Nov 2026, the officers' second round).
+   Only the song's own title on it. */
+.q-play { display: flex; align-items: center; gap: 12px; margin-top: var(--gap); padding: 0; border: 0; background: none;
+  font: 600 var(--text-small)/1 var(--head); color: var(--char); cursor: pointer; }
+.q .q-play img { width: 34px; height: 34px; aspect-ratio: 1; object-fit: cover; display: block; flex: none; }   /* not the quote photo's sizing */
+.q-play span:last-child { white-space: nowrap; }
+.q-play-i { order: -1; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--ochre); color: var(--char); display: grid; place-items: center; }
+.q-play-i svg { width: 56%; height: 56%; fill: currentColor; }
+.q-play .i-z, .q-play[aria-pressed="true"] .i-p { display: none; }
+.q-play[aria-pressed="true"] .i-z { display: inline; }
 /* LANDSCAPE, ALL OF THEM: "I'm thinking we could maybe crop the images to all be a bit landscape? The three testimonials
    I mean" (Carl, 10 Nov 2026). 3 to 2; each photo says where its subject is with --at (Mishaal's head near the top). */
 .q img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: var(--at, 50% 50%); }
@@ -407,7 +426,10 @@ vinyl-player {
   .contact-video { grid-column: 1; grid-row: 3; }
   .contact #form, .contact .thanks { grid-column: 2; grid-row: 2 / span 2; }
 }
-.contact .lede { font-size: var(--text-read); color: var(--dusty); margin: var(--gap-words) 0 0; }
+/* the words one gap under the heading, as in the other sections: this margin had come on top of the grid's own gap
+   (the officers' second round, "Use the DRAFT set", Carl, 11 Nov 2026) */
+.contact .lede { font-size: var(--text-read); color: var(--dusty); margin: 0; }
+@media (max-width: 760px) { .contact .lede { margin-top: calc(var(--gap-words) - var(--gap-panel)); } }   /* stacked: one gap, not the panel's */
 form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-words) var(--gap-panel); align-content: start; }
 form .full { grid-column: 1 / -1; }
 .field { position: relative; display: block; }
@@ -437,7 +459,7 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 /* ---------- His bio: the studio photo beside his story, on the off-white between the form and the footer ---------- */
 .bio { padding-block: clamp(72px, 12vw, 130px); }
 .bio-photo img { aspect-ratio: 3 / 2; object-position: 30% 40%; }
-.bio p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
+.bio p { font: 400 var(--text-read)/1.55 var(--body);   /* his set for reading words ("Use the DRAFT set") */ color: var(--char); margin: 0 0 var(--gap-words); }
 .bio h2 { margin-bottom: var(--gap-words); }   /* ABOUT GREG (Carl, 11 Nov 2026), in capitals and the Gelateria font like the others */
 .bio-lead p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin-bottom: 0; }
 /* NO WORD LEFT ALONE ON A LAST LINE: the bio's first paragraph ended on "it." by itself, which with its own margin on top
@@ -447,6 +469,10 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 p { text-wrap: pretty; }
 .bio-body { margin-top: var(--gap-panel); }
 .bio-body p:last-child { margin-bottom: 0; }
+/* A WAY BACK TO THE FORM where the visit ends: CONTACT after the bio's last line ("Use DRAFT 1", Carl, 11 Nov 2026). Not
+   on a phone, where the form comes straight after the bio. */
+.bio-cta { margin-top: var(--gap-panel) !important; }
+@media (max-width: 760px) { .bio-cta { display: none; } }
 /* THE REST OF THE BIO WRAPS ROUND THE PHOTO: under the heading and its first paragraph, the photo sits on the right and
    the words start at the page's left edge and run round it, the last of them full width beneath ("another super rough
    markup to show the image under the top section, then the main bio starting on the left and word wraping under the
@@ -574,6 +600,7 @@ footer a { color: var(--paper); }
           <blockquote>
             <p>Greg has been the best mixing engineer and producer I’ve worked with, as he has an incredible ability to adapt in order to fit what’s best for the song. His sheer love of music and dedication to his craft makes him a pleasure to work with! He also has a knack for great melodies.</p>
             <cite>Mishaal Tamer</cite>
+            <button class="q-play" type="button" data-track="1" aria-label="Play Painful Paradise"><img src="img/painful-paradise.webp" alt="" width="34" height="34"><span class="q-play-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-p" d="M8 5v14l11-7z"/><path class="i-z" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></span><span>Painful Paradise</span></button>
           </blockquote>
         </figure>
         <figure class="q split">
@@ -581,6 +608,7 @@ footer a { color: var(--paper); }
           <blockquote>
             <p>I’ve been honored to work with Greg for the past 10 years. He is the only engineer that I use. As my sound and style has evolved and grown over the years, Greg grew with me. … Even now as I’m recently signed, Greg is and will remain my go to guy!</p>
             <cite>Essence Natay</cite>
+            <button class="q-play" type="button" data-track="2" aria-label="Play Forgive Them"><img src="img/forgive-them.webp" alt="" width="34" height="34"><span class="q-play-i" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-p" d="M8 5v14l11-7z"/><path class="i-z" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></span><span>Forgive Them</span></button>
           </blockquote>
         </figure>
         <figure class="q split">
@@ -639,6 +667,7 @@ footer a { color: var(--paper); }
         <p>He learned guitar and a handful of other instruments completely by ear, with no theory at all. That sounds like a limitation until you work with him and realize he hears your song the same way the people streaming it will… by whether it moves him or not.</p>
         <p>That’s probably why he gets so obsessive about vocals. Harmonies, arrangement, the textures and transitions you don’t notice until somebody takes them out… the last five percent of a record is his favorite part, and it’s usually the part that changes how the whole song feels.</p>
         <p>These days he mixes out of his own studio in New Jersey for artists all over the world, and his clients talk about him like he’s in the band. He’ll give you honest feedback, he’ll stay in your corner the whole way, and he’ll care where the song ends up about as much as you do. He’s at his best with artists who have big plans and are already out there chasing them.</p>
+        <p class="bio-cta"><a class="b-btn" href="#contact">Contact</a></p>
       </div>
     </div>
   </section>
@@ -825,6 +854,25 @@ $("form").addEventListener("submit", async e => {
   // and again whenever the form or the thank-you changes size: the message box dragged taller had slid Submit under the
   // panel, out of reach (the officers' second round)
   const ro = new ResizeObserver(climb); [contact, bio, $("form"), $("thanks")].forEach(el => ro.observe(el)); wide.addEventListener("change", climb); climb();
+})();
+// Their song from their quote (THEIR SONG FROM THEIR QUOTE, in the styles): plays, or pauses if it's the one playing.
+(() => {
+  const btns = [...document.querySelectorAll(".q-play")];
+  const show = () => btns.forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.track === vp.current && vp.audio && !vp.audio.paused)));
+  btns.forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.track;
+    if (vp.current === i) return vp.audio.paused ? vp.play() : vp.pause();
+    vp.play(i);
+  }));
+  const hook = () => { if (!vp.audio) return requestAnimationFrame(hook); ["play", "pause", "ended"].forEach(e => vp.audio.addEventListener(e, show)); vp.addEventListener("trackchange", show); show(); };
+  hook();
+})();
+// A mistyped email told what to fix, in his voice ("Use DRAFT 1", Carl, 11 Nov 2026; it had been the browser's "Please
+// match the requested format.").
+(() => {
+  const em = $("f-email");
+  const check = () => em.setCustomValidity(em.validity.patternMismatch || em.validity.typeMismatch ? "Double-check your email so I can get back to you." : "");
+  em.addEventListener("input", check); $("form").querySelector("button[type=submit]").addEventListener("click", check);
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.

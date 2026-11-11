@@ -224,6 +224,14 @@ relative so the same page works there; its form only says it is a preview.
   asks for less motion; the thank-you heading in Gelateria (a later rule had undone it); the not-found page named "Greg
   Recchia // Mixer & Co-Producer"; the bar's name read out as "Greg Recchia, back to the top" and the song by its own
   words; SUBMIT's arrow drawn (Gelateria has none); every button 16 on a phone, SUBMIT too.
+  His answers to its taste questions (https://claude.ai/artifact/PfFxcgbM2wxBPnRsUNUs2z, 11 Nov 2026), all built: on a phone
+  ABOUT GREG comes before the form ("Do it on phone"; the laptop keeps his mockup) and CONTACT lands on the heading so
+  Submit is on screen; a phone on its side draws the deck small enough to fit, the covers no longer ink to ink there; a
+  CONTACT button after the bio on a laptop; a play button with the cover and title under Mishaal Tamer's and Essence
+  Natay's quotes, playing their song where they're read (THEIR SONG FROM THEIR QUOTE); a mistyped email told "Double-check
+  your email so I can get back to you."; one gap under the contact heading (a later margin had doubled it); the bio at
+  1.55 line spacing; the quotes' arrows and dots square. Kept: the song's name on the deck in Encode, not Gelateria.
+  Asked "do we need more contact CTA buttons throughout?": the bar's CONTACT is on screen everywhere after the top.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.

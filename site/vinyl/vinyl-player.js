@@ -1693,6 +1693,13 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 @container player (max-width: 720px) {
   :host([noframe]) .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* A PHONE ON ITS SIDE: the deck drawn small enough to fit the screen under the bar, keys, song name and progress line in
+   view after LISTEN ("Do it", Carl, 11 Nov 2026, the officers' second round). At this one size the covers no longer meet
+   the deck ink to ink, as he was told. */
+@media (orientation: landscape) and (max-height: 500px) {
+  :host([noframe]) .pp { grid-template-columns: minmax(0, 1fr) min(312px, 100vh - 90px); }
+  :host([noframe]) .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; }
+}
 /* THE CENTRE POST A BIT THICKER: "the center post circle a bit thicker" (Carl, 11 Nov 2026). Its ring 3 like the page's
    lines (was 2) and the post wider (4.6% of the platter, was 2.4%), so its cream still shows inside the ring. */
 .spindle { width: 4.6%; border-width: 3px; }
