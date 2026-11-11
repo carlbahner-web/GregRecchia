@@ -432,12 +432,18 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 
 /* ---------- His bio: the studio photo beside his story, on the off-white between the form and the footer ---------- */
 .bio { padding-block: clamp(72px, 12vw, 130px); }
-.bio .split { align-items: start; }
 .bio-photo img { aspect-ratio: 3 / 2; object-position: 30% 40%; }
-.bio-words p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
-.bio-words h2 { margin-bottom: var(--gap-words); }   /* ABOUT GREG (Carl, 11 Nov 2026), in capitals and the Gelateria font like the others */
-.bio-words h2 + p { font: 600 var(--text-big)/var(--lines-read) var(--head); }
-.bio-words p:last-child { margin-bottom: 0; }
+.bio p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
+.bio h2 { margin-bottom: var(--gap-words); }   /* ABOUT GREG (Carl, 11 Nov 2026), in capitals and the Gelateria font like the others */
+.bio-lead p { font: 600 var(--text-big)/var(--lines-read) var(--head); }
+.bio-body { margin-top: var(--gap-panel); }
+.bio-body p:last-child { margin-bottom: 0; }
+/* THE REST OF THE BIO WRAPS ROUND THE PHOTO: under the heading and its first paragraph, the photo sits on the right and
+   the words start at the page's left edge and run round it, the last of them full width beneath ("another super rough
+   markup to show the image under the top section, then the main bio starting on the left and word wraping under the
+   image", Carl, 11 Nov 2026). Its frame stays 64 from the words beside it and 40 from those under it. */
+.bio-body .bio-photo { float: right; width: calc((100% - var(--gap-cols)) * 5 / 12 - 44px); margin: 22px 22px 62px 86px; }
+.bio-body::after { content: ""; display: block; clear: both; }
 /* THE BIO LOCKS INTO THE CONTACT SECTION (a laptop): its off-white rises into the charcoal on the right, under the form,
    while the charcoal carries on down the left round Greg's video; the studio photo starts below where the charcoal ends
    ("is something like this crazy? i just did a super rough cutup job in photoshop", Carl, 11 Nov 2026, with the mockup).
@@ -455,17 +461,18 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
   .bio > .wrap { position: relative; z-index: 1; }
   /* THE WORDS 64 IN FROM THE PANEL'S EDGE, as they are from its top ("see how the bio text is too close on the left?",
      Carl, 11 Nov 2026): the edge stands half the column gap left of the words' column, so they step in the rest. */
-  .bio-words { padding-left: calc(64px - var(--gap-cols) / 2); }
+  .bio-grid { display: grid; grid-template-columns: var(--cols); column-gap: var(--gap-cols); }
+  .bio-lead { grid-column: 2; padding-left: calc(64px - var(--gap-cols) / 2); min-height: calc(var(--rise, 0px) - 64px); }
+  .bio-body { grid-column: 1 / -1; margin-top: 64px; }   /* 64 under the charcoal's foot, or under the lead if it runs longer */
   /* THE STUDIO PHOTO LANDSCAPE, whole, 64 under the charcoal: "can we make the bottom photo landscape since we have more
      space to fill and that photo is landscape anyway" (Carl, 11 Nov 2026). It had been cropped tall to fill the column. */
-  .bio .bio-photo { margin-top: calc(var(--rise, 0px) + 22px); align-self: start; }
   /* ONE GAP ROUND THE CUT, 64: Submit to the panel, the panel's top to its words, the video's frame to where the charcoal
      ends, and that to the studio photo's frame; the photo's frame ends level with the bio's last line ("yeah do it",
      Carl, 11 Nov 2026, of 96, 64, 90 and 42 made one, and the 184 under the photo taken out). */
   .contact { padding-bottom: 64px; }
 }
 @media (max-width: 760px) { .bio-edge { display: none; } }
-@media (max-width: 760px) { .bio .bio-photo { margin-inline: auto; width: min(340px, 100% - 44px); max-width: none; } }
+@media (max-width: 760px) { .bio .bio-body .bio-photo { float: none; margin: 22px auto var(--gap-panel); width: min(340px, 100% - 44px); } }
 
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
 footer .inner { width: min(var(--wrap), 100%); margin-inline: auto; display: flex; align-items: center; justify-content: space-between;
@@ -608,11 +615,13 @@ footer a { color: var(--paper); }
        and "the studio photo" (Carl, 11 Nov 2026). -->
   <section class="bio" id="bio" aria-labelledby="bio-h">
     <svg class="bio-edge" id="bio-edge" aria-hidden="true"><path fill="currentColor"/></svg>
-    <div class="wrap split">
-      <figure class="portrait bio-photo"><img src="img/greg-studio.webp" width="1400" height="994" alt="Greg at the console in the studio" loading="lazy"></figure>
-      <div class="bio-words">
+    <div class="wrap bio-grid">
+      <div class="bio-lead">
         <h2 id="bio-h">About Greg</h2>
         <p>Greg Recchia has spent over twenty years chasing the same thing… whatever it is that makes a song special, and making sure the listener can’t ignore it.</p>
+      </div>
+      <div class="bio-body">
+        <figure class="portrait bio-photo"><img src="img/greg-studio.webp" width="1400" height="994" alt="Greg at the console in the studio" loading="lazy"></figure>
         <p>He came up the old-school way: audio engineering at SAE in New York City, then years in real rooms like Eastside Sound, Studio Crash in Philly and Water Music in Hoboken. Along the way he got to work on projects with Masego, Nile Rodgers, Pino Palladino, Idris Elba, and a bunch more.</p>
         <p>He learned guitar and a handful of other instruments completely by ear, with no theory at all. That sounds like a limitation until you work with him and realize he hears your song the same way the people streaming it will… by whether it moves him or not.</p>
         <p>That’s probably why he gets so obsessive about vocals. Harmonies, arrangement, the textures and transitions you don’t notice until somebody takes them out… the last five percent of a record is his favorite part, and it’s usually the part that changes how the whole song feels.</p>
@@ -772,8 +781,8 @@ $("form").addEventListener("submit", async e => {
   /* THE EDGE, ONE RIPPLING LINE (in the styles): the step's middle line, sampled every 6px, each point nudged across the
      line by three slow uneven waves (2.2px at most), then joined as one smooth curve. */
   const drawEdge = rise => {
-    const svg = $("bio-edge"), W = bio.clientWidth, words = bio.querySelector(".bio-words").getBoundingClientRect();
-    const gap = parseFloat(getComputedStyle(bio.querySelector(".split")).columnGap) || 0;
+    const svg = $("bio-edge"), W = bio.clientWidth, words = bio.querySelector(".bio-lead").getBoundingClientRect();
+    const gap = parseFloat(getComputedStyle(bio.querySelector(".bio-grid")).columnGap) || 0;
     const x0 = words.left - bio.getBoundingClientRect().left - gap / 2, r = 48, A = 3, top = A, foot = rise - A;
     if (rise < 2 * r + 2 * A) { svg.querySelector("path").setAttribute("d", ""); return; }
     const pts = [], add = (x, y) => pts.push([x, y]);
