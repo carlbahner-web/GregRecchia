@@ -1667,6 +1667,8 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
                 overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sleeve[data-state="deck"] .sleeve-art::before { content: "NOW PLAYING"; }
 :host([noframe]) .pp { padding: 0; }
+:host .np-title[data-idle], :host([data-art~="plinth"]) .np-title[data-idle] { font-family: 'Portofino Gelateria Caps', var(--pp-font); font-weight: 400; letter-spacing: 0;
+  white-space: nowrap; overflow: visible; text-overflow: clip; }
 .sleeve { padding: 0; }   /* the room it kept was for a boiling outline, which Greg's page doesn't draw */
 /* THE PAGE'S COLUMNS: side by side, the covers and the deck take the page's own pair (--cols and --gap-cols, set on
    Greg's page), so the deck starts where the intro's words, the quote and the form do ("so the columns still don't
@@ -1887,6 +1889,7 @@ class VinylPlayer extends HTMLElement {
     if (!this._built) this._build();
     // the deck's words re-fit when the deck changes size (GREG'S DECK, _fitWords)
     if (!this._fitRO) { this._fitRO = new ResizeObserver(() => this._fitWords()); this._fitRO.observe(this); }
+    document.fonts?.ready.then(() => this._fitWords());   // measured again once the headings' font is in
 
     // Tracks may arrive from an attribute, an inline JSON block, or the
     // property setter having run before upgrade. Handle all three.
@@ -1958,7 +1961,7 @@ class VinylPlayer extends HTMLElement {
                 <button id="stopBtn" title="Stop" aria-label="Stop" disabled>${ICONS.stop}</button>
               </div>
               <div class="np">
-                <p class="np-title" id="npTitle">${escapeHTML(this.getAttribute('idle') || 'Choose a record')}</p>
+                <p class="np-title" id="npTitle" data-idle>${escapeHTML(this.getAttribute('idle') || 'Choose a record')}</p>
                 <!-- The idle attribute sets these words (Greg's page: "Hear for yourself", Carl, 10 Nov 2026).
                      Empty at rest on purpose. "Pick a sleeve to drop the needle"
                      under a title already reading "Choose a record" said the same
@@ -2216,6 +2219,18 @@ class VinylPlayer extends HTMLElement {
       let fs = parseFloat(getComputedStyle(el).fontSize);
       const floor = fs * 0.6;
       while (el.scrollWidth > el.clientWidth + 1 && fs > floor) { fs *= 0.94; el.style.fontSize = fs + 'px'; }
+    }
+    /* HEAR FOR YOURSELF ENDS WHERE THE PROGRESS LINE ENDS: the waiting words, in the headings' font, are sized so their last
+       letter sits over the progress line's right end, at any size ("can we make the HEAR FOR YOURSELF use the new header
+       font, and size it so it's right-aligned with the right end of the play bar?", Carl, 11 Nov 2026). */
+    const tt = this.el.npTitle;
+    if (tt && tt.dataset.idle !== undefined) {
+      const track = this.shadowRoot.querySelector('.scrub-track');
+      const range = document.createRange(); range.selectNodeContents(tt);
+      const ink = range.getBoundingClientRect(), end = track?.getBoundingClientRect().right;
+      if (ink.width > 0 && end > ink.left) {
+        tt.style.fontSize = (parseFloat(getComputedStyle(tt).fontSize) * (end - ink.left) / ink.width) + 'px';
+      }
     }
     /* THE ARTIST NEVER OUTGROWS THE SONG: each line shrank on its own, so a long title ended up smaller than the artist
        under it. The artist stays at most three quarters of the title, the two lines' ratio on Carl's deck (5.6 to 4.2). */
@@ -2793,6 +2808,7 @@ class VinylPlayer extends HTMLElement {
 
   _updateNowPlaying(track) {
     this.el.npTitle.textContent = track.title;
+    delete this.el.npTitle.dataset.idle;   // HEAR FOR YOURSELF gives way to the song (below)
     // the artist alone under the title, as on Carl's deck (GREG'S DECK, above)
     this.el.npMeta.textContent = this.hasAttribute('data-art') ? (track.artist || '')
       : [track.artist, track.role, track.year].filter(Boolean).join(' · ') || 'On the deck';

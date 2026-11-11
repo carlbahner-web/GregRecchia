@@ -101,7 +101,7 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Buttons: his slab CONTACT button, made a real button. */
-.btn { display: inline-block; font: 400 var(--text-name)/1 var(--slab); letter-spacing: var(--caps-slab); text-transform: uppercase; text-decoration: none;
+.btn { display: inline-block; font: 400 var(--text-name)/1 'Portofino Gelateria Caps', var(--slab); letter-spacing: var(--caps-slab); text-transform: uppercase; text-decoration: none;
   padding: 16px 30px; border: var(--line) solid currentColor; color: var(--butter); background: transparent; cursor: pointer;
   transition: background .15s, color .15s; }
 .btn:hover, .btn:focus-visible { background: var(--butter); color: var(--black); }
@@ -179,7 +179,9 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .contact :focus-visible, footer :focus-visible { outline-color: var(--ochre); }
 
 /* Buttons in the body: his slab type, square, slate. (The hero keeps its own.) */
-.b-btn { display: inline-flex; align-items: center; gap: 10px; font: 400 var(--text-name)/1 var(--slab);
+/* THE BUTTONS IN THE GELATERIA FONT too: "oh and the buttons should use galeteria too" (Carl, 11 Nov 2026), the slab
+   kept behind it should the font not load. */
+.b-btn { display: inline-flex; align-items: center; gap: 10px; font: 400 var(--text-name)/1 'Portofino Gelateria Caps', var(--slab);
   letter-spacing: var(--caps-slab); text-transform: uppercase; text-decoration: none; padding: 16px 30px; border: 0;
   background: var(--slate); color: var(--paper); cursor: pointer; transition: background .2s, transform .2s var(--ease); }
 .b-btn:hover { background: var(--char); }
@@ -370,13 +372,31 @@ vinyl-player {
 /* THE SAME OFFSET FRAME BEHIND IT AS BEHIND GREG'S PORTRAIT: "can we put the little box layer thing behind the quote photos
    too?" (Carl, 10 Nov 2026). The photo sits in a .portrait like his video. */
 .q .portrait img { display: block; }
-.q blockquote::before { content: "\201C"; display: block; font: 400 var(--text-mark)/.7 var(--slab); color: var(--ochre); height: 56px; }
+/* THE QUOTE MARK WHOLE, in the headings' font: it was the slab's mark in a 56-high box at .7 line spacing, which cut
+   the bottom of it off ("the quotation marks used at the top of the testimonials look cutoff or weird", Carl, 11 Nov
+   2026). Its own height now, its ink's foot 10 above the quote's first line. */
+.q blockquote::before { content: "\201C"; display: block; font: 400 var(--text-mark)/1 'Portofino Gelateria Caps', var(--slab);
+  color: var(--ochre); height: .5em; margin-bottom: 10px; }
 .q blockquote p { font: 600 var(--text-big)/var(--lines-read) var(--head); color: var(--char); margin: 0 0 var(--gap-panel); }
 .q cite { font: 400 var(--text-read)/1 var(--slab); font-style: normal; letter-spacing: var(--caps-slab); color: var(--slate); }
 
 /* ---------- Let's make it happen: the page closes in charcoal ---------- */
 .contact { background: var(--char); color: var(--paper); padding-block: clamp(72px, 12vw, 130px) clamp(48px, 8vw, 90px); }
 .contact h2 { color: var(--paper); }
+/* LET'S MAKE IT HAPPEN ON ONE ROW: "can we make "let's make it happen" one row?" (Carl, 11 Nov 2026). In the narrow left
+   column it would have had to shrink to half the other headings' size, so it runs across both columns, above the words,
+   video and form, at the headings' size; where even the page is too narrow (a phone) it shrinks to fit, 13.2 times as
+   wide as its size. */
+.contact .wrap { container-type: inline-size; }
+.contact h2 { white-space: nowrap; font-size: min(var(--text-heading), 100cqi / 13.3); }
+@media (min-width: 761px) {
+  .contact .split { align-items: start; row-gap: var(--gap-words); }
+  .contact .split > div:first-child { display: contents; }
+  .contact h2 { grid-column: 1 / -1; }
+  .contact .lede { grid-column: 1; grid-row: 2; margin-top: 0; }
+  .contact-video { grid-column: 1; grid-row: 3; }
+  .contact #form, .contact .thanks { grid-column: 2; grid-row: 2 / span 2; }
+}
 .contact .lede { font-size: var(--text-read); color: var(--dusty); margin: var(--gap-words) 0 0; }
 form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-words) var(--gap-panel); align-content: start; }
 form .full { grid-column: 1 / -1; }

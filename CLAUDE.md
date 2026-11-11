@@ -21,6 +21,12 @@ relative so the same page works there; its form only says it is a preview.
   11 Nov 2026), shown it beside the traced FBS Funegral. Each sized to the width the traced name had (`.wordmark`,
   `.tb-name`, `--text-name-bar`, `--text-name-foot`). So Greg needs no Funegral licence; what follows is how it was.
   The picture a shared link shows (`img/share.jpg`) still has the traced name.
+- More of it in the Gelateria font (Carl, 11 Nov 2026): every button ("oh and the buttons should use galeteria too"),
+  the quotes' opening mark (drawn whole; the slab's was cut off in a box too short: "look cutoff or weird"), and the deck's
+  HEAR FOR YOURSELF, sized each time so its last letter ends over the progress line's right end ("size it so it's
+  right-aligned with the right end of the play bar", `data-idle` on the title, HEAR FOR YOURSELF ENDS WHERE THE PROGRESS
+  LINE ENDS in the player). LET'S MAKE IT HAPPEN is one row across the page above the contact's words, video and form,
+  shrinking to fit on a phone ("can we make "let's make it happen" one row?").
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
   GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
   sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
