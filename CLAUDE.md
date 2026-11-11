@@ -6,8 +6,8 @@ Carl, 10 Nov 2026: "something more like a one pager rather than an elaborate thr
 
 No framework, no build step. Netlify publishes `site/` (`netlify.toml`).
 
-`main` is what Netlify publishes, made from the work branch on Carl's "Yeah make a main" (11 Nov 2026); work goes on
-`claude/affectionate-turing-dzaj9w` and reaches `main` when Carl says. Until it is on Netlify, Carl sees it at https://claude.ai/artifact/XA2wrXqQrUkxmvVJyUHMHd (private to him), built by
+`main` is what Netlify publishes (https://gregrecchia.netlify.app), and all work goes straight onto it: "Yeah lets only
+work on main now" (Carl, 11 Nov 2026). Every push to `main` goes live. Until it is on Netlify, Carl sees it at https://claude.ai/artifact/XA2wrXqQrUkxmvVJyUHMHd (private to him), built by
 `python3 tools/build_preview.py <dir>` and published with its `img/`, `audio/` and `video/` beside it. The site's paths are
 relative so the same page works there; its form only says it is a preview.
 
