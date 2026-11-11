@@ -20,7 +20,8 @@ relative so the same page works there; its form only says it is a preview.
   circle-and-arcs mark kept beside it: "change the top and the footer, but keep the little icon logo thing we made" (Carl,
   11 Nov 2026), shown it beside the traced FBS Funegral. Each sized to the width the traced name had (`.wordmark`,
   `.tb-name`, `--text-name-bar`, `--text-name-foot`). So Greg needs no Funegral licence; what follows is how it was.
-  The picture a shared link shows (`img/share.jpg`) still has the traced name.
+  The picture a shared link shows (`img/share.jpg`, `?v=2` so apps fetch it afresh) has it too since 11 Nov 2026 ("make that
+  updated link preview pic", Carl): the hero's mark, name and MIXER & CO-PRODUCER over the console clip.
 - More of it in the Gelateria font (Carl, 11 Nov 2026): every button ("oh and the buttons should use galeteria too"),
   the quotes' opening mark (drawn whole; the slab's was cut off in a box too short: "look cutoff or weird"), and the deck's
   HEAR FOR YOURSELF, sized each time so its last letter ends over the progress line's right end ("size it so it's
