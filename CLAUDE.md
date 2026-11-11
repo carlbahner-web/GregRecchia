@@ -48,7 +48,9 @@ relative so the same page works there; its form only says it is a preview.
   maybe right-align it?" (Carl, 10 Nov 2026).
 - His mark, a circle with two arcs, flipped: "Can we flip this horizontally and use it to replace the old waveform
   logo?" (Carl, 10 Nov 2026). Traced into `img/mark.svg` and painted as a mask like the wordmark: white in the hero,
-  cream in the footer, butter as the tab icon (`img/favicon.svg`). The old headphone-and-waveform logo is gone from
+  cream in the footer, and the tab icon: off-white on a charcoal square (`img/favicon.svg`, `favicon-32.png`,
+  `apple-touch-icon.png`, `icon-512.png`), so it shows on light and dark tab bars ("can we make his little icon the page
+  favicon", Carl, 11 Nov 2026; it had been butter on nothing). The old headphone-and-waveform logo is gone from
   the site. `img/share.jpg`, the picture a shared link shows, is the hero's mark and name over the console clip.
 - The body below the hero, redesigned: "can you re think the design of the main body entirely? Leave the hero section
   unchanged for the moment but show off your modern web dev chops" (Carl, 10 Nov 2026). Colours from a picture he sent
