@@ -468,6 +468,10 @@ p { text-wrap: pretty; }
      Carl, 11 Nov 2026): the edge stands half the column gap left of the words' column, so they step in the rest. */
   .bio-grid { display: grid; grid-template-columns: var(--cols); column-gap: var(--gap-cols); }
   .bio-lead { grid-column: 2; padding-left: calc(64px - var(--gap-cols) / 2); min-height: calc(var(--rise, 0px) - 64px); }
+  /* THE FORM IN LINE WITH THE BIO: it steps in as far as the bio's words do, so the form's boxes, Submit, ABOUT GREG and
+     the bio's first lines all start on one line ("can we move the contact form to the right so it's in alignment with the
+     bio section?", Carl, 11 Nov 2026, with a line drawn down from EMAIL to the bio). */
+  .contact #form, .contact .thanks { margin-left: calc(64px - var(--gap-cols) / 2); }
   .bio-body { grid-column: 1 / -1; margin-top: 64px; }   /* 64 under the charcoal's foot, or under the lead if it runs longer */
   /* THE STUDIO PHOTO LANDSCAPE, whole, 64 under the charcoal: "can we make the bottom photo landscape since we have more
      space to fill and that photo is landscape anyway" (Carl, 11 Nov 2026). It had been cropped tall to fill the column. */

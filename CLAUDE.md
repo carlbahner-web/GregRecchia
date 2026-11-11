@@ -197,7 +197,8 @@ relative so the same page works there; its form only says it is a preview.
   "…"), the first in the intro's larger type; beside it Greg at the console with the lava lamp (`img/greg-studio.webp`,
   landscape 3:2, the two frames), on the off-white page, in the page's two columns. Its heading ABOUT GREG (Carl, 11
   Nov 2026). On a laptop its words stand 64 in from the panel's edge, as from its top ("see how the bio text is too close
-  on the left?").
+  on the left?"). The contact form steps in by the same amount, so its boxes and Submit start on the bio's line ("can we
+  move the contact form to the right so it's in alignment with the bio section?", Carl, 11 Nov 2026).
   On a laptop it locks into the contact section, from Carl's Photoshop mockup ("is something like this crazy?", 11 Nov
   2026): its off-white climbs into the charcoal on the right, 96 under the form, the charcoal carrying on down the left
   round the video, the studio photo starting below it (`--rise`, measured by the script; THE BIO LOCKS INTO THE CONTACT
