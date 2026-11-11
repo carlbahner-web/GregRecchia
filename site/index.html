@@ -22,6 +22,8 @@
 @font-face { font-family: 'Krub'; font-weight: 400; font-display: swap; src: url(fonts/Krub-400.woff2) format('woff2'); }
 @font-face { font-family: 'Krub'; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/Krub-400i.woff2) format('woff2'); }
 @font-face { font-family: 'Krub'; font-weight: 600; font-display: swap; src: url(fonts/Krub-600.woff2) format('woff2'); }
+/* The headings' font, Portofino Gelateria Caps, with the webfont licence Carl bought for it (11 Nov 2026). */
+@font-face { font-family: 'Portofino Gelateria Caps'; font-weight: 400; font-display: swap; src: url(fonts/PortofinoGelateria-Caps.woff2) format('woff2'); }
 @font-face { font-family: 'Alfa Slab One'; font-weight: 400; font-display: swap; src: url(fonts/AlfaSlabOne-400.woff2) format('woff2'); }
 
 /* His colours, read off his Squarespace page: black, the wood, butter-cream type, and the five tinted cards. */
@@ -164,6 +166,9 @@ main h2 { color: var(--char); text-align: left; }
 /* THE HEADINGS IN CAPITALS, ready for the font Carl will set them in: "can you meak the header texts all caps? i'll be
    replacing it with that one font" (Carl, 10 Nov 2026). The thank-you's heading too. */
 main h2, .thanks h3 { text-transform: uppercase; }
+/* THE HEADINGS IN HIS FONT: "i just bought a webfont license for this font" (Carl, 11 Nov 2026), the font the capitals
+   were waiting for. It has one weight, so it isn't thickened. */
+main h2, .thanks h3 { font-family: 'Portofino Gelateria Caps', var(--head); font-weight: 400; }
 main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .contact :focus-visible, footer :focus-visible { outline-color: var(--ochre); }
 
