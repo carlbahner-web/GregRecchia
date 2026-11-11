@@ -152,6 +152,9 @@ relative so the same page works there; its form only says it is a preview.
 - The record is neutral black (#222 at its middle tone), its rings neutral grey: "Yeah neutral black record" (Carl, 11 Nov
   2026), asked whether it should be the page's charcoal, which leans blue-green. The one colour outside his set, on purpose
   (`tools/vinyl_art.py`, A NEUTRAL BLACK RECORD).
+- Every framed picture (Greg's photo, the quotes' photos, the contact video) has two offset frames, one down and right and
+  one equal and opposite, up and left: "The box behind him that's diagonally southeast of him... can we add another that is
+  equal and opposite? Northwest" (Carl, 11 Nov 2026). The pictures sit 22 in from every side to leave them room.
 - Each video plays while it's on screen and pauses off it; one coming into view for the first time goes back to its first
   frame (its poster) and plays from there. The one by the contact form had played from page open, off screen, and jumped
   as it came in: "The video by the contact form" (Carl, 10 Nov 2026, of the glitch he saw "right on load"). Both keep

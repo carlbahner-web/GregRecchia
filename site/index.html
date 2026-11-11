@@ -247,7 +247,7 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
 /* ---------- Hi, I'm Greg Recchia: Greg in the live room beside his words ---------- */
 .intro { padding-block: clamp(72px, 12vw, 130px); }
 .split { display: grid; grid-template-columns: var(--cols); gap: var(--gap-cols); align-items: center; }
-.portrait { margin: 0 22px 22px 0; position: relative; isolation: isolate; }  /* the margin is the offset frame's room, inside the column */
+.portrait { margin: 22px; position: relative; isolation: isolate; }  /* the margin is the offset frames' room, inside the column */
 .portrait video, .portrait > img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: var(--at, 50% 50%); background: var(--paper-deep); }
 /* HIS PHOTO BY "HI, I'M GREG", HIS VIDEO BY THE FORM: "Could it be used in the hi in Greg section and then move that video
    down to the contact section?" (Carl, 10 Nov 2026, of a new photo of Greg against a white brick wall). Under the
@@ -264,7 +264,11 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
   .contact .split { row-gap: var(--gap-panel); }
   .contact .lede { margin-top: calc(var(--gap-words) - var(--gap-panel)); }
 }
-.portrait::after { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
+.portrait::after, .portrait::before { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
+/* AND ONE EQUAL AND OPPOSITE, up and to the left: "The box behind him that's diagonally southeast of him... can we add
+   another that is equal and opposite? Northwest" (Carl, 11 Nov 2026). On every framed picture, his, the quotes' and the
+   video's, as they share the one frame. */
+.portrait::before { inset: -22px 22px 22px -22px; }
 .intro h2 { margin-bottom: var(--gap-words); }  /* a heading with words under it (the officers' round, 10 Nov 2026) */
 .intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin: 0 0 var(--gap-words); color: var(--char); }
 .intro p.goal { color: var(--slate); margin: 0; }
