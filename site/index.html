@@ -445,17 +445,13 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 @media (min-width: 761px) {
   .bio { --split: calc((100% - min(var(--wrap), 100% - 32px)) / 2 + (min(var(--wrap), 100% - 32px) - var(--gap-cols)) * 5 / 12 + var(--gap-cols) / 2);
     position: relative; z-index: 1; margin-top: calc(-1 * var(--rise, 0px)); padding-top: 64px; background:
-      linear-gradient(var(--paper), var(--paper)) right top / calc(100% - var(--split)) calc(var(--rise, 0px) + 1px) no-repeat,
       linear-gradient(var(--paper), var(--paper)) left bottom / 100% calc(100% - var(--rise, 0px)) no-repeat; }
-  /* ROUNDED CORNERS WITH A LITTLE RIPPLE where the charcoal and the bio meet, both of them: "can you give a little bit of
-     uneven ripple to the rounded lcorners? just subtle so it feels more like the icon and header font" (Carl, 11 Nov
-     2026, having picked rounded over square and diagonal). Each a quarter circle 48 across whose edge wanders by up to
-     about 1 in uneven waves, painted through a drawn shape (made by a few lines of Python, in the commit). */
-  .bio::before, .bio::after { content: ""; position: absolute; width: 48px; height: 48px; pointer-events: none;
-    -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
-  .bio::before { left: var(--split); top: 0; background: var(--char); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M0,0 L48,0 L48.00,-1.05 L46.07,-0.99 L44.16,-0.73 L42.27,-0.37 L40.40,0.01 L38.53,0.39 L36.67,0.80 L34.83,1.31 L33.05,1.98 L31.32,2.80 L29.65,3.69 L27.98,4.57 L26.29,5.39 L24.56,6.15 L22.82,6.92 L21.14,7.80 L19.57,8.87 L18.17,10.15 L16.91,11.60 L15.74,13.11 L14.60,14.60 L13.42,16.03 L12.20,17.42 L10.99,18.82 L9.83,20.27 L8.77,21.79 L7.79,23.36 L6.82,24.94 L5.80,26.50 L4.71,28.04 L3.57,29.60 L2.50,31.21 L1.60,32.92 L0.96,34.73 L0.57,36.61 L0.37,38.53 L0.24,40.44 L0.09,42.33 L-0.11,44.21 L-0.32,46.10 L-0.45,48.00 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M0,0 L48,0 L48.00,-1.05 L46.07,-0.99 L44.16,-0.73 L42.27,-0.37 L40.40,0.01 L38.53,0.39 L36.67,0.80 L34.83,1.31 L33.05,1.98 L31.32,2.80 L29.65,3.69 L27.98,4.57 L26.29,5.39 L24.56,6.15 L22.82,6.92 L21.14,7.80 L19.57,8.87 L18.17,10.15 L16.91,11.60 L15.74,13.11 L14.60,14.60 L13.42,16.03 L12.20,17.42 L10.99,18.82 L9.83,20.27 L8.77,21.79 L7.79,23.36 L6.82,24.94 L5.80,26.50 L4.71,28.04 L3.57,29.60 L2.50,31.21 L1.60,32.92 L0.96,34.73 L0.57,36.61 L0.37,38.53 L0.24,40.44 L0.09,42.33 L-0.11,44.21 L-0.32,46.10 L-0.45,48.00 Z'/%3E%3C/svg%3E"); }
-  .bio::after { left: calc(var(--split) - 48px); top: calc(var(--rise, 0px) - 48px); background: var(--paper);
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M48,0 L48,48 L0,48 L0.00,48.26 L1.89,48.14 L3.77,47.87 L5.62,47.48 L7.45,47.05 L9.28,46.66 L11.12,46.34 L12.99,46.05 L14.85,45.69 L16.66,45.16 L18.39,44.39 L20.01,43.41 L21.55,42.29 L23.05,41.15 L24.56,40.08 L26.12,39.09 L27.70,38.13 L29.28,37.14 L30.80,36.06 L32.24,34.88 L33.64,33.64 L35.03,32.39 L36.47,31.15 L37.95,29.92 L39.41,28.63 L40.75,27.23 L41.89,25.67 L42.79,23.96 L43.47,22.15 L44.04,20.30 L44.59,18.47 L45.20,16.68 L45.86,14.90 L46.49,13.11 L47.03,11.29 L47.40,9.43 L47.63,7.54 L47.78,5.66 L47.91,3.77 L48.07,1.89 L48.21,0.00 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M48,0 L48,48 L0,48 L0.00,48.26 L1.89,48.14 L3.77,47.87 L5.62,47.48 L7.45,47.05 L9.28,46.66 L11.12,46.34 L12.99,46.05 L14.85,45.69 L16.66,45.16 L18.39,44.39 L20.01,43.41 L21.55,42.29 L23.05,41.15 L24.56,40.08 L26.12,39.09 L27.70,38.13 L29.28,37.14 L30.80,36.06 L32.24,34.88 L33.64,33.64 L35.03,32.39 L36.47,31.15 L37.95,29.92 L39.41,28.63 L40.75,27.23 L41.89,25.67 L42.79,23.96 L43.47,22.15 L44.04,20.30 L44.59,18.47 L45.20,16.68 L45.86,14.90 L46.49,13.11 L47.03,11.29 L47.40,9.43 L47.63,7.54 L47.78,5.66 L47.91,3.77 L48.07,1.89 L48.21,0.00 Z'/%3E%3C/svg%3E"); }
+  /* THE EDGE, ONE RIPPLING LINE: the off-white above the bio's foot is drawn as one shape whose edge (along under the
+     form, round the corner, down beside the video, round again and along under it) is a single smooth curve wandering
+     a couple of pixels in slow uneven waves, rounded corners and all ("it still has too many elbows" / "it should happen
+     on the entirety of the line not just the corners", Carl, 11 Nov 2026). Drawn by the script to the page's size. */
+  .bio-edge { display: block; color: var(--paper); position: absolute; left: 0; top: 0; width: 100%; height: calc(var(--rise, 0px) + 2px); z-index: 0; pointer-events: none; }
+  .bio > .wrap { position: relative; z-index: 1; }
   .bio .bio-photo { margin-top: calc(var(--rise, 0px) + 22px); align-self: stretch; }
   /* the studio photo fills the column from 64 under the charcoal to the bio's last line, cropped round Greg, so neither
      end leaves a gap */
@@ -465,6 +461,7 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
      Carl, 11 Nov 2026, of 96, 64, 90 and 42 made one, and the 184 under the photo taken out). */
   .contact { padding-bottom: 64px; }
 }
+@media (max-width: 760px) { .bio-edge { display: none; } }
 @media (max-width: 760px) { .bio .bio-photo { margin-inline: auto; width: min(340px, 100% - 44px); max-width: none; } }
 
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
@@ -607,6 +604,7 @@ footer a { color: var(--paper); }
   <!-- HIS BIO, after the contact form: "i want to add a bio section at the bottom after the contact form", then the words
        and "the studio photo" (Carl, 11 Nov 2026). -->
   <section class="bio" id="bio" aria-label="About Greg">
+    <svg class="bio-edge" id="bio-edge" aria-hidden="true"><path fill="currentColor"/></svg>
     <div class="wrap split">
       <figure class="portrait bio-photo"><img src="img/greg-studio.webp" width="1400" height="994" alt="Greg at the console in the studio" loading="lazy"></figure>
       <div class="bio-words">
@@ -763,9 +761,39 @@ $("form").addEventListener("submit", async e => {
     if (!wide.matches) return bio.style.removeProperty("--rise");
     bio.style.setProperty("--rise", "0px");
     const end = (($("form").hidden ? $("thanks") : $("form")).getBoundingClientRect().bottom);
-    bio.style.setProperty("--rise", Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 64)) + "px");
+    const rise = Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 64));
+    bio.style.setProperty("--rise", rise + "px");
+    drawEdge(rise);
   };
-  new ResizeObserver(climb).observe(contact); wide.addEventListener("change", climb); climb();
+  /* THE EDGE, ONE RIPPLING LINE (in the styles): the step's middle line, sampled every 6px, each point nudged across the
+     line by three slow uneven waves (2.2px at most), then joined as one smooth curve. */
+  const drawEdge = rise => {
+    const svg = $("bio-edge"), W = bio.clientWidth, words = bio.querySelector(".bio-words").getBoundingClientRect();
+    const gap = parseFloat(getComputedStyle(bio.querySelector(".split")).columnGap) || 0;
+    const x0 = words.left - bio.getBoundingClientRect().left - gap / 2, r = 48, A = 3, top = A, foot = rise - A;
+    if (rise < 2 * r + 2 * A) { svg.querySelector("path").setAttribute("d", ""); return; }
+    const pts = [], add = (x, y) => pts.push([x, y]);
+    for (let x = W + 12; x > x0 + r; x -= 6) add(x, top);
+    for (let a = 270; a >= 180; a -= 4) add(x0 + r + r * Math.cos(a * Math.PI / 180), top + r + r * Math.sin(a * Math.PI / 180));
+    for (let y = top + r; y < foot - r; y += 6) add(x0, y);
+    for (let a = 0; a <= 90; a += 4) add(x0 - r + r * Math.cos(a * Math.PI / 180), foot - r + r * Math.sin(a * Math.PI / 180));
+    for (let x = x0 - r; x > -12; x -= 6) add(x, foot);
+    let len = 0; const out = pts.map((p, i) => {
+      const q = pts[Math.min(i + 1, pts.length - 1)], o = pts[Math.max(i - 1, 0)], dx = q[0] - o[0], dy = q[1] - o[1], d = Math.hypot(dx, dy) || 1;
+      if (i) len += Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]);
+      const n = 2.2 * (.55 * Math.sin(len / 53 + 1.1) + .3 * Math.sin(len / 23 + 2.7) + .15 * Math.sin(len / 11 + .4));
+      return [p[0] - dy / d * n, p[1] + dx / d * n];
+    });
+    let d = `M${out[0][0].toFixed(1)},${out[0][1].toFixed(1)}`;
+    for (let i = 0; i < out.length - 1; i++) {   // a smooth curve through every point, no corners between them
+      const a = out[Math.max(i - 1, 0)], b = out[i], c = out[i + 1], e = out[Math.min(i + 2, out.length - 1)];
+      d += ` C${(b[0] + (c[0] - a[0]) / 6).toFixed(1)},${(b[1] + (c[1] - a[1]) / 6).toFixed(1)} ${(c[0] - (e[0] - b[0]) / 6).toFixed(1)},${(c[1] - (e[1] - b[1]) / 6).toFixed(1)} ${c[0].toFixed(1)},${c[1].toFixed(1)}`;
+    }
+    d += ` L-12,${rise + 4} L${W + 12},${rise + 4} Z`;
+    svg.setAttribute("viewBox", `0 0 ${W} ${rise + 2}`);
+    svg.querySelector("path").setAttribute("d", d);
+  };
+  new ResizeObserver(climb).observe(contact); new ResizeObserver(climb).observe(bio); wide.addEventListener("change", climb); climb();
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.

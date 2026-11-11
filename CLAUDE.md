@@ -201,10 +201,12 @@ relative so the same page works there; its form only says it is a preview.
   round the video, the studio photo starting below it (`--rise`, measured by the script; THE BIO LOCKS INTO THE CONTACT
   SECTION). A phone stacks them as before. Round the cut one gap, 64: Submit to the panel, the panel to its words, the video's frame
   to the charcoal's end, that to the studio photo, which fills its column down to the bio's last line ("yeah do it", Carl,
-  11 Nov 2026). Its two corners where the charcoal and the off-white meet are rounded, 48 across, their edges wandering
-  in small uneven waves like his mark and the Gelateria letters: rounded picked over square and diagonal, then "can you give
-  a little bit of uneven ripple to the rounded lcorners? just subtle" (Carl, 11 Nov 2026; ROUNDED CORNERS WITH A LITTLE
-  RIPPLE).
+  11 Nov 2026). The whole line where the charcoal and the off-white meet (along under the form, round, down beside the
+  video, round, along under it) is one smooth curve with rounded corners, wandering about 2px in slow uneven waves like his
+  mark and the Gelateria letters, drawn by the script to the page's size (`#bio-edge`; THE EDGE, ONE RIPPLING LINE): rounded
+  picked over square and diagonal, then "can you give a little bit of uneven ripple to the rounded lcorners? just subtle",
+  then "it still has too many elbows" and "it should happen on the entirety of the line not just the corners" (Carl, 11
+  Nov 2026).
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.
