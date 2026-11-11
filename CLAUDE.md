@@ -217,6 +217,11 @@ relative so the same page works there; its form only says it is a preview.
   picked over square and diagonal, then "can you give a little bit of uneven ripple to the rounded lcorners? just subtle",
   then "it still has too many elbows" and "it should happen on the entirety of the line not just the corners" (Carl, 11
   Nov 2026).
+- Every hard section edge ripples like the bio's panel, about 1px in slow uneven waves, each its own: the intro under the
+  video, the contact under the bricks (or the bio on a phone), the footer under the bio, and on a phone the bio under the
+  bricks (EVERY HARD SECTION EDGE RIPPLES; a strip in the lower section's colour drawn by the script). "Can we do the
+  ripple on all the section birders? Not necessarily making them angled, I just mean the subtle ripple" (Carl, 11 Nov
+  2026). The bricks' top fades instead.
 - The officers' second round, 11 Nov 2026 (on the live site; notes in `.officers/*/round-2026-11-11.md`). Fixed straight
   away, as plain bugs or breaks from Carl's own picks: the bio's rise measured by layout (not mid-animation) and again
   whenever the form or thank-you changes size, so a message box dragged taller no longer slides Submit under the panel

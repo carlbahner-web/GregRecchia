@@ -513,6 +513,13 @@ p { text-wrap: pretty; }
 @media (max-width: 760px) { .bio-edge { display: none; } }
 @media (max-width: 760px) { .bio .bio-body .bio-photo { float: none; margin: 22px auto var(--gap-panel); width: min(340px, 100% - 44px); } }
 
+/* EVERY HARD SECTION EDGE RIPPLES, a strip along the lower section's top in its own colour, reaching up over the edge in
+   the same slow uneven waves as the bio's panel (about 1px): "Can we do the ripple on all the section birders? Not
+   necessarily making them angled, I just mean the subtle ripple" (Carl, 11 Nov 2026). Drawn by the script to the
+   page's width. The bricks' top fades instead, so it has none. */
+.edge-ripple { position: absolute; left: 0; top: -3px; width: 100%; height: 6px; z-index: 2; pointer-events: none; display: block; }
+.intro, .contact, footer { position: relative; }
+
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
 footer .inner { width: min(var(--wrap), 100%); margin-inline: auto; display: flex; align-items: center; justify-content: space-between;
   gap: var(--gap); flex-wrap: wrap; padding-top: 28px; box-shadow: inset 0 1px 0 var(--hair-dark); }
@@ -873,6 +880,34 @@ $("form").addEventListener("submit", async e => {
   const em = $("f-email");
   const check = () => em.setCustomValidity(em.validity.patternMismatch || em.validity.typeMismatch ? "Double-check your email so I can get back to you." : "");
   em.addEventListener("input", check); $("form").querySelector("button[type=submit]").addEventListener("click", check);
+})();
+// The section edges' ripple (EVERY HARD SECTION EDGE RIPPLES, in the styles): the intro under the video, the contact under
+// the bricks (or the bio, on a phone), the footer under the bio, and on a phone the bio under the bricks.
+(() => {
+  const wide = matchMedia("(min-width: 761px)");
+  const edges = [[".intro", "--paper", .3], [".contact", "--char", 1.7], ["footer", "--char", 2.9], [".bio", "--paper", 4.1, true]];
+  const svgs = edges.map(([sel, colour, seed, phoneOnly]) => {
+    const el = document.querySelector(sel), svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "edge-ripple"); svg.setAttribute("aria-hidden", "true"); svg.style.color = `var(${colour})`;
+    svg.innerHTML = '<path fill="currentColor"/>'; el.prepend(svg); return { el, svg, seed, phoneOnly };
+  });
+  const draw = () => svgs.forEach(({ el, svg, seed, phoneOnly }) => {
+    svg.style.display = phoneOnly && wide.matches ? "none" : "";
+    const W = el.clientWidth || innerWidth, pts = [];
+    for (let x = -6; x <= W + 6; x += 6) {
+      const n = 1.1 * (.55 * Math.sin(x / 53 + seed) + .3 * Math.sin(x / 23 + seed * 2.3) + .15 * Math.sin(x / 11 + seed * 3.1));
+      pts.push([x, 3 + n]);
+    }
+    let d = `M${pts[0][0]},${pts[0][1].toFixed(2)}`;
+    for (let i = 0; i < pts.length - 1; i++) {   // a smooth curve through the points
+      const a = pts[Math.max(i - 1, 0)], b = pts[i], c = pts[i + 1], e = pts[Math.min(i + 2, pts.length - 1)];
+      d += ` C${(b[0] + (c[0] - a[0]) / 6).toFixed(1)},${(b[1] + (c[1] - a[1]) / 6).toFixed(2)} ${(c[0] - (e[0] - b[0]) / 6).toFixed(1)},${(c[1] - (e[1] - b[1]) / 6).toFixed(2)} ${c[0]},${c[1].toFixed(2)}`;
+    }
+    d += ` L${W + 6},7 L-6,7 Z`;
+    svg.setAttribute("viewBox", `0 0 ${W} 6`); svg.setAttribute("preserveAspectRatio", "none");
+    svg.querySelector("path").setAttribute("d", d);
+  });
+  new ResizeObserver(draw).observe(document.documentElement); wide.addEventListener("change", draw); draw();
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.
