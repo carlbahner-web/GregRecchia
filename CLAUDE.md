@@ -144,8 +144,9 @@ relative so the same page works there; its form only says it is a preview.
   the one about her voice left out): "Can we trim essence's quote to be the same number of lines as the others?" (Carl,
   11 Nov 2026). Her whole quote is in git history (10 Nov 2026).
 - The quotes sit on Greg's white brick wall, the whole section covered: "can we make this the background behind the
-  testimonials section? and convert it to a faster loading file please" (Carl, 11 Nov 2026). His 5.4 MB `greg bricks.png`,
-  its dark right edge cropped off, is `img/bricks.webp` (1920 wide, 45 KB) and `img/bricks-960.webp` for phones (16 KB).
+  testimonials section? and convert it to a faster loading file please" (Carl, 11 Nov 2026). Then his lighter grey
+  version, `greg bricks desat light.png`: "actually use this" (the same day, after a grey one). Its dark right edge cropped
+  off, it is `img/bricks.webp` (1920 wide, 37 KB) and `img/bricks-960.webp` for phones (13 KB).
 - Beside "Hi, I'm Greg" is his photo against the white brick (`img/greg-portrait.webp`), and his live-room video moved
   under the contact section's words, in the same offset frame: "Could it be used in the hi in Greg section and then move
   that video down to the contact section?" (Carl, 10 Nov 2026).
