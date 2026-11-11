@@ -321,7 +321,12 @@ vinyl-player {
 }
 
 /* ---------- What the artists are saying ---------- */
-.quotes { padding-block: 0 clamp(72px, 12vw, 130px); } /* the songs' own space sits above it */
+.quotes { padding-block: clamp(72px, 12vw, 130px); }
+/* THE QUOTES ON GREG'S BRICK WALL: "can we make this the background behind the testimonials section? and convert it to a
+   faster loading file please" (Carl, 11 Nov 2026, the white brick from behind his portrait). His 5.4 MB picture is
+   img/bricks.webp, 1920 wide (43 KB), and img/bricks-960.webp for a phone (16 KB), covering the section. */
+.quotes { background: var(--paper) url(img/bricks.webp) center / cover no-repeat; }
+@media (max-width: 760px) { .quotes { background-image: url(img/bricks-960.webp); } }
 .quotes h2 { margin-bottom: var(--gap-panel); }
 .q-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .q-track::-webkit-scrollbar { display: none; }
