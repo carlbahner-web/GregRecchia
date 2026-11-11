@@ -140,6 +140,9 @@ relative so the same page works there; its form only says it is a preview.
   So a phone no longer needs a smaller photo. Three quotes, from his Squarespace page as Carl sent them (10 Nov 2026),
   word for word: Mishaal Tamer, Essence Natay (her photo her "In The Light" cover, "a better one for Essence Natay"),
   Ryan Matthew. Each takes its own height and the carousel grows or shrinks to the one showing.
+  Essence's is trimmed with "…" to the same length as the others, her own words only (the RnB-to-gospel sentence and
+  the one about her voice left out): "Can we trim essence's quote to be the same number of lines as the others?" (Carl,
+  11 Nov 2026). Her whole quote is in git history (10 Nov 2026).
 - Beside "Hi, I'm Greg" is his photo against the white brick (`img/greg-portrait.webp`), and his live-room video moved
   under the contact section's words, in the same offset frame: "Could it be used in the hi in Greg section and then move
   that video down to the contact section?" (Carl, 10 Nov 2026).
