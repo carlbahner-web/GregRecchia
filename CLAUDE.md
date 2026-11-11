@@ -208,7 +208,9 @@ relative so the same page works there; its form only says it is a preview.
   ("show the image under the top section, then the main bio starting on the left and word wraping under the image"):
   ABOUT GREG and the first paragraph sit in the risen panel (`.bio-lead`); 64 under the charcoal (or the lead) the rest
   starts at the page's left edge and wraps round the landscape photo on the right, the last paragraph full width under it
-  (`.bio-body`, the photo floated). A phone: heading, first paragraph, photo, the rest. The whole line where the charcoal and the off-white meet (along under the form, round, down beside the
+  (`.bio-body`, the photo floated). A phone: heading, first paragraph, photo, the rest. No word alone on a paragraph's
+  last line anywhere on the page (`text-wrap: pretty`), and the lead's own margin gone so 64 is 64: "the padding is a bit
+  weird, maybe it's because there's one word on that last line?" (Carl, 11 Nov 2026). The whole line where the charcoal and the off-white meet (along under the form, round, down beside the
   video, round, along under it) is one smooth curve with rounded corners, wandering about 2px in slow uneven waves like his
   mark and the Gelateria letters, drawn by the script to the page's size (`#bio-edge`; THE EDGE, ONE RIPPLING LINE): rounded
   picked over square and diagonal, then "can you give a little bit of uneven ripple to the rounded lcorners? just subtle",

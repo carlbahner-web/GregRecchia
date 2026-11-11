@@ -435,7 +435,12 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 .bio-photo img { aspect-ratio: 3 / 2; object-position: 30% 40%; }
 .bio p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
 .bio h2 { margin-bottom: var(--gap-words); }   /* ABOUT GREG (Carl, 11 Nov 2026), in capitals and the Gelateria font like the others */
-.bio-lead p { font: 600 var(--text-big)/var(--lines-read) var(--head); }
+.bio-lead p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin-bottom: 0; }
+/* NO WORD LEFT ALONE ON A LAST LINE: the bio's first paragraph ended on "it." by itself, which with its own margin on top
+   of the 64 made the gap under it read wrong ("the padding is a bit weird, maybe it's because there's one word on that
+   last line?", Carl, 11 Nov 2026). Its own margin is gone, and every paragraph on the page keeps a last line of more
+   than one word where the browser can. */
+p { text-wrap: pretty; }
 .bio-body { margin-top: var(--gap-panel); }
 .bio-body p:last-child { margin-bottom: 0; }
 /* THE REST OF THE BIO WRAPS ROUND THE PHOTO: under the heading and its first paragraph, the photo sits on the right and
