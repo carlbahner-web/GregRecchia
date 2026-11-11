@@ -1686,6 +1686,11 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
       calc((140cqi - (var(--shelf-rows, 2) - 1) * 16px - var(--shelf-rows, 2) * 64px) / var(--shelf-rows, 2)))); }
   :host([noframe]) .sleeve-style { text-box: trim-end text text; }
 }
+/* STACKED (A PHONE), TWO ROWS OF TWO: "Can we do two rows of two vinyl on mobile?" (Carl, 11 Nov 2026). Under the deck the
+   covers were as many across as fit, three or four on a wider phone; now always two, each half the width. */
+@container player (max-width: 720px) {
+  :host([noframe]) .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* THE DECK DRAWN IN CODE, NOT A PICTURE: "can we replace the deck with something procedural?", then, of three drawn
    in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,
