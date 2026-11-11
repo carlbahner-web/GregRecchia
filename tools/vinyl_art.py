@@ -10,7 +10,7 @@ the tonearm's yellow ochre (#af945f), each part's middle tone exactly the page's
 
 The deck comes from carlbahner.com's (its assets/deck-plinth.webp, in its wood): the kit's drawing with the thick charcoal
 shadow along its bottom and right edges taken off and a thinner outline ("The removal of the weird shadow?", Carl,
-10 Nov 2026). The platter is a deep slate disc with Greg's mark faint on it, where the STUDIOLAND MGMT watermark was.
+10 Nov 2026). The platter is a deep slate disc (#26363f since 11 Nov 2026, "make the slip mat darker"; it was #364e5b) with Greg's mark faint on it, where the STUDIOLAND MGMT watermark was.
 Needs Pillow, numpy, and Node with Playwright (to draw the mark)."""
 import colorsys, json, pathlib, subprocess, sys, tempfile
 import numpy as np
@@ -58,6 +58,6 @@ with tempfile.TemporaryDirectory() as tmp:
     m = np.array(Image.open(f"{tmp}/mark.png").convert("RGBA"))
 m[:, :, :3] = [0x92, 0xa6, 0xb1]; m[:, :, 3] = (m[:, :, 3] * .32).astype("uint8")
 disc = Image.new("RGBA", (1024, 1024), (0, 0, 0, 0))
-ImageDraw.Draw(disc).ellipse((0, 0, 1023, 1023), fill=(0x36, 0x4e, 0x5b, 255))
+ImageDraw.Draw(disc).ellipse((0, 0, 1023, 1023), fill=(0x26, 0x36, 0x3f, 255))
 disc.alpha_composite(Image.fromarray(m, "RGBA")); disc.save(out / "platter.webp", quality=90)
 print("made", sorted(f.name for f in out.iterdir()))

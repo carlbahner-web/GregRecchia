@@ -1691,6 +1691,9 @@ button > svg:not(.boil) { width: 19px; height: 19px; fill: currentColor; }
 @container player (max-width: 720px) {
   :host([noframe]) .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* THE CENTRE POST A BIT THICKER: "the center post circle a bit thicker" (Carl, 11 Nov 2026). Its ring 3 like the page's
+   lines (was 2) and the post wider (4.6% of the platter, was 2.4%), so its cream still shows inside the ring. */
+.spindle { width: 4.6%; border-width: 3px; }
 
 /* THE DECK DRAWN IN CODE, NOT A PICTURE: "can we replace the deck with something procedural?", then, of three drawn
    in code, "ooh i like the screws" and "i meant slate" (Carl, 10 Nov 2026). A square slate board with a charcoal edge,

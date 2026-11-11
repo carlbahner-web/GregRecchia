@@ -147,6 +147,8 @@ relative so the same page works there; its form only says it is a preview.
   form on phone" (Carl, 11 Nov 2026). The laptop keeps it under the words, beside the form.
 - On a phone the covers under the deck are two rows of two, each half the width: "Can we do two rows of two vinyl on
   mobile?" (Carl, 11 Nov 2026).
+- The slip mat darker, #26363f (was #364e5b), and the centre post bigger with a ring of 3: "Can you make the slip mat
+  darker and the center post circle a bit thicker?" (Carl, 11 Nov 2026).
 - Each video plays while it's on screen and pauses off it; one coming into view for the first time goes back to its first
   frame (its poster) and plays from there. The one by the contact form had played from page open, off screen, and jumped
   as it came in: "The video by the contact form" (Carl, 10 Nov 2026, of the glitch he saw "right on load"). Both keep
