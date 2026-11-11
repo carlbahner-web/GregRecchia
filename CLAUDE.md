@@ -73,7 +73,7 @@ relative so the same page works there; its form only says it is a preview.
   `python3 tools/check_consistency.py` lists anything outside them; run it before every change. The rest of the
   quiz (https://claude.ai/artifact/AM6gVs8Rb5PWBfe1Q6VbEG) saves its answers in its own database: read them with
   ArtifactData `list`, collection `answers`. The officer's notes are in `.officers/` (not in git).
-- Every word is his, from the Squarespace page. Nothing on the page is written for him.
+- Every word is his, from the Squarespace page or sent by Carl (the bio). Nothing on the page is written for him.
 - The player is the record player from his StudioLand MGMT profile page, `<vinyl-player>`: "I want to take the
   portfolio player from his profile page and migrate it to his website but with different images instead of my Slmgmt
   branded art" (Carl, 10 Nov 2026). Copied from studiolandmgmt-site `portfolio-player-kit/src/vinyl-player.js` into
@@ -192,6 +192,10 @@ relative so the same page works there; its form only says it is a preview.
   `gregrecchia.netlify.app` added; his "Squarespace Email Forwarding" records (Mailgun MX and TXT) stay untouched. The
   domain renews on its own at Squarespace, apart from the website plan. The shared-link picture, `og:url` and canonical
   use the full address.
+- His bio, after the contact form and before the footer: "i want to add a bio section at the bottom after the contact
+  form", then the words and "the studio photo" (Carl, 11 Nov 2026). Carl's five paragraphs word for word (his "..." as
+  "…"), the first in the intro's larger type; beside it Greg at the console with the lava lamp (`img/greg-studio.webp`,
+  landscape 3:2, the two frames), on the off-white page, in the page's two columns. No heading: none was given.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.

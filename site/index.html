@@ -430,6 +430,15 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 .thanks p { font: 400 var(--text-name)/var(--lines-read) var(--body); color: var(--paper); margin: 0; }
 @media (max-width: 560px) { form { grid-template-columns: 1fr; } }
 
+/* ---------- His bio: the studio photo beside his story, on the off-white between the form and the footer ---------- */
+.bio { padding-block: clamp(72px, 12vw, 130px); }
+.bio .split { align-items: start; }
+.bio-photo img { aspect-ratio: 3 / 2; object-position: 30% 40%; }
+.bio-words p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
+.bio-words p:first-child { font: 600 var(--text-big)/var(--lines-read) var(--head); }
+.bio-words p:last-child { margin-bottom: 0; }
+@media (max-width: 760px) { .bio .bio-photo { margin-inline: auto; width: min(340px, 100% - 44px); max-width: none; } }
+
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
 footer .inner { width: min(var(--wrap), 100%); margin-inline: auto; display: flex; align-items: center; justify-content: space-between;
   gap: var(--gap); flex-wrap: wrap; padding-top: 28px; box-shadow: inset 0 1px 0 var(--hair-dark); }
@@ -565,6 +574,20 @@ footer a { color: var(--paper); }
         </div>
       </form>
       <div class="thanks" id="thanks" hidden tabindex="-1" role="status"><h3 id="thanks-h">Thanks!</h3><p>I’ll be in touch with you shortly.</p></div>
+    </div>
+  </section>
+  <!-- HIS BIO, after the contact form: "i want to add a bio section at the bottom after the contact form", then the words
+       and "the studio photo" (Carl, 11 Nov 2026). -->
+  <section class="bio" id="bio" aria-label="About Greg">
+    <div class="wrap split">
+      <figure class="portrait bio-photo"><img src="img/greg-studio.webp" width="1400" height="994" alt="Greg at the console in the studio" loading="lazy"></figure>
+      <div class="bio-words">
+        <p>Greg Recchia has spent over twenty years chasing the same thing… whatever it is that makes a song special, and making sure the listener can’t ignore it.</p>
+        <p>He came up the old-school way: audio engineering at SAE in New York City, then years in real rooms like Eastside Sound, Studio Crash in Philly and Water Music in Hoboken. Along the way he got to work on projects with Masego, Nile Rodgers, Pino Palladino, Idris Elba, and a bunch more.</p>
+        <p>He learned guitar and a handful of other instruments completely by ear, with no theory at all. That sounds like a limitation until you work with him and realize he hears your song the same way the people streaming it will… by whether it moves him or not.</p>
+        <p>That’s probably why he gets so obsessive about vocals. Harmonies, arrangement, the textures and transitions you don’t notice until somebody takes them out… the last five percent of a record is his favorite part, and it’s usually the part that changes how the whole song feels.</p>
+        <p>These days he mixes out of his own studio in New Jersey for artists all over the world, and his clients talk about him like he’s in the band. He’ll give you honest feedback, he’ll stay in your corner the whole way, and he’ll care where the song ends up about as much as you do. He’s at his best with artists who have big plans and are already out there chasing them.</p>
+      </div>
     </div>
   </section>
 </main>
