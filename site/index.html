@@ -254,6 +254,16 @@ html:not(.has-song) .topbar:not(.on) .tb-player { visibility: hidden; }
    contact's words, in the same offset frame, here in dusty blue on the charcoal. */
 .contact-video { margin-top: var(--gap-panel); max-width: 340px; }
 .contact-video video { background: var(--char); }
+/* ON A PHONE THE VIDEO GOES UNDER THE FORM: "I just want to move the video to be below the contact form on phone" (Carl,
+   11 Nov 2026). Stacked, the words' column opens up so its pieces line up with the form, and the video goes last. */
+@media (max-width: 760px) {
+  .contact .split > div:first-child { display: contents; }
+  .contact h2, .contact .lede { order: 0; }
+  .contact #form, .contact .thanks { order: 1; }
+  .contact-video { order: 2; margin-top: 0; }
+  .contact .split { row-gap: var(--gap-panel); }
+  .contact .lede { margin-top: calc(var(--gap-words) - var(--gap-panel)); }
+}
 .portrait::after { content: ""; position: absolute; inset: 22px -22px -22px 22px; z-index: -1; border: var(--line) solid var(--dusty); }
 .intro h2 { margin-bottom: var(--gap-words); }  /* a heading with words under it (the officers' round, 10 Nov 2026) */
 .intro p { font: 600 var(--text-big)/var(--lines-read) var(--head); margin: 0 0 var(--gap-words); color: var(--char); }
