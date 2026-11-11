@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/EncodeSansCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/wordmark.svg" as="image">
+<link rel="preload" href="fonts/PortofinoGelateria-Caps.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Fonts: the three his Squarespace site used, saved here (latin) so nothing loads from Google. */
 @font-face { font-family: 'Encode Sans Condensed'; font-weight: 600; font-display: swap; src: url(fonts/EncodeSansCondensed-600.woff2) format('woff2'); }
@@ -62,6 +62,8 @@
   --text-hero: clamp(14px, 2.6vw, 34px);
   --text-hero-line: clamp(13px, 1.7vw, 19px);
   --text-mark: 80px;
+  --text-name-bar: calc(clamp(120px, 14vw, 160px) / 8.49);   /* his name in the bar, as wide as the traced one was */
+  --text-name-foot: calc(170px / 8.49);                      /* and in the footer */
   /* White is for the words over the video only; everything else you read is cream ("Use the DRAFT set", 10 Nov). */
   --white: #fff;
   /* The rest of the sets, picked on the same quiz (10 Nov 2026), each "Use the DRAFT set". */
@@ -128,10 +130,14 @@ h2 { font-size: var(--text-heading); color: var(--butter); text-align: center; }
    through it like the wordmark. It replaced the headphone-and-waveform G from his old logo. */
 .mark { width: clamp(64px, 8vw, 92px); aspect-ratio: 1625 / 1517; background: #fff;
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
-/* His name in FBS Funegral, traced from the type sample Carl sent (10 Nov 2026) into img/wordmark.svg, and painted
-   through it as a mask so it takes any colour. */
-.wordmark { width: 100%; aspect-ratio: 5832 / 631; background: #fff;
-  -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
+/* HIS NAME IN PORTOFINO GELATERIA CAPS, set as words: "change the top and the footer, but keep the little icon logo thing
+   we made" (Carl, 11 Nov 2026), in place of the FBS Funegral sample traced into img/wordmark.svg (kept, unused). The font
+   is 8.49 times as wide as it is big for GREG RECCHIA, so each name is sized to fill the width the traced one had: the
+   whole of the brand's column at the top, 170 in the footer, the bar's 120-160. */
+.brand { container-type: inline-size; }
+.wordmark, .tb-name { font-family: 'Portofino Gelateria Caps', var(--head); font-weight: 400; line-height: 1;
+  text-transform: uppercase; white-space: nowrap; color: var(--white); }
+.wordmark { font-size: calc(100cqi / 8.49); }
 .productions { font: 600 var(--text-hero-line)/1 var(--head); letter-spacing: .42em; margin-right: -.42em; color: var(--white); text-transform: uppercase; }
 /* The headline in the MIXER & CO-PRODUCER line's type, bigger: "can you use that for the architect lines? Maybe a
    bigger size though?" (Carl, 10 Nov 2026). It was big italic Encode Sans Condensed. */
@@ -197,8 +203,7 @@ main :focus-visible, .topbar.on :focus-visible { outline-color: var(--slate); }
 .tb-brand { justify-self: start; display: flex; align-items: center; gap: 10.5px; text-decoration: none; } /* + the name's own 1.5px edge = 12 */
 .tb-mark { height: var(--bar-h); width: auto; aspect-ratio: 1625 / 1517; background: var(--char);
   -webkit-mask: url(img/mark.svg) center / contain no-repeat; mask: url(img/mark.svg) center / contain no-repeat; }
-.tb-name { width: clamp(120px, 14vw, 160px); aspect-ratio: 5832 / 631; background: var(--char);
-  -webkit-mask: url(img/wordmark.svg) center / contain no-repeat; mask: url(img/wordmark.svg) center / contain no-repeat; }
+.tb-name { font-size: var(--text-name-bar); color: var(--char); }
 .tb-links { justify-self: end; display: flex; gap: 0; }
 .tb-links a { font: 600 var(--text-tiny)/1 var(--head); letter-spacing: var(--caps-big); text-transform: uppercase;
   color: var(--char); text-decoration: none; height: var(--bar-h); display: inline-flex; align-items: center;
@@ -401,7 +406,7 @@ footer .inner { width: min(var(--wrap), 100%); margin-inline: auto; display: fle
   gap: var(--gap); flex-wrap: wrap; padding-top: 28px; box-shadow: inset 0 1px 0 var(--hair-dark); }
 footer .sig { display: flex; align-items: center; gap: 12px; }
 footer .mark { width: 30px; margin: 0; background: var(--paper); }
-footer .wordmark { width: 170px; margin: 0; background: var(--paper); }
+footer .wordmark { font-size: var(--text-name-foot); margin: 0; color: var(--paper); }
 footer p { margin: 0; }
 /* ONE ROW OR ONE COLUMN, NEVER HALF-WRAPPED: where his name, Instagram, management and the year don't all fit on one
    line they stack down the left, rather than wrapping into a ragged second row ("the footer text gets real weird as
@@ -419,7 +424,7 @@ footer a { color: var(--paper); }
   <div class="hero-in">
     <div class="brand">
       <div class="mark" aria-hidden="true"></div>
-      <div class="wordmark" role="img" aria-label="Greg Recchia"></div>
+      <div class="wordmark">Greg Recchia</div>
       <div class="productions">Mixer &amp; Co-Producer</div>
     </div>
     <h1>Earworm Architect for <span class="l2"><em>Hook-Obsessed</em> Indie Artists</span></h1>
@@ -431,7 +436,7 @@ footer a { color: var(--paper); }
 </header>
 
 <nav class="topbar" id="topbar" aria-label="Greg Recchia">
-  <a class="tb-brand" href="#top" aria-label="Back to the top"><span class="tb-mark"></span><span class="tb-name"></span></a>
+  <a class="tb-brand" href="#top" aria-label="Back to the top"><span class="tb-mark"></span><span class="tb-name">Greg Recchia</span></a>
   <div class="tb-player" id="tb-player">
     <button class="tb-play" id="tb-play" type="button" aria-label="Play">
       <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
@@ -537,7 +542,7 @@ footer a { color: var(--paper); }
 
 <footer>
   <div class="inner">
-    <div class="sig"><div class="mark" aria-hidden="true"></div><div class="wordmark" role="img" aria-label="Greg Recchia"></div></div>
+    <div class="sig"><div class="mark" aria-hidden="true"></div><div class="wordmark">Greg Recchia</div></div>
     <p><strong>Instagram:</strong> <a href="https://instagram.com/greg_recchia_productions" target="_blank" rel="noopener">@greg_recchia_productions</a></p>
     <p><strong>Management:</strong> Carl Bahner, <a href="mailto:carl@studiolandmgmt.com">carl@studiolandmgmt.com</a></p>
     <p>© <span id="year">2026</span> Greg Recchia</p>

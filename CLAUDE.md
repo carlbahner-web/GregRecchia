@@ -16,6 +16,11 @@ relative so the same page works there; its form only says it is a preview.
   testimonials, contact. His five steps came off: "Yeah take em out" (Carl, 10 Nov 2026), as they repeated his intro
   (vocals, transitions, ear candy) before the songs; kept in `archive/five-steps.html` to put back.
 - His branding, read off his Squarespace page (saved as a PDF, 10 Nov 2026): black and butter-cream type (still the hero's), and his three fonts, Encode Sans Condensed, Krub and Alfa Slab One, saved in `site/fonts/` (latin only).
+- His name is set in Portofino Gelateria Caps (real words, not a picture) at the top, in the bar and in the footer, his
+  circle-and-arcs mark kept beside it: "change the top and the footer, but keep the little icon logo thing we made" (Carl,
+  11 Nov 2026), shown it beside the traced FBS Funegral. Each sized to the width the traced name had (`.wordmark`,
+  `.tb-name`, `--text-name-bar`, `--text-name-foot`). So Greg needs no Funegral licence; what follows is how it was.
+  The picture a shared link shows (`img/share.jpg`) still has the traced name.
 - His name in FBS Funegral, on trial: "Can we isolate this and try it?" (Carl, 10 Nov 2026, with a type sample of
   GREG RECCHIA). Traced into `img/wordmark.svg` and drawn as a CSS mask (`.wordmark`) so it takes any colour; the
   sample faded out over the A's right foot, so each column was darkened back to full ink before tracing. In the hero
