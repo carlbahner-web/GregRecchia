@@ -440,14 +440,21 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 /* THE BIO LOCKS INTO THE CONTACT SECTION (a laptop): its off-white rises into the charcoal on the right, under the form,
    while the charcoal carries on down the left round Greg's video; the studio photo starts below where the charcoal ends
    ("is something like this crazy? i just did a super rough cutup job in photoshop", Carl, 11 Nov 2026, with the mockup).
-   --rise is how far it climbs: from 96 under the form (or the thank-you) to the contact section's foot, measured by the
+   --rise is how far it climbs: from 64 under the form (or the thank-you) to the contact section's foot, measured by the
    script. The panel's top-left is left clear so the charcoal and the video show through it. */
 @media (min-width: 761px) {
   .bio { --split: calc((100% - min(var(--wrap), 100% - 32px)) / 2 + (min(var(--wrap), 100% - 32px) - var(--gap-cols)) * 5 / 12 + var(--gap-cols) / 2);
     position: relative; z-index: 1; margin-top: calc(-1 * var(--rise, 0px)); padding-top: 64px; background:
       linear-gradient(var(--paper), var(--paper)) right top / calc(100% - var(--split)) calc(var(--rise, 0px) + 1px) no-repeat,
       linear-gradient(var(--paper), var(--paper)) left bottom / 100% calc(100% - var(--rise, 0px)) no-repeat; }
-  .bio .bio-photo { margin-top: var(--rise, 0px); }
+  .bio .bio-photo { margin-top: calc(var(--rise, 0px) + 22px); align-self: stretch; }
+  /* the studio photo fills the column from 64 under the charcoal to the bio's last line, cropped round Greg, so neither
+     end leaves a gap */
+  .bio .bio-photo img { aspect-ratio: auto; height: 100%; object-position: 22% 50%; }
+  /* ONE GAP ROUND THE CUT, 64: Submit to the panel, the panel's top to its words, the video's frame to where the charcoal
+     ends, and that to the studio photo's frame; the photo's frame ends level with the bio's last line ("yeah do it",
+     Carl, 11 Nov 2026, of 96, 64, 90 and 42 made one, and the 184 under the photo taken out). */
+  .contact { padding-bottom: 64px; }
 }
 @media (max-width: 760px) { .bio .bio-photo { margin-inline: auto; width: min(340px, 100% - 44px); max-width: none; } }
 
@@ -747,7 +754,7 @@ $("form").addEventListener("submit", async e => {
     if (!wide.matches) return bio.style.removeProperty("--rise");
     bio.style.setProperty("--rise", "0px");
     const end = (($("form").hidden ? $("thanks") : $("form")).getBoundingClientRect().bottom);
-    bio.style.setProperty("--rise", Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 96)) + "px");
+    bio.style.setProperty("--rise", Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 64)) + "px");
   };
   new ResizeObserver(climb).observe(contact); wide.addEventListener("change", climb); climb();
 })();

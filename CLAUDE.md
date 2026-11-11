@@ -199,7 +199,9 @@ relative so the same page works there; its form only says it is a preview.
   On a laptop it locks into the contact section, from Carl's Photoshop mockup ("is something like this crazy?", 11 Nov
   2026): its off-white climbs into the charcoal on the right, 96 under the form, the charcoal carrying on down the left
   round the video, the studio photo starting below it (`--rise`, measured by the script; THE BIO LOCKS INTO THE CONTACT
-  SECTION). A phone stacks them as before.
+  SECTION). A phone stacks them as before. Round the cut one gap, 64: Submit to the panel, the panel to its words, the video's frame
+  to the charcoal's end, that to the studio photo, which fills its column down to the bio's last line ("yeah do it", Carl,
+  11 Nov 2026).
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.
