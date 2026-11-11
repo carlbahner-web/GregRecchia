@@ -45,6 +45,18 @@ def recolour(src, dst, warm, warm_from):
 
 # The deck itself is drawn in code now (vinyl-player.js, THE DECK DRAWN IN CODE), so no plinth.webp is made.
 recolour(kit / "record.webp", "record.webp", OCHRE, (210, 112, 40))  # the label's orange squares
+
+# A NEUTRAL BLACK RECORD: "Yeah neutral black record" (Carl, 11 Nov 2026), asked whether it should be the page's charcoal,
+# which leans blue-green, its rings more so. Outside the label (covered by the song's cover anyway) every colour goes
+# grey, keeping its lightness, and the vinyl's own middle tone becomes #222.
+r = np.array(Image.open(out / "record.webp").convert("RGBA")).astype(float)
+h, w = r.shape[:2]; yy, xx = np.mgrid[:h, :w]; rad = np.hypot(xx - w / 2, yy - h / 2) / (w / 2)
+outside = (rad > 0.40) & (r[..., 3] > 0)
+g = lum(r[..., :3])
+body = outside & (g < 120) & (r[..., 3] > 200)
+k = 0x22 / np.median(g[body])
+r[outside, :3] = np.clip(np.where((g[outside] < 120)[:, None], g[outside, None] * k, g[outside, None]), 0, 255)
+Image.fromarray(r.astype("uint8"), "RGBA").save(out / "record.webp", quality=90)
 recolour(kit / "tonearm.webp", "tonearm.webp", OCHRE, (236, 194, 98))  # the yellow
 
 svg = mark_svg.read_text().replace('fill="currentColor"', 'fill="#fff"').replace("<svg", '<svg style="width:400px"', 1)
