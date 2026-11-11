@@ -217,6 +217,13 @@ relative so the same page works there; its form only says it is a preview.
   picked over square and diagonal, then "can you give a little bit of uneven ripple to the rounded lcorners? just subtle",
   then "it still has too many elbows" and "it should happen on the entirety of the line not just the corners" (Carl, 11
   Nov 2026).
+- The officers' second round, 11 Nov 2026 (on the live site; notes in `.officers/*/round-2026-11-11.md`). Fixed straight
+  away, as plain bugs or breaks from Carl's own picks: the bio's rise measured by layout (not mid-animation) and again
+  whenever the form or thank-you changes size, so a message box dragged taller no longer slides Submit under the panel
+  and the gap under Submit is 64 from the start; .CON and its cousins caught in capitals; the quotes jump for anyone who
+  asks for less motion; the thank-you heading in Gelateria (a later rule had undone it); the not-found page named "Greg
+  Recchia // Mixer & Co-Producer"; the bar's name read out as "Greg Recchia, back to the top" and the song by its own
+  words; SUBMIT's arrow drawn (Gelateria has none); every button 16 on a phone, SUBMIT too.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.

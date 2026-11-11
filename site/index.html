@@ -353,6 +353,7 @@ vinyl-player {
 .q-track::-webkit-scrollbar { display: none; }
 .q { scroll-snap-align: start; margin: 0; }
 .q-track { scroll-behavior: smooth; outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) { .q-track { scroll-behavior: auto; } }   /* they jump, as everything else does then */
 .q-track { align-items: start; }
 /* ONE HEIGHT FOR THE SECTION: the carousel is as tall as its longest quote, whichever is showing, so the section and the
    arrows under it hold still as you go through them ("can we keep a consistent section height for hte testimonials? it
@@ -422,11 +423,14 @@ form .full { grid-column: 1 / -1; }
 .send-row { display: flex; align-items: center; gap: var(--gap); flex-wrap: wrap; }
 .contact .b-btn { background: var(--ochre); color: var(--char); }
 .contact .b-btn:hover { background: var(--paper); }
+.b-btn svg.arrow { width: .9em; height: auto; }   /* drawn, 3 thick: the Gelateria font has no arrow, so each device drew its own */
+/* every button on a phone the same size (his set), SUBMIT too */
+@media (max-width: 560px) { .b-btn { font-size: var(--text-button-phone); } }
 .sent { font: 600 var(--text-name)/1.3 var(--head); color: var(--paper); margin: 0; min-height: 1.3em; }
 .sent a { color: var(--dusty); }
 form[hidden], .thanks[hidden] { display: none; }   /* the form's own display would otherwise keep it on screen */
 .thanks { align-self: center; border-block: var(--line) solid var(--ochre); padding-block: var(--gap-panel); outline: none; }
-.thanks h3 { font: 800 var(--text-now)/var(--lines-title) var(--head); color: var(--paper); margin: 0 0 var(--gap); }
+.thanks h3 { font: 400 var(--text-now)/var(--lines-title) 'Portofino Gelateria Caps', var(--head); color: var(--paper); margin: 0 0 var(--gap); }
 .thanks p { font: 400 var(--text-name)/var(--lines-read) var(--body); color: var(--paper); margin: 0; }
 @media (max-width: 560px) { form { grid-template-columns: 1fr; } }
 
@@ -518,13 +522,13 @@ footer a { color: var(--paper); }
 </header>
 
 <nav class="topbar" id="topbar" aria-label="Greg Recchia">
-  <a class="tb-brand" href="#top" aria-label="Back to the top"><span class="tb-mark"></span><span class="tb-name">Greg Recchia</span></a>
+  <a class="tb-brand" href="#top" aria-label="Greg Recchia, back to the top"><span class="tb-mark"></span><span class="tb-name">Greg Recchia</span></a>
   <div class="tb-player" id="tb-player">
     <button class="tb-play" id="tb-play" type="button" aria-label="Play">
       <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>
       <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>
     </button>
-    <button class="tb-song" id="tb-song" type="button" aria-label="Go to the record player">
+    <button class="tb-song" id="tb-song" type="button">
       <span class="tb-cover"><img id="tb-art" src="img/i-won-t-see-you-anymore.webp" alt="" width="40" height="40"><span class="tb-bar" aria-hidden="true"></span></span>
       <span><span class="tb-title" id="tb-title">i won’t see you anymore</span><span class="tb-artist" id="tb-artist">Rol3ert</span></span>
     </button>
@@ -609,11 +613,11 @@ footer a { color: var(--paper); }
         <p class="sr" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
         <label class="field full"><input id="f-name" name="name" required autocomplete="name" placeholder=" "><span>Name</span></label>
         <label class="field"><input id="f-email" name="email" type="email" required autocomplete="email" placeholder=" "
-          pattern="[^@\s]+@(?![^@\s]*\.(con|cmo|ocm|comm|vom|xom)$)[^@\s]+\.[A-Za-z]{2,}"><span>Email</span></label>
+          pattern="[^@\s]+@(?![^@\s]*\.([cC][oO][nN]|[cC][mM][oO]|[oO][cC][mM]|[cC][oO][mM][mM]|[vV][oO][mM]|[xX][oO][mM])$)[^@\s]+\.[A-Za-z]{2,}"><span>Email</span></label>
         <label class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder=" "><span>Phone (optional)</span></label>
         <label class="field full"><textarea id="f-msg" name="message" required placeholder=" "></textarea><span>Message</span></label>
         <div class="send-row full">
-          <button class="b-btn" type="submit">Submit <span class="arrow" aria-hidden="true">→</span></button>
+          <button class="b-btn" type="submit">Submit <svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h17M12 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></button>
           <p class="sent" id="sent" role="status"></p>
         </div>
       </form>
@@ -782,8 +786,11 @@ $("form").addEventListener("submit", async e => {
   const climb = () => {
     if (!wide.matches) return bio.style.removeProperty("--rise");
     bio.style.setProperty("--rise", "0px");
-    const end = (($("form").hidden ? $("thanks") : $("form")).getBoundingClientRect().bottom);
-    const rise = Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 64));
+    /* measured by layout, not by where things are drawn: the form rises into place as it scrolls in, and measuring it
+       mid-rise left 84 under Submit, not 64, until a resize (the officers' second round, 11 Nov 2026) */
+    const top = el => { let y = 0; for (; el; el = el.offsetParent) y += el.offsetTop; return y; };
+    const box = $("form").hidden ? $("thanks") : $("form");
+    const rise = Math.max(0, Math.round(top(contact) + contact.offsetHeight - (top(box) + box.offsetHeight) - 64));
     bio.style.setProperty("--rise", rise + "px");
     drawEdge(rise);
   };
@@ -815,7 +822,9 @@ $("form").addEventListener("submit", async e => {
     svg.setAttribute("viewBox", `0 0 ${W} ${rise + 2}`);
     svg.querySelector("path").setAttribute("d", d);
   };
-  new ResizeObserver(climb).observe(contact); new ResizeObserver(climb).observe(bio); wide.addEventListener("change", climb); climb();
+  // and again whenever the form or the thank-you changes size: the message box dragged taller had slid Submit under the
+  // panel, out of reach (the officers' second round)
+  const ro = new ResizeObserver(climb); [contact, bio, $("form"), $("thanks")].forEach(el => ro.observe(el)); wide.addEventListener("change", climb); climb();
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.
