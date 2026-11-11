@@ -169,7 +169,9 @@ relative so the same page works there; its form only says it is a preview.
   `gregrecchia.netlify.app` added; his "Squarespace Email Forwarding" records (Mailgun MX and TXT) stay untouched. The
   domain renews on its own at Squarespace, apart from the website plan. The shared-link picture, `og:url` and canonical
   use the full address.
-- Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings.
+- Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
+  the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
+  "Thanks, TEST!". Nothing more is sent for real.
 
 ## Waiting on Greg
 - The other five songs from his Squarespace player: Naskar (Mishaal Tamer), Just Chill, Daylight (Ryan Pol…),
