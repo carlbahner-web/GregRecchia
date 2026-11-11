@@ -163,7 +163,9 @@ relative so the same page works there; its form only says it is a preview.
 - The quotes sit on Greg's white brick wall, the whole section covered: "can we make this the background behind the
   testimonials section? and convert it to a faster loading file please" (Carl, 11 Nov 2026). Then his lighter grey
   version, `greg bricks desat light.png`: "actually use this" (the same day, after a grey one). Its dark right edge cropped
-  off, it is `img/bricks.webp` (1920 wide, 37 KB) and `img/bricks-960.webp` for phones (13 KB).
+  off, it is `img/bricks.webp` (1920 wide, 37 KB) and `img/bricks-960.webp` for phones (13 KB). Its top fades up into the
+  page's off-white over 90 to 200 ("can we have the very top of the brick image fade up into the background of the
+  previous section?", Carl, 11 Nov 2026).
 - Beside "Hi, I'm Greg" is his photo against the white brick (`img/greg-portrait.webp`), and his live-room video moved
   under the contact section's words, in the same offset frame: "Could it be used in the hi in Greg section and then move
   that video down to the contact section?" (Carl, 10 Nov 2026).
