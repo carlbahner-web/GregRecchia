@@ -337,10 +337,11 @@ vinyl-player {
 .q-track::-webkit-scrollbar { display: none; }
 .q { scroll-snap-align: start; margin: 0; }
 .q-track { scroll-behavior: smooth; outline-offset: 6px; }
-.q-track { align-items: start; overflow-y: hidden; transition: height .35s var(--ease); }
-/* each quote its own height, and the carousel as tall as the one showing, so the arrows sit under it, not under the
-   longest (Essence's) */
-@media (prefers-reduced-motion: reduce) { .q-track { transition: none; } }
+.q-track { align-items: start; }
+/* ONE HEIGHT FOR THE SECTION: the carousel is as tall as its longest quote, whichever is showing, so the section and the
+   arrows under it hold still as you go through them ("can we keep a consistent section height for hte testimonials? it
+   drifts a bit when cycling through them", Carl, 11 Nov 2026). It grew and shrank to each quote while Essence's ran long;
+   since it was trimmed the three are within a line of each other. Each quote sits at the top of the space. */
 /* A SIMPLE CAROUSEL ("i'm gonna send two more testimonaisl with photos, so can you wire it up to be a simple carousel?",
    Carl, 10 Nov 2026): swipe or scroll it sideways, or the arrows and dots under it, which show once there are two
    quotes. It never moves on its own. Under the quote's own column, so they sit under the words. */
@@ -664,9 +665,7 @@ $("form").addEventListener("submit", async e => {
     const d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", `Quote ${i + 1} of ${slides.length}`);
     d.addEventListener("click", () => go(i)); $("q-dots").append(d); return d;
   });
-  const fit = () => { track.style.height = slides[Math.min(at(), slides.length - 1)].offsetHeight + "px"; };
-  const light = () => { dots.forEach((d, i) => d.setAttribute("aria-current", String(i === at()))); fit(); };
-  new ResizeObserver(fit).observe(track.parentElement);
+  const light = () => dots.forEach((d, i) => d.setAttribute("aria-current", String(i === at())));
   track.addEventListener("scroll", light, { passive: true }); light();
   $("q-prev").addEventListener("click", () => go(at() - 1));
   $("q-next").addEventListener("click", () => go(at() + 1));

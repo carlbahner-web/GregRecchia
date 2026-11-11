@@ -142,7 +142,8 @@ relative so the same page works there; its form only says it is a preview.
   thinking we could maybe crop the images to all be a bit landscape? The three testimonials I mean" (Carl, 10 Nov 2026).
   So a phone no longer needs a smaller photo. Three quotes, from his Squarespace page as Carl sent them (10 Nov 2026),
   word for word: Mishaal Tamer, Essence Natay (her photo her "In The Light" cover, "a better one for Essence Natay"),
-  Ryan Matthew. Each takes its own height and the carousel grows or shrinks to the one showing.
+  Ryan Matthew. The carousel is as tall as its longest quote whichever is showing, so the section holds still: "can we
+  keep a consistent section height for hte testimonials? it drifts a bit when cycling through them" (Carl, 11 Nov 2026).
   Essence's is trimmed with "…" to the same length as the others, her own words only (the RnB-to-gospel sentence and
   the one about her voice left out): "Can we trim essence's quote to be the same number of lines as the others?" (Carl,
   11 Nov 2026). Her whole quote is in git history (10 Nov 2026).
