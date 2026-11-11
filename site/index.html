@@ -437,6 +437,18 @@ form[hidden], .thanks[hidden] { display: none; }   /* the form's own display wou
 .bio-words p { font: 400 var(--text-read)/var(--lines-read) var(--body); color: var(--char); margin: 0 0 var(--gap-words); }
 .bio-words p:first-child { font: 600 var(--text-big)/var(--lines-read) var(--head); }
 .bio-words p:last-child { margin-bottom: 0; }
+/* THE BIO LOCKS INTO THE CONTACT SECTION (a laptop): its off-white rises into the charcoal on the right, under the form,
+   while the charcoal carries on down the left round Greg's video; the studio photo starts below where the charcoal ends
+   ("is something like this crazy? i just did a super rough cutup job in photoshop", Carl, 11 Nov 2026, with the mockup).
+   --rise is how far it climbs: from 96 under the form (or the thank-you) to the contact section's foot, measured by the
+   script. The panel's top-left is left clear so the charcoal and the video show through it. */
+@media (min-width: 761px) {
+  .bio { --split: calc((100% - min(var(--wrap), 100% - 32px)) / 2 + (min(var(--wrap), 100% - 32px) - var(--gap-cols)) * 5 / 12 + var(--gap-cols) / 2);
+    position: relative; z-index: 1; margin-top: calc(-1 * var(--rise, 0px)); padding-top: 64px; background:
+      linear-gradient(var(--paper), var(--paper)) right top / calc(100% - var(--split)) calc(var(--rise, 0px) + 1px) no-repeat,
+      linear-gradient(var(--paper), var(--paper)) left bottom / 100% calc(100% - var(--rise, 0px)) no-repeat; }
+  .bio .bio-photo { margin-top: var(--rise, 0px); }
+}
 @media (max-width: 760px) { .bio .bio-photo { margin-inline: auto; width: min(340px, 100% - 44px); max-width: none; } }
 
 footer { background: var(--char); color: var(--dusty); padding: 0 16px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: var(--text-small); }
@@ -727,6 +739,17 @@ $("form").addEventListener("submit", async e => {
   $("q-prev").addEventListener("click", () => go(at() - 1));
   $("q-next").addEventListener("click", () => go(at() + 1));
   track.addEventListener("keydown", e => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); go(at() + (e.key === "ArrowRight" ? 1 : -1)); } });
+})();
+// How far the bio climbs into the contact section (THE BIO LOCKS INTO THE CONTACT SECTION, in the styles).
+(() => {
+  const contact = $("contact"), bio = $("bio"), wide = matchMedia("(min-width: 761px)");
+  const climb = () => {
+    if (!wide.matches) return bio.style.removeProperty("--rise");
+    bio.style.setProperty("--rise", "0px");
+    const end = (($("form").hidden ? $("thanks") : $("form")).getBoundingClientRect().bottom);
+    bio.style.setProperty("--rise", Math.max(0, Math.round(contact.getBoundingClientRect().bottom - end - 96)) + "px");
+  };
+  new ResizeObserver(climb).observe(contact); wide.addEventListener("change", climb); climb();
 })();
 $("year").textContent = new Date().getFullYear();
 // Asked for less motion: the videos hold on their first frame.

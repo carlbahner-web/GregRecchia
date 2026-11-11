@@ -196,6 +196,10 @@ relative so the same page works there; its form only says it is a preview.
   form", then the words and "the studio photo" (Carl, 11 Nov 2026). Carl's five paragraphs word for word (his "..." as
   "…"), the first in the intro's larger type; beside it Greg at the console with the lava lamp (`img/greg-studio.webp`,
   landscape 3:2, the two frames), on the off-white page, in the page's two columns. No heading: none was given.
+  On a laptop it locks into the contact section, from Carl's Photoshop mockup ("is something like this crazy?", 11 Nov
+  2026): its off-white climbs into the charcoal on the right, 96 under the form, the charcoal carrying on down the left
+  round the video, the studio photo starting below it (`--rise`, measured by the script; THE BIO LOCKS INTO THE CONTACT
+  SECTION). A phone stacks them as before.
 - Contact goes to Netlify Forms (form name `contact`). Set the email it notifies in Netlify's form settings. Form detection on since 11 Nov 2026;
   the one agreed TEST message was sent then (name TEST, test@example.com), Netlify answered 200 and the page showed
   "Thanks, TEST!". Nothing more is sent for real.
